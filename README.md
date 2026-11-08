@@ -168,8 +168,8 @@ Real vs synthetic test photos (pre + post): field accuracy 55.7 % vs 39.3 % (Tes
 2. **QR codes that never decode.** Real photos decode by seller: ERA Tinda **0/9**, ERA Barkamol 2/5,
    Akmal Farm 2/2. The Tinda printer leaves white gaps in its codes (a worn thermal print head), which
    use up most of the QR error correction; zxing then fails with a checksum error as soon as anything
-   else is wrong (code small in the frame, bent paper, blur). A separate sharp close-up of r10 decoded on
-   the first try, and its text matched our rebuilt ground truth exactly. On the other shops crumpling is
+   else is wrong (code small in the frame, bent paper, blur). Separate sharp close-ups of r10 and r12 decoded
+   on the first try, and their text matched our rebuilt ground truth exactly. On the other shops crumpling is
    what breaks the code. These fields then come from OCR only, and the OCR ↔ QR check says "нет данных".
 3. **An artefact of my own preprocessing.** Background division (shadow removal) estimates the paper
    brightness with a large blur; inside a big black QR module that estimate is dark too, so the module
@@ -178,7 +178,7 @@ Real vs synthetic test photos (pre + post): field accuracy 55.7 % vs 39.3 % (Tes
    preprocessed image only as its last retry.
 4. **Sideways photos** (7 of 16): handled by the orientation step (aspect ratio + Tesseract OSD).
 5. **Deskew at its limit** (r06): the projection-profile search stopped at −8°, the edge of its range.
-6. **Unreadable digits on paper**: two fiscal-sign digits are hidden by creases (r10 was checked on the paper receipt, r12 not yet).
+6. **Unreadable digits on paper**: two fiscal-sign digits were hidden by creases in the photos (r10, r12); both were checked on the paper receipts.
 
 Automatic causes over all wrong fields (pre + post, both engines): *not found* 134, *text misread /
 wrong span* 61, *digits/amounts misread* 20, *digits misread* 7, *date/time misread* 5,

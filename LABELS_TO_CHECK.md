@@ -17,13 +17,13 @@ When a receipt is correct, change `"_status": "draft"` to `"_status": "verified"
 | r09 | AKMAL FARM | 2026-11-04 21:18:15 | 28973 | 760014957255 | 4400 | Шприц 5мл Хелф Лайн 1×500; Перчатки стер.хир №7,5 Дентафил 1×3700; Пакет полиэтилен МАЛЕНЬКИЙ ( Андижон 1×200 |
 | r10 ✅ | Tinda | 2026-11-04 18:31:36 | 36804 | 740250722957 | 5000 | Margarin 1×5000 |
 | r11 | ERA | 2026-11-03 17:12:38 | 11917 | 952988211279 | 20000 | Aralashmalar 1×20000 |
-| r12 ⚠️ | Tinda | 2026-11-04 18:14:01 | 36801 | 220956006915 | 15000 | Kofe yanchilgan 1×15000 |
+| r12 ✅ | Tinda | 2026-11-04 18:14:01 | 36801 | 220956006915 | 15000 | Kofe yanchilgan 1×15000 |
 | r13 | ERA | 2026-10-31 18:34:21 | 11814 | 438814874366 | 19800 | Aralashmalar 1×19800 |
 | r14 | Tinda | 2026-11-03 17:38:16 | 36762 | 532227412590 | 30000 | Xurmo 1×30000 |
 | r15 | ERA | 2026-11-02 17:46:10 | 11881 | 272330013324 | 34000 | Aralashmalar 1×34000 |
 
 Notes:
 - ✅ r10: fiscal sign confirmed on paper: 740250722957.
-- ⚠️ r12: fiscal sign, 1st digit (`?20956006915`, I wrote 2).
+- ✅ r12: fiscal sign confirmed on paper: 220956006915.
 - r04, r09 (Akmal Farm): seconds of the time and the receipt number come from the QR code (`RS:` on the paper), not from `Chek:`.
 - Akmal Farm receipts print no TIN, address or payment type, so those are `null`.
