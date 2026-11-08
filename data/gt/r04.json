@@ -1,5 +1,5 @@
 {
-  "_status": "draft",
+  "_status": "verified",
   "_note": "datetime seconds and receipt number (RS) are taken from the decoded QR; paper shows 17:16 and Chek:155; no TIN, address or payment type printed; vat = sh.j. QQS 957,14; seller_name = shop name printed under the logo (the AKMAL FARM logo is a picture, not text)",
   "seller_name": "9-Этажка",
   "seller_tin": null,

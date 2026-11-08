@@ -1,5 +1,7 @@
 # Labels to check against the paper receipts
 
+**Status (2026-11-08): all 15 receipts checked against the paper receipts by the author.**
+
 Take each paper receipt, compare it with its row, and fix any wrong value in `data/gt/<id>.json`.
 When a receipt is correct, change `"_status": "draft"` to `"_status": "verified"` in its file.
 **Most important:** the two rows marked ⚠️ have a digit I could not read through a crease.

@@ -1,5 +1,5 @@
 {
-  "_status": "draft",
+  "_status": "verified",
   "_note": "seller name and full address are read from r01_b; in r01_a the top of the receipt is cut off, so those fields cannot be read from that photo",
   "seller_name": "Tinda",
   "seller_tin": "31709886970015",

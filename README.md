@@ -77,7 +77,7 @@ strong JPEG compression. A variant shares the receipt id, seller and ground trut
 and therefore always sits in the same split: there is no leakage between dev and test.
 They are marked `synthetic` in `data/meta.csv` and reported separately in the per-condition table.
 
-**Ground truth.** `data/gt/<id>.json` holds the fields, items and QR text. The QR text of a receipt
+**Ground truth.** `data/gt/<id>.json` holds the fields, items and QR text. Every label was typed from the photos and then checked against the paper receipt. The QR text of a receipt
 whose code cannot be decoded was rebuilt from the printed fiscal module, receipt number, date and fiscal
 sign; on the 4 codes that do decode the rebuilt text matches byte for byte. `data/gt/<id>.txt` holds the
 full text line by line (test receipts only; logos and masked names are not part of the text).
