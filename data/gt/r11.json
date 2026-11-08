@@ -1,0 +1,25 @@
+{
+  "_status": "draft",
+  "_note": "read by hand from the photos; QR text rebuilt from the printed FM/receipt/date/sign (format checked on the 4 decoded codes)",
+  "seller_name": "ERA",
+  "seller_tin": "31802964140017",
+  "address": "Farg'ona viloyati, Farg'ona shahri, Barkamol MFY, Yangi asr ko'chasi, 118 b uy",
+  "datetime": "2026-11-03T17:12:38",
+  "receipt_number": "11917",
+  "fiscal_module": "LG420211609580",
+  "fiscal_sign": "952988211279",
+  "vat": 0.0,
+  "total": 20000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Aralashmalar",
+      "quantity": 1.0,
+      "price": 20000.0,
+      "total": 20000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211609580&r=11917&c=20261103171238&s=952988211279"
+  }
+}

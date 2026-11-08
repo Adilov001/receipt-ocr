@@ -1,0 +1,37 @@
+{
+  "_status": "draft",
+  "_note": "item 3 name is cut by the printer; datetime/RS from QR (paper: 21:17, Chek:233); vat = 471,43; seller_name = shop name printed under the logo (the AKMAL FARM logo is a picture, not text)",
+  "seller_name": "9-Этажка",
+  "seller_tin": null,
+  "address": null,
+  "datetime": "2026-11-04T21:18:15",
+  "receipt_number": "28973",
+  "fiscal_module": "UZ210317264829",
+  "fiscal_sign": "760014957255",
+  "vat": 471.43,
+  "total": 4400.0,
+  "payment": null,
+  "items": [
+    {
+      "name": "Шприц 5мл Хелф Лайн",
+      "quantity": 1.0,
+      "price": 500.0,
+      "total": 500.0
+    },
+    {
+      "name": "Перчатки стер.хир №7,5 Дентафил",
+      "quantity": 1.0,
+      "price": 3700.0,
+      "total": 3700.0
+    },
+    {
+      "name": "Пакет полиэтилен МАЛЕНЬКИЙ ( Андижон",
+      "quantity": 1.0,
+      "price": 200.0,
+      "total": 200.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=UZ210317264829&r=28973&c=20261104211815&s=760014957255"
+  }
+}

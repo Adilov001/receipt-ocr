@@ -1,0 +1,58 @@
+# All tunable parameters live here. Tune on the dev split only.
+
+ocr:
+  tesseract:
+    cmd: null            # path to tesseract binary; null = find on PATH
+    lang: uzb+rus+eng
+    oem: 1
+    psm: 4
+  easyocr:
+    langs: [uz, en]      # EasyOCR cannot mix Latin and Cyrillic models in one reader
+    gpu: false
+
+preprocess:
+  crop: true             # detect receipt on background, perspective warp
+  orient: true           # turn a sideways / upside-down receipt upright (aspect ratio + Tesseract OSD)
+  deskew: true           # projection-profile skew search
+  illumination: true     # background division (shadows, uneven light)
+  clahe: true            # local contrast for faded thermal print
+  binarize: false        # adaptive threshold (hurts EasyOCR, sometimes helps Tesseract)
+  max_side: 3000         # downscale huge photos first
+  min_width: 1400        # upscale the cropped receipt to at least this width
+  deskew_range: 8        # degrees
+  clahe_clip: 2.0
+
+postprocess:
+  fill_from_qr: true     # QR values override missing/mismatched OCR values (after the OCR<->QR check)
+
+qr:
+  # query parameter -> output field, for ofd.soliq.uz links
+  param_map:
+    t: fiscal_module
+    r: receipt_number
+    c: datetime
+    s: fiscal_sign
+
+reconcile:
+  abs_tol: 1.0           # so'm
+  rel_tol: 0.001
+
+data:
+  meta: data/meta.csv
+  images: data/images
+  gt: data/gt
+  split: data/split.json
+  test_fraction: 0.35
+  seed: 42
+
+eval:
+  lowercase: true        # CER/WER are case-insensitive
+  engines: [tesseract, easyocr]
+  configs:
+    baseline: {preprocess: false, postprocess: false}
+    pre:      {preprocess: true,  postprocess: false}
+    pre_post: {preprocess: true,  postprocess: true}
+  ablation_engine: tesseract
+  ablation_steps: [crop, orient, deskew, illumination, clahe, binarize]
+  cache_dir: .cache/ocr
+  reports_dir: reports

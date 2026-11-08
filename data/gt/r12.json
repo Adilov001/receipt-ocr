@@ -1,0 +1,25 @@
+{
+  "_status": "draft",
+  "_note": "CHECK fiscal_sign 1st digit (crease): ?20956006915",
+  "seller_name": "Tinda",
+  "seller_tin": "31709886970015",
+  "address": "Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",
+  "datetime": "2026-11-04T18:14:01",
+  "receipt_number": "36801",
+  "fiscal_module": "NA000000006920",
+  "fiscal_sign": "220956006915",
+  "vat": 0.0,
+  "total": 15000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Kofe yanchilgan",
+      "quantity": 1.0,
+      "price": 15000.0,
+      "total": 15000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=NA000000006920&r=36801&c=20261104181401&s=220956006915"
+  }
+}

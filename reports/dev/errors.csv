@@ -1,0 +1,733 @@
+config,engine,image,conditions,field,gt,pred,cause
+baseline,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,seller_name,Tinda,FAR А AHIR,text misread / wrong span
+baseline,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",FARG I,text misread / wrong span
+baseline,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,datetime,2026-11-04T13:47:26,,not found
+baseline,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,fiscal_sign,352606397030,,not found
+baseline,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,vat,0.0,,not found
+baseline,tesseract,r01_b.jpg,crumpled,seller_name,Tinda,ee era,text misread / wrong span
+baseline,tesseract,r01_b.jpg,crumpled,seller_tin,31709886970015,51709886970015,digits misread
+baseline,tesseract,r01_b.jpg,crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","в Fargʻuna viloyati, Fargʻona shahar , 6+, Barkamol MFY yangi asr, \ koʻchasi 130-uy, a FARGʻONA VILOYATI",text misread / wrong span
+baseline,tesseract,r01_b.jpg,crumpled,datetime,2026-11-04T13:47:26,2926-11-04T13:47:26,date/time misread
+baseline,tesseract,r01_b.jpg,crumpled,receipt_number,36785,,not found
+baseline,tesseract,r01_b.jpg,crumpled,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r01_b.jpg,crumpled,fiscal_sign,352606397030,,not found
+baseline,tesseract,r01_b.jpg,crumpled,vat,0.0,,not found
+baseline,tesseract,r01_b.jpg,crumpled,total,32000.0,52600.6,digits/amounts misread
+baseline,tesseract,r01_b.jpg,crumpled,payment,card,,not found
+baseline,tesseract,r05_a.jpg,crumpled,seller_name,Tinda,"""OPERATSIYA",text misread / wrong span
+baseline,tesseract,r05_a.jpg,crumpled,seller_tin,31709886970015,,not found
+baseline,tesseract,r05_a.jpg,crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r05_a.jpg,crumpled,datetime,2026-11-04T18:07:47,,not found
+baseline,tesseract,r05_a.jpg,crumpled,receipt_number,36800,,not found
+baseline,tesseract,r05_a.jpg,crumpled,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r05_a.jpg,crumpled,fiscal_sign,861532066154,,not found
+baseline,tesseract,r05_a.jpg,crumpled,vat,0.0,,not found
+baseline,tesseract,r05_a.jpg,crumpled,total,15700.0,35.0,digits/amounts misread
+baseline,tesseract,r05_a.jpg,crumpled,payment,card,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,seller_name,Tinda,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,datetime,2026-11-04T18:04:00,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,receipt_number,36799,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,fiscal_sign,559055341237,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,vat,0.0,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,total,10000.0,,not found
+baseline,tesseract,r06_a.jpg,crumpled;tilted,payment,card,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,seller_name,Tinda,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,seller_tin,31709886970015,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,datetime,2026-11-04T20:33:07,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,receipt_number,36811,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,fiscal_sign,570122841671,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,vat,0.0,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,total,8000.0,,not found
+baseline,tesseract,r07_a.jpg,sideways;crumpled,payment,card,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,seller_name,Tinda,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,seller_tin,31709886970015,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,datetime,2026-11-04T21:03:56,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,receipt_number,36812,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,fiscal_sign,115903172013,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,vat,0.0,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,total,24000.0,,not found
+baseline,tesseract,r08_a.jpg,sideways;crumpled,payment,card,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,seller_name,Tinda,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,seller_tin,31709886970015,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,datetime,2026-11-04T18:31:36,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,receipt_number,36804,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,fiscal_sign,740250722957,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,vat,0.0,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,total,5000.0,,not found
+baseline,tesseract,r10_a.jpg,sideways;handheld;crumpled,payment,card,,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,seller_name,Tinda,i oni,text misread / wrong span
+baseline,tesseract,r12_a.jpg,handheld;crumpled,seller_tin,31709886970015,,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,datetime,2026-11-04T18:14:01,,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,receipt_number,36801,,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,fiscal_sign,220956006915,,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,vat,0.0,,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,total,15000.0,,not found
+baseline,tesseract,r12_a.jpg,handheld;crumpled,payment,card,,not found
+baseline,tesseract,r14_a.jpg,clean,seller_tin,31709886970015,,not found
+baseline,tesseract,r14_a.jpg,clean,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r14_a.jpg,clean,datetime,2026-11-03T17:38:16,,not found
+baseline,tesseract,r14_a.jpg,clean,receipt_number,36762,,not found
+baseline,tesseract,r14_a.jpg,clean,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r14_a.jpg,clean,vat,0.0,30600.0,digits/amounts misread
+baseline,tesseract,r14_a.jpg,clean,total,30000.0,30600.0,digits/amounts misread
+baseline,tesseract,r14_a.jpg,clean,payment,card,other,text misread / wrong span
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_name,Tinda,Yun N24),text misread / wrong span
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,datetime,2026-11-04T13:47:26,,not found
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,receipt_number,36785,,not found
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_sign,352606397030,,not found
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,vat,0.0,,not found
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,total,32000.0,,not found
+baseline,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,payment,card,,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,seller_name,Tinda,росе ʼ a,text misread / wrong span
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,datetime,2026-11-04T13:47:26,,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,receipt_number,36785,,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,fiscal_sign,352606397030,,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,vat,0.0,,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,total,32000.0,,not found
+baseline,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,payment,card,,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,seller_name,Tinda,ADHAMION MAMADALI,text misread / wrong span
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T13:47:26,,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,receipt_number,36785,,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,352606397030,,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,total,32000.0,,not found
+baseline,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,seller_name,Tinda,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,seller_tin,31709886970015,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,datetime,2026-11-04T13:47:26,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,receipt_number,36785,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_sign,352606397030,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,vat,0.0,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,total,32000.0,,not found
+baseline,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,payment,card,,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_name,Tinda,pos yeri,text misread / wrong span
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T18:07:47,,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,receipt_number,36800,,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,861532066154,,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,total,15700.0,,not found
+baseline,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,seller_name,Tinda,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,seller_tin,31709886970015,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,datetime,2026-11-04T18:07:47,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,receipt_number,36800,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_sign,861532066154,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,vat,0.0,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,total,15700.0,,not found
+baseline,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,payment,card,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_name,Tinda,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T18:04:00,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,receipt_number,36799,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,559055341237,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,total,10000.0,,not found
+baseline,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,seller_name,Tinda,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,datetime,2026-11-04T18:04:00,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,receipt_number,36799,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,fiscal_sign,559055341237,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,vat,0.0,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,total,10000.0,,not found
+baseline,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,payment,card,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_name,Tinda,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,datetime,2026-11-04T20:33:07,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,receipt_number,36811,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_sign,570122841671,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,vat,0.0,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,total,8000.0,,not found
+baseline,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,payment,card,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_name,Tinda,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_tin,31709886970015,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,datetime,2026-11-04T20:33:07,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,receipt_number,36811,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_sign,570122841671,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,vat,0.0,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,total,8000.0,,not found
+baseline,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,payment,card,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_name,Tinda,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,datetime,2026-11-04T21:03:56,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,receipt_number,36812,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_sign,115903172013,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,vat,0.0,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,total,24000.0,,not found
+baseline,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,payment,card,,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_name,Tinda,--- ча = 3 — _ ae,text misread / wrong span
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_tin,31709886970015,,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,datetime,2026-11-04T21:03:56,,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,receipt_number,36812,,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_sign,115903172013,,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,vat,0.0,,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,total,24000.0,,not found
+baseline,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,payment,card,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,seller_name,Tinda,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,datetime,2026-11-04T18:31:36,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,receipt_number,36804,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,fiscal_sign,740250722957,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,vat,0.0,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,total,5000.0,,not found
+baseline,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,payment,card,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,seller_name,Tinda,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,seller_tin,31709886970015,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,datetime,2026-11-04T18:31:36,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,receipt_number,36804,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,fiscal_sign,740250722957,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,vat,0.0,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,total,5000.0,,not found
+baseline,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,payment,card,,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_name,Tinda,Nara,text misread / wrong span
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,datetime,2026-11-04T18:14:01,,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,receipt_number,36801,,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_sign,220956006915,,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,vat,0.0,,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,total,15000.0,,not found
+baseline,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,payment,card,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,seller_name,Tinda,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,seller_tin,31709886970015,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,datetime,2026-11-04T18:14:01,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,receipt_number,36801,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,fiscal_sign,220956006915,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,vat,0.0,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,total,15000.0,,not found
+baseline,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,payment,card,,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,seller_tin,31709886970015,,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,datetime,2026-11-03T17:38:16,,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,receipt_number,36762,,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,fiscal_sign,532227412590,,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,vat,0.0,,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,total,30000.0,,not found
+baseline,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,payment,card,,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,seller_name,Tinda,by Re eeee * 46 $4,text misread / wrong span
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,seller_tin,31709886970015,,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,datetime,2026-11-03T17:38:16,,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,receipt_number,36762,,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,fiscal_module,NA000000006920,,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,fiscal_sign,532227412590,,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,vat,0.0,,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,total,30000.0,,not found
+baseline,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,payment,card,,not found
+pre,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,seller_name,Tinda,,not found
+pre,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,seller_tin,31709886970015,41709886970015,digits misread
+pre,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","koʻchasi 13, Yur. Mane) FARGʻONA VILOYATI, ) FARGʻONA SHAHRI",text misread / wrong span
+pre,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,receipt_number,36785,,not found
+pre,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,vat,0.0,,not found
+pre,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,total,32000.0,80.0,digits/amounts misread
+pre,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,payment,card,,not found
+pre,tesseract,r01_b.jpg,crumpled,seller_name,Tinda,LIYEV ASKARALIYEVICH,text misread / wrong span
+pre,tesseract,r01_b.jpg,crumpled,seller_tin,31709886970015,,not found
+pre,tesseract,r01_b.jpg,crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fargʻona viloyati, Fargʻona shahar ‚ 64-",text misread / wrong span
+pre,tesseract,r01_b.jpg,crumpled,datetime,2026-11-04T13:47:26,2826-11-04T13:47:26,date/time misread
+pre,tesseract,r01_b.jpg,crumpled,receipt_number,36785,,not found
+pre,tesseract,r01_b.jpg,crumpled,fiscal_module,NA000000006920,,not found
+pre,tesseract,r01_b.jpg,crumpled,fiscal_sign,352606397030,,not found
+pre,tesseract,r01_b.jpg,crumpled,vat,0.0,,not found
+pre,tesseract,r01_b.jpg,crumpled,total,32000.0,32609.6,digits/amounts misread
+pre,tesseract,r01_b.jpg,crumpled,payment,card,,not found
+pre,tesseract,r05_a.jpg,crumpled,seller_name,Tinda,Tinda | р,text misread / wrong span
+pre,tesseract,r05_a.jpg,crumpled,seller_tin,31709886970015,,not found
+pre,tesseract,r05_a.jpg,crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",Fargʻona) viloyt |,text misread / wrong span
+pre,tesseract,r05_a.jpg,crumpled,datetime,2026-11-04T18:07:47,,not found
+pre,tesseract,r05_a.jpg,crumpled,receipt_number,36800,36802,digits misread
+pre,tesseract,r05_a.jpg,crumpled,fiscal_module,NA000000006920,,not found
+pre,tesseract,r05_a.jpg,crumpled,fiscal_sign,861532066154,861532866154,digits misread
+pre,tesseract,r05_a.jpg,crumpled,vat,0.0,,not found
+pre,tesseract,r05_a.jpg,crumpled,total,15700.0,,not found
+pre,tesseract,r06_a.jpg,crumpled;tilted,seller_name,Tinda,"""Un м",text misread / wrong span
+pre,tesseract,r06_a.jpg,crumpled;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r06_a.jpg,crumpled;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","fargʻona Уз У 64-, papgʻona Shahar + 7",text misread / wrong span
+pre,tesseract,r06_a.jpg,crumpled;tilted,datetime,2026-11-04T18:04:00,,not found
+pre,tesseract,r06_a.jpg,crumpled;tilted,receipt_number,36799,3,digits missing/extra
+pre,tesseract,r06_a.jpg,crumpled;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r06_a.jpg,crumpled;tilted,fiscal_sign,559055341237,,not found
+pre,tesseract,r06_a.jpg,crumpled;tilted,vat,0.0,6.68,digits/amounts misread
+pre,tesseract,r06_a.jpg,crumpled;tilted,total,10000.0,19688.69,digits/amounts misread
+pre,tesseract,r07_a.jpg,sideways;crumpled,seller_tin,31709886970015,,not found
+pre,tesseract,r07_a.jpg,sideways;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fargʻona viloyati, Fargʻona shahar 5, 199, Barkamol MFY Yanyi ast, koʻchasi 139-МУ, Yur Manet FARGʻONA VILOYATI, FARGʻONA SHAHRI",text misread / wrong span
+pre,tesseract,r07_a.jpg,sideways;crumpled,datetime,2026-11-04T20:33:07,2026-11-04T20:35:07,date/time misread
+pre,tesseract,r07_a.jpg,sideways;crumpled,fiscal_module,NA000000006920,,not found
+pre,tesseract,r07_a.jpg,sideways;crumpled,fiscal_sign,570122841671,,not found
+pre,tesseract,r07_a.jpg,sideways;crumpled,vat,0.0,8.6,digits/amounts misread
+pre,tesseract,r07_a.jpg,sideways;crumpled,total,8000.0,0.09,digits/amounts misread
+pre,tesseract,r07_a.jpg,sideways;crumpled,payment,card,other,text misread / wrong span
+pre,tesseract,r08_a.jpg,sideways;crumpled,seller_name,Tinda,S Gan,text misread / wrong span
+pre,tesseract,r08_a.jpg,sideways;crumpled,seller_tin,31709886970015,,not found
+pre,tesseract,r08_a.jpg,sideways;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",Fargʻona viloyati .,text misread / wrong span
+pre,tesseract,r08_a.jpg,sideways;crumpled,datetime,2026-11-04T21:03:56,,not found
+pre,tesseract,r08_a.jpg,sideways;crumpled,fiscal_module,NA000000006920,,not found
+pre,tesseract,r08_a.jpg,sideways;crumpled,fiscal_sign,115903172013,115993172613,digits misread
+pre,tesseract,r08_a.jpg,sideways;crumpled,vat,0.0,8.0,digits/amounts misread
+pre,tesseract,r08_a.jpg,sideways;crumpled,total,24000.0,24888.66,digits/amounts misread
+pre,tesseract,r08_a.jpg,sideways;crumpled,payment,card,other,text misread / wrong span
+pre,tesseract,r10_a.jpg,sideways;handheld;crumpled,seller_tin,31709886970015,51709880970015,digits misread
+pre,tesseract,r10_a.jpg,sideways;handheld;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fa: y na viloyati \, Fargʻona shahar , 64-, Barkamol MFY Ye wi asr, koʻchasi 136-uy, Yur, Manzil FARGʻONA VILOYATI, FARGʻONA SHAHRI",text misread / wrong span
+pre,tesseract,r10_a.jpg,sideways;handheld;crumpled,datetime,2026-11-04T18:31:36,,not found
+pre,tesseract,r10_a.jpg,sideways;handheld;crumpled,fiscal_module,NA000000006920,,not found
+pre,tesseract,r10_a.jpg,sideways;handheld;crumpled,fiscal_sign,740250722957,748250722957,digits misread
+pre,tesseract,r10_a.jpg,sideways;handheld;crumpled,vat,0.0,90.0,digits/amounts misread
+pre,tesseract,r10_a.jpg,sideways;handheld;crumpled,total,5000.0,5009.68,digits/amounts misread
+pre,tesseract,r10_a.jpg,sideways;handheld;crumpled,payment,card,other,text misread / wrong span
+pre,tesseract,r12_a.jpg,handheld;crumpled,seller_name,Tinda,WALT,text misread / wrong span
+pre,tesseract,r12_a.jpg,handheld;crumpled,seller_tin,31709886970015,,not found
+pre,tesseract,r12_a.jpg,handheld;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",apoʻ ONA 6,text misread / wrong span
+pre,tesseract,r12_a.jpg,handheld;crumpled,datetime,2026-11-04T18:14:01,,not found
+pre,tesseract,r12_a.jpg,handheld;crumpled,receipt_number,36801,,not found
+pre,tesseract,r12_a.jpg,handheld;crumpled,fiscal_module,NA000000006920,,not found
+pre,tesseract,r12_a.jpg,handheld;crumpled,fiscal_sign,220956006915,,not found
+pre,tesseract,r12_a.jpg,handheld;crumpled,vat,0.0,,not found
+pre,tesseract,r12_a.jpg,handheld;crumpled,payment,card,,not found
+pre,tesseract,r14_a.jpg,clean,seller_name,Tinda,о ee ee — — u. — =,text misread / wrong span
+pre,tesseract,r14_a.jpg,clean,seller_tin,31709886970015,31709886976015,digits misread
+pre,tesseract,r14_a.jpg,clean,datetime,2026-11-03T17:38:16,,not found
+pre,tesseract,r14_a.jpg,clean,fiscal_module,NA000000006920,,not found
+pre,tesseract,r14_a.jpg,clean,vat,0.0,28.0,digits/amounts misread
+pre,tesseract,r14_a.jpg,clean,total,30000.0,30029.69,digits/amounts misread
+pre,tesseract,r14_a.jpg,clean,payment,card,other,text misread / wrong span
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_name,Tinda,хо. II,text misread / wrong span
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","aS koʻchasi Tenn TET, с ONA VILOYATI., : РА ААС"" ОМА SHAHRI",text misread / wrong span
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,datetime,2026-11-04T13:47:26,,not found
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,receipt_number,36785,11946783,digits missing/extra
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_sign,352606397030,,not found
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,vat,0.0,,not found
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,total,32000.0,,not found
+pre,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,payment,card,,not found
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,seller_name,Tinda,Г ВАМ I VELI,text misread / wrong span
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",vur Manzar FARGʻONA SHAHRI,text misread / wrong span
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,datetime,2026-11-04T13:47:26,,not found
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,receipt_number,36785,,not found
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,fiscal_sign,352606397030,,not found
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,vat,0.0,,not found
+pre,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,total,32000.0,,not found
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fargʻuna viloyati, Barkamol MFY Yangi asr, Fargʻona shahar , 64- ;, koʻchasi 130-uy, Pil FARGʻONA VILOYATI, |, FARGʻONA SHAHRI",text misread / wrong span
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T13:47:26,2626-11-04T13:47:00,date/time misread
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,receipt_number,36785,,not found
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,352606397030,,not found
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,total,32000.0,425.0,digits/amounts misread
+pre,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,seller_name,Tinda,ADHAM.,text misread / wrong span
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,seller_tin,31709886970015,,not found
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fargʻona viloyati, Fargʻona shahar , 64°, Barkamol MFY Yangi asr, koʻchasi 130-uy",text misread / wrong span
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,receipt_number,36785,,not found
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_module,NA000000006920,,not found
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_sign,352606397030,352606397038,digits misread
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,vat,0.0,,not found
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,total,32000.0,32600.6,digits/amounts misread
+pre,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,payment,card,,not found
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_name,Tinda,“; G / $,text misread / wrong span
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","\ if Barkamol MFY Y ngi, : \ ʼ 130-uy",text misread / wrong span
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T18:07:47,,not found
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,receipt_number,36800,,not found
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,861532066154,,not found
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,total,15700.0,,not found
+pre,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,seller_name,Tinda,"tarda ИХ, fs",text misread / wrong span
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,seller_tin,31709886970015,,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,datetime,2026-11-04T18:07:47,,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,receipt_number,36800,,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_module,NA000000006920,,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_sign,861532066154,,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,vat,0.0,,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,total,15700.0,,not found
+pre,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,payment,card,,not found
+pre,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_name,Tinda,ADHANJON ИН EV ASKARALTYEVICH,text misread / wrong span
+pre,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","fargʻona viloyati ., Fargʻonid shahar , 64°, Barkamol MFY Yangi asr, —— koʻchasi 136-uy",text misread / wrong span
+pre,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T18:04:00,,not found
+pre,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,559055341237,,not found
+pre,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+pre,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,total,10000.0,,not found
+pre,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,seller_name,Tinda,STIRJISHSAR o,text misread / wrong span
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,datetime,2026-11-04T18:04:00,,not found
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,receipt_number,36799,,not found
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,fiscal_sign,559055341237,,not found
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,vat,0.0,,not found
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,total,10000.0,90.0,digits/amounts misread
+pre,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,payment,card,,not found
+pre,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","\Manzil Рагоʼопа viloyati, \ Fargʻona shahar, o, ʻ Barkamol MFY Yangi ast, \ koʻchasi 130- Wy",text misread / wrong span
+pre,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,datetime,2026-11-04T20:33:07,,not found
+pre,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,receipt_number,36811,,not found
+pre,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_sign,570122841671,,not found
+pre,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,vat,0.0,,not found
+pre,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,total,8000.0,,not found
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_name,Tinda,р N HMHADALIYEV ATA. >,text misread / wrong span
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_tin,31709886970015,,not found
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Barkamol MFY Yang, koʻchasi 130-uy",text misread / wrong span
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,datetime,2026-11-04T20:33:07,,not found
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,receipt_number,36811,,not found
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_module,NA000000006920,,not found
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_sign,570122841671,,not found
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,vat,0.0,,not found
+pre,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,total,8000.0,8220.0,digits/amounts misread
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_name,Tinda,MXIK 31186100168 386860808,text misread / wrong span
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,datetime,2026-11-04T21:03:56,,not found
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,receipt_number,36812,,not found
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_sign,115903172013,,not found
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,vat,0.0,,not found
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,total,24000.0,980.0,digits/amounts misread
+pre,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,payment,card,other,text misread / wrong span
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_name,Tinda,Yur “arzi БАРС oA НВ,text misread / wrong span
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_tin,31709886970015,,not found
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,datetime,2026-11-04T21:03:56,,not found
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,receipt_number,36812,,not found
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_module,NA000000006920,,not found
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_sign,115903172013,,not found
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,vat,0.0,,not found
+pre,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,total,24000.0,,not found
+pre,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,seller_name,Tinda,Ге ее “7,text misread / wrong span
+pre,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,datetime,2026-11-04T18:31:36,,not found
+pre,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,receipt_number,36804,,not found
+pre,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,fiscal_sign,740250722957,748250722957,digits misread
+pre,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,vat,0.0,69.0,digits/amounts misread
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,seller_name,Tinda,PIO WIPO “AAA,text misread / wrong span
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,seller_tin,31709886970015,,not found
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,datetime,2026-11-04T18:31:36,,not found
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,receipt_number,36804,,not found
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,fiscal_module,NA000000006920,,not found
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,fiscal_sign,740250722957,,not found
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,vat,0.0,,not found
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,total,5000.0,,not found
+pre,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,payment,card,,not found
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_name,Tinda,Loyat,text misread / wrong span
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","РА"" ОЙ = 79015",text misread / wrong span
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,datetime,2026-11-04T18:14:01,,not found
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,receipt_number,36801,,not found
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_sign,220956006915,,not found
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,vat,0.0,,not found
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,total,15000.0,,not found
+pre,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,payment,card,,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,seller_name,Tinda,| Yi jo att,text misread / wrong span
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,seller_tin,31709886970015,,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,datetime,2026-11-04T18:14:01,,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,receipt_number,36801,,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,fiscal_module,NA000000006920,,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,fiscal_sign,220956006915,,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,vat,0.0,,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,total,15000.0,,not found
+pre,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,payment,card,,not found
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,seller_name,Tinda,iz RA,text misread / wrong span
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,seller_tin,31709886970015,,not found
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Гагдʼопа viloyati, Fargʻona shahar ‚ 64-, Barkamol MFY Yangi asr, koʻchasi 130-uy",text misread / wrong span
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,datetime,2026-11-03T17:38:16,,not found
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,fiscal_sign,532227412590,,not found
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,vat,0.0,,not found
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,total,30000.0,,not found
+pre,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,payment,card,other,text misread / wrong span
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,seller_name,Tinda,Tirda,text misread / wrong span
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,seller_tin,31709886970015,,not found
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",Ни Faty rw viloyati,text misread / wrong span
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,datetime,2026-11-03T17:38:16,3026-11-03T17:19:15,date/time misread
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,receipt_number,36762,,not found
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,fiscal_module,NA000000006920,,not found
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,fiscal_sign,532227412590,,not found
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,vat,0.0,,not found
+pre,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,total,30000.0,20629.69,digits/amounts misread
+pre_post,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,seller_name,Tinda,,not found
+pre_post,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,seller_tin,31709886970015,41709886970015,digits misread
+pre_post,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","koʻchasi 13, Yur. Mane) FARGʻONA VILOYATI, ) FARGʻONA SHAHRI",text misread / wrong span
+pre_post,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,receipt_number,36785,,not found
+pre_post,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,vat,0.0,,not found
+pre_post,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,total,32000.0,80.0,digits/amounts misread
+pre_post,tesseract,r01_a.jpg,crumpled;shadow;handheld;tilted,payment,card,,not found
+pre_post,tesseract,r01_b.jpg,crumpled,seller_name,Tinda,LIYEV ASKARALIYEVICH,text misread / wrong span
+pre_post,tesseract,r01_b.jpg,crumpled,seller_tin,31709886970015,,not found
+pre_post,tesseract,r01_b.jpg,crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fargʻona viloyati, Fargʻona shahar ‚ 64-",text misread / wrong span
+pre_post,tesseract,r01_b.jpg,crumpled,receipt_number,36785,,not found
+pre_post,tesseract,r01_b.jpg,crumpled,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r01_b.jpg,crumpled,fiscal_sign,352606397030,,not found
+pre_post,tesseract,r01_b.jpg,crumpled,vat,0.0,,not found
+pre_post,tesseract,r01_b.jpg,crumpled,total,32000.0,32009.0,digits/amounts misread
+pre_post,tesseract,r01_b.jpg,crumpled,payment,card,,not found
+pre_post,tesseract,r05_a.jpg,crumpled,seller_name,Tinda,turasan MAMADALIYIN АКА ЕК,text misread / wrong span
+pre_post,tesseract,r05_a.jpg,crumpled,seller_tin,31709886970015,,not found
+pre_post,tesseract,r05_a.jpg,crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",Fargʻona) viloyt |,text misread / wrong span
+pre_post,tesseract,r05_a.jpg,crumpled,datetime,2026-11-04T18:07:47,2026-11-04T18:07:00,date/time misread
+pre_post,tesseract,r05_a.jpg,crumpled,receipt_number,36800,36802,digits misread
+pre_post,tesseract,r05_a.jpg,crumpled,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r05_a.jpg,crumpled,fiscal_sign,861532066154,861532866154,digits misread
+pre_post,tesseract,r05_a.jpg,crumpled,vat,0.0,,not found
+pre_post,tesseract,r06_a.jpg,crumpled;tilted,seller_name,Tinda,ADHAMJON MAMADALIYEV ^ Te ati,text misread / wrong span
+pre_post,tesseract,r06_a.jpg,crumpled;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r06_a.jpg,crumpled;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","fargʻona Уз У 64-, papgʻona Shahar + 7",text misread / wrong span
+pre_post,tesseract,r06_a.jpg,crumpled;tilted,datetime,2026-11-04T18:04:00,2026-11-04T18:03:00,date/time misread
+pre_post,tesseract,r06_a.jpg,crumpled;tilted,receipt_number,36799,3,digits missing/extra
+pre_post,tesseract,r06_a.jpg,crumpled;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r06_a.jpg,crumpled;tilted,fiscal_sign,559055341237,,not found
+pre_post,tesseract,r06_a.jpg,crumpled;tilted,total,10000.0,10080.0,digits/amounts misread
+pre_post,tesseract,r07_a.jpg,sideways;crumpled,seller_name,Tinda,ADHAMION MAMADAL.,text misread / wrong span
+pre_post,tesseract,r07_a.jpg,sideways;crumpled,seller_tin,31709886970015,,not found
+pre_post,tesseract,r07_a.jpg,sideways;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fargʻona viloyati, Fargʻona shahar 5, 199, Barkamol MFY Yanyi ast, koʻchasi 139-МУ, Yur Manet FARGʻONA VILOYATI, FARGʻONA SHAHRI",text misread / wrong span
+pre_post,tesseract,r07_a.jpg,sideways;crumpled,datetime,2026-11-04T20:33:07,2026-11-04T20:35:07,date/time misread
+pre_post,tesseract,r07_a.jpg,sideways;crumpled,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r07_a.jpg,sideways;crumpled,fiscal_sign,570122841671,,not found
+pre_post,tesseract,r07_a.jpg,sideways;crumpled,payment,card,other,text misread / wrong span
+pre_post,tesseract,r08_a.jpg,sideways;crumpled,seller_tin,31709886970015,,not found
+pre_post,tesseract,r08_a.jpg,sideways;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",Fargʻona viloyati .,text misread / wrong span
+pre_post,tesseract,r08_a.jpg,sideways;crumpled,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r08_a.jpg,sideways;crumpled,fiscal_sign,115903172013,115993172613,digits misread
+pre_post,tesseract,r10_a.jpg,sideways;handheld;crumpled,seller_tin,31709886970015,51709880970015,digits misread
+pre_post,tesseract,r10_a.jpg,sideways;handheld;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fa: y na viloyati \, Fargʻona shahar , 64-, Barkamol MFY Ye wi asr, koʻchasi 136-uy, Yur, Manzil FARGʻONA VILOYATI, FARGʻONA SHAHRI",text misread / wrong span
+pre_post,tesseract,r10_a.jpg,sideways;handheld;crumpled,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r10_a.jpg,sideways;handheld;crumpled,fiscal_sign,740250722957,748250722957,digits misread
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,seller_name,Tinda,FARIS Ave RI,text misread / wrong span
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,seller_tin,31709886970015,,not found
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",apoʻ ONA 6,text misread / wrong span
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,datetime,2026-11-04T18:14:01,,not found
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,receipt_number,36801,,not found
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,fiscal_sign,220956006915,,not found
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,vat,0.0,,not found
+pre_post,tesseract,r12_a.jpg,handheld;crumpled,payment,card,,not found
+pre_post,tesseract,r14_a.jpg,clean,seller_name,Tinda,ERA,text misread / wrong span
+pre_post,tesseract,r14_a.jpg,clean,seller_tin,31709886970015,31709886976015,digits misread
+pre_post,tesseract,r14_a.jpg,clean,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r14_a.jpg,clean,vat,0.0,28.0,digits/amounts misread
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_name,Tinda,i BO,text misread / wrong span
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","aS koʻchasi Tenn TET, с ONA VILOYATI., : РА ААС"" ОМА SHAHRI",text misread / wrong span
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,datetime,2026-11-04T13:47:26,,not found
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,receipt_number,36785,11946783,digits missing/extra
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_sign,352606397030,,not found
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,vat,0.0,,not found
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,total,32000.0,,not found
+pre_post,tesseract,r01_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,payment,card,,not found
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,seller_name,Tinda,Г ВАМ I VELI,text misread / wrong span
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",vur Manzar FARGʻONA SHAHRI,text misread / wrong span
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,datetime,2026-11-04T13:47:26,,not found
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,receipt_number,36785,,not found
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,fiscal_sign,352606397030,,not found
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,vat,0.0,,not found
+pre_post,tesseract,r01_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,total,32000.0,,not found
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fargʻuna viloyati, Barkamol MFY Yangi asr, Fargʻona shahar , 64- ;, koʻchasi 130-uy, Pil FARGʻONA VILOYATI, |, FARGʻONA SHAHRI",text misread / wrong span
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T13:47:26,2026-11-04T13:47:00,date/time misread
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,receipt_number,36785,,not found
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,352606397030,,not found
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,total,32000.0,425.0,digits/amounts misread
+pre_post,tesseract,r01_b_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,seller_name,Tinda,JON renal: nev ASKARALTYEVICH,text misread / wrong span
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,seller_tin,31709886970015,,not found
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Fargʻona viloyati, Fargʻona shahar , 64°, Barkamol MFY Yangi asr, koʻchasi 130-uy",text misread / wrong span
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,receipt_number,36785,,not found
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_sign,352606397030,352606397038,digits misread
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,vat,0.0,,not found
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,total,32000.0,32600.6,digits/amounts misread
+pre_post,tesseract,r01_b_x2.jpg,synthetic;crumpled;faded;perspective,payment,card,,not found
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_name,Tinda,i Fargʻona 91 asr,text misread / wrong span
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","\ if Barkamol MFY Y ngi, : \ ʼ 130-uy",text misread / wrong span
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T18:07:47,,not found
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,receipt_number,36800,,not found
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,861532066154,,not found
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,total,15700.0,,not found
+pre_post,tesseract,r05_a_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,seller_name,Tinda,"tarda ИХ, fs",text misread / wrong span
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,seller_tin,31709886970015,,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,datetime,2026-11-04T18:07:47,,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,receipt_number,36800,,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,fiscal_sign,861532066154,,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,vat,0.0,,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,total,15700.0,,not found
+pre_post,tesseract,r05_a_x2.jpg,synthetic;crumpled;faded;perspective,payment,card,,not found
+pre_post,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,seller_name,Tinda,ADHANJON ИН EV ASKARALTYEVICH,text misread / wrong span
+pre_post,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","fargʻona viloyati ., Fargʻonid shahar , 64°, Barkamol MFY Yangi asr, —— koʻchasi 136-uy",text misread / wrong span
+pre_post,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,datetime,2026-11-04T18:04:00,,not found
+pre_post,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,fiscal_sign,559055341237,,not found
+pre_post,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,vat,0.0,,not found
+pre_post,tesseract,r06_a_x1.jpg,synthetic;crumpled;shadow;tilted,payment,card,,not found
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,seller_name,Tinda,STIRJISHSAR o,text misread / wrong span
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,datetime,2026-11-04T18:04:00,,not found
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,receipt_number,36799,,not found
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,fiscal_sign,559055341237,,not found
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,vat,0.0,,not found
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,total,10000.0,10.0,thousand/decimal separator
+pre_post,tesseract,r06_a_x2.jpg,synthetic;crumpled;faded;perspective;tilted,payment,card,,not found
+pre_post,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","\Manzil Рагоʼопа viloyati, \ Fargʻona shahar, o, ʻ Barkamol MFY Yangi ast, \ koʻchasi 130- Wy",text misread / wrong span
+pre_post,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,datetime,2026-11-04T20:33:07,,not found
+pre_post,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,receipt_number,36811,,not found
+pre_post,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_sign,570122841671,,not found
+pre_post,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,vat,0.0,,not found
+pre_post,tesseract,r07_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,total,8000.0,,not found
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_name,Tinda,"Е hanar ,",text misread / wrong span
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_tin,31709886970015,,not found
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Barkamol MFY Yang, koʻchasi 130-uy",text misread / wrong span
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,datetime,2026-11-04T20:33:07,2025-11-04T02:36:00,date/time misread
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,receipt_number,36811,,not found
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_sign,570122841671,,not found
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,vat,0.0,,not found
+pre_post,tesseract,r07_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,total,8000.0,8220.0,digits/amounts misread
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_name,Tinda,MXIK 31186100168 386860808,text misread / wrong span
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,datetime,2026-11-04T21:03:56,2026-11-04T21:03:52,date/time misread
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,receipt_number,36812,,not found
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,fiscal_sign,115903172013,,not found
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,vat,0.0,,not found
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,total,24000.0,980.0,digits/amounts misread
+pre_post,tesseract,r08_a_x1.jpg,synthetic;crumpled;shadow;sideways;tilted,payment,card,other,text misread / wrong span
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_name,Tinda,Yur “arzi БАРС oA НВ,text misread / wrong span
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,seller_tin,31709886970015,,not found
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,datetime,2026-11-04T21:03:56,,not found
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,receipt_number,36812,,not found
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,fiscal_sign,115903172013,,not found
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,vat,0.0,,not found
+pre_post,tesseract,r08_a_x2.jpg,synthetic;crumpled;faded;perspective;sideways,total,24000.0,,not found
+pre_post,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,seller_name,Tinda,Ге ее “7,text misread / wrong span
+pre_post,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre_post,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,datetime,2026-11-04T18:31:36,,not found
+pre_post,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,receipt_number,36804,,not found
+pre_post,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,fiscal_sign,740250722957,748250722957,digits misread
+pre_post,tesseract,r10_a_x1.jpg,synthetic;crumpled;handheld;shadow;sideways;tilted,vat,0.0,69.0,digits/amounts misread
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,seller_name,Tinda,PIO WIPO “AAA,text misread / wrong span
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,seller_tin,31709886970015,,not found
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,datetime,2026-11-04T18:31:36,,not found
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,receipt_number,36804,,not found
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,fiscal_sign,740250722957,,not found
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,vat,0.0,,not found
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,total,5000.0,,not found
+pre_post,tesseract,r10_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective;sideways,payment,card,,not found
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_name,Tinda,png oA VIE a,text misread / wrong span
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","РА"" ОЙ = 79015",text misread / wrong span
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,datetime,2026-11-04T18:14:01,,not found
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,receipt_number,36801,,not found
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,fiscal_sign,220956006915,,not found
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,vat,0.0,,not found
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,total,15000.0,,not found
+pre_post,tesseract,r12_a_x1.jpg,synthetic;crumpled;handheld;shadow;tilted,payment,card,,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,seller_name,Tinda,| Yi jo att,text misread / wrong span
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,seller_tin,31709886970015,,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,datetime,2026-11-04T18:14:01,,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,receipt_number,36801,,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,fiscal_sign,220956006915,,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,vat,0.0,,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,total,15000.0,,not found
+pre_post,tesseract,r12_a_x2.jpg,synthetic;crumpled;faded;handheld;perspective,payment,card,,not found
+pre_post,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,seller_tin,31709886970015,,not found
+pre_post,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy","Гагдʼопа viloyati, Fargʻona shahar ‚ 64-, Barkamol MFY Yangi asr, koʻchasi 130-uy",text misread / wrong span
+pre_post,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,fiscal_sign,532227412590,,not found
+pre_post,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,vat,0.0,,not found
+pre_post,tesseract,r14_a_x1.jpg,synthetic;shadow;tilted,total,30000.0,30800.0,digits/amounts misread
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,seller_name,Tinda,ASHVIZON HAHADALTYEV AAPA tirvicn,text misread / wrong span
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,seller_tin,31709886970015,,not found
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,address,"Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",Ни Faty rw viloyati,text misread / wrong span
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,datetime,2026-11-03T17:38:16,,not found
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,receipt_number,36762,,not found
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,fiscal_module,NA000000006920,,not found
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,fiscal_sign,532227412590,,not found
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,vat,0.0,,not found
+pre_post,tesseract,r14_a_x2.jpg,synthetic;faded;perspective,total,30000.0,20629.69,digits/amounts misread

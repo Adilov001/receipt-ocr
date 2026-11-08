@@ -1,0 +1,25 @@
+{
+  "_status": "draft",
+  "_note": "CHECK fiscal_sign 5th digit (crease): 7402?0722957",
+  "seller_name": "Tinda",
+  "seller_tin": "31709886970015",
+  "address": "Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",
+  "datetime": "2026-11-04T18:31:36",
+  "receipt_number": "36804",
+  "fiscal_module": "NA000000006920",
+  "fiscal_sign": "740250722957",
+  "vat": 0.0,
+  "total": 5000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Margarin",
+      "quantity": 1.0,
+      "price": 5000.0,
+      "total": 5000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=NA000000006920&r=36804&c=20261104183136&s=740250722957"
+  }
+}

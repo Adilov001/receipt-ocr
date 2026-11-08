@@ -1,0 +1,25 @@
+{
+  "_status": "draft",
+  "_note": "read by hand from the photos; QR text rebuilt from the printed FM/receipt/date/sign (format checked on the 4 decoded codes)",
+  "seller_name": "Tinda",
+  "seller_tin": "31709886970015",
+  "address": "Farg'ona viloyati, Farg'ona shahar, 64-Barkamol MFY Yangi asr ko'chasi 130-uy",
+  "datetime": "2026-11-04T18:07:47",
+  "receipt_number": "36800",
+  "fiscal_module": "NA000000006920",
+  "fiscal_sign": "861532066154",
+  "vat": 0.0,
+  "total": 15700.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Ikkinchi navli un",
+      "quantity": 1.0,
+      "price": 15700.0,
+      "total": 15700.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=NA000000006920&r=36800&c=20261104180747&s=861532066154"
+  }
+}

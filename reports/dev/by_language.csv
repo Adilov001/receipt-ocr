@@ -1,0 +1,4 @@
+engine,config,lang,images,CER %,WER %,field acc %,item F1 %,QR plain %,QR final %,consistent %,sec/receipt
+tesseract,baseline,uz_latn,27.0,,,2.2222222222222223,0.0,0.0,0.0,0.0,6.026499961520333
+tesseract,pre,uz_latn,27.0,,,9.629629629629632,0.0,0.0,0.0,0.0,9.472827941080208
+tesseract,pre_post,uz_latn,27.0,,,17.037037037037038,10.526315789473683,0.0,0.0,14.814814814814813,10.230706626080266

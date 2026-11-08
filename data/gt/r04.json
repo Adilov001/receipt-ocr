@@ -1,0 +1,31 @@
+{
+  "_status": "draft",
+  "_note": "datetime seconds and receipt number (RS) are taken from the decoded QR; paper shows 17:16 and Chek:155; no TIN, address or payment type printed; vat = sh.j. QQS 957,14; seller_name = shop name printed under the logo (the AKMAL FARM logo is a picture, not text)",
+  "seller_name": "9-Этажка",
+  "seller_tin": null,
+  "address": null,
+  "datetime": "2026-11-03T17:16:32",
+  "receipt_number": "28616",
+  "fiscal_module": "UZ210317264829",
+  "fiscal_sign": "823084923002",
+  "vat": 957.14,
+  "total": 8933.33,
+  "payment": null,
+  "items": [
+    {
+      "name": "Омиезо капс 20мг №30 (Комомес)",
+      "quantity": 0.333,
+      "price": 16000.0,
+      "total": 5333.33
+    },
+    {
+      "name": "Аллохол таб №50",
+      "quantity": 0.2,
+      "price": 18000.0,
+      "total": 3600.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=UZ210317264829&r=28616&c=20261103171632&s=823084923002"
+  }
+}

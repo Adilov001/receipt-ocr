@@ -1,0 +1,9 @@
+{
+  "test": [
+    "akmal_farm",
+    "era_barkamol"
+  ],
+  "dev": [
+    "era_tinda"
+  ]
+}
