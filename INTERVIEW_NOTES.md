@@ -35,7 +35,8 @@ of shops the system never saw while I was tuning it."
    For every copy I list what it could be if an 8/6/9 is really a 0, and pick the value the copies agree on.
    It never changes a number without support from another copy.
 2. **QR codes that never decode.** Only 4 of 16 real photos decode. I grouped the results by shop:
-   ERA Tinda 0 of 9, even on a flat, sharp photo → that printer's codes are damaged; the other shops
+   ERA Tinda 0 of 9. That printer leaves white gaps in its codes, which use up the QR error correction,
+   so any extra problem (small, bent, blurry) breaks them; a sharp close-up does decode. The other shops
    fail only when the paper is crumpled. The system then falls back to OCR for those fields.
    *Bonus story:* I first thought creases made white dots in the QR, but comparing the original photo with
    the preprocessed one showed **my own shadow-removal step** created them. Lesson: always compare with the

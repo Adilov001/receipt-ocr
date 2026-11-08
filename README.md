@@ -166,9 +166,11 @@ Real vs synthetic test photos (pre + post): field accuracy 55.7 % vs 39.3 % (Tes
    (Narx, Naqdsiz, Jami, To'lov uchun jami): it lists what each copy could be if an 8/6/9 is a 0 and keeps
    the value the copies agree on; a value is never changed without support from another copy.
 2. **QR codes that never decode.** Real photos decode by seller: ERA Tinda **0/9**, ERA Barkamol 2/5,
-   Akmal Farm 2/2. zxing finds every Tinda code but fails with a checksum error even on a new flat, sharp
-   photo, so the printed code itself seems damaged (worn thermal print head); on the other shops crumpling
-   is what breaks it. These fields then come from OCR only, and the OCR ↔ QR check says "нет данных".
+   Akmal Farm 2/2. The Tinda printer leaves white gaps in its codes (a worn thermal print head), which
+   use up most of the QR error correction; zxing then fails with a checksum error as soon as anything
+   else is wrong (code small in the frame, bent paper, blur). A separate sharp close-up of r10 decoded on
+   the first try, and its text matched our rebuilt ground truth exactly. On the other shops crumpling is
+   what breaks the code. These fields then come from OCR only, and the OCR ↔ QR check says "нет данных".
 3. **An artefact of my own preprocessing.** Background division (shadow removal) estimates the paper
    brightness with a large blur; inside a big black QR module that estimate is dark too, so the module
    turns partly white (panel 2: original vs preprocessed). It does not change the QR rate here (the codes
