@@ -51,6 +51,7 @@ of shops the system never saw while I was tuning it."
 - Best fields: receipt number 67–71 %, fiscal sign 62–71 %, payment 81 % (Tesseract).
 - QR decoded: 52 % on the first try → 57 % after retries.
 - Speed on CPU: Tesseract ~6 s / receipt, EasyOCR ~17 s → I chose Tesseract as default.
+- Ablation (which preprocessing step matters): shadow removal is the most important (−9.6 points without it); binarization *hurts* (17 → 7 %), so I turned it off, decided on dev data.
 - Honest weak spot: VAT and total are still low, because of the dotted-zero font and bent receipts.
 
 ## Metrics in one line each

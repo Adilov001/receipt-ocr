@@ -157,6 +157,26 @@ Real vs synthetic test photos (pre + post): field accuracy 55.7 % vs 39.3 % (Tes
 * WER stays high (~84 %) because one wrong character spoils a whole word and receipts are mostly
   short tokens (numbers, codes).
 
+### Preprocessing ablation (dev split, Tesseract, post-processing on)
+
+Steps added one by one, and each step removed from the default:
+
+| added step | field acc % | | default without | field acc % | drop |
+|---|---:|---|---|---:|---:|
+| none (raw image) | 1.9 | | — (default) | 17.0 | |
+| + crop | 7.4 | | crop | 15.2 | −1.8 |
+| + orient | 7.4 | | orient | 15.6 | −1.4 |
+| + deskew | 10.0 | | deskew | 12.2 | −4.8 |
+| + illumination | 12.6 | | illumination | 7.4 | **−9.6** |
+| + clahe | **17.0** | | clahe | 12.6 | −4.4 |
+| + binarize | 7.4 | | | | |
+
+Shadow removal (illumination) matters most; deskew and contrast (CLAHE) come next. Adaptive binarization
+**hurts** (17.0 → 7.4: it breaks thin thermal strokes), so it is off by default; that choice was made on dev.
+Orientation adds little here because the perspective warp already turns most receipts upright; it is a
+safety net for photos where no receipt outline is found. Dev numbers are lower than test because dev
+(ERA Tinda) has the most crumpled receipts and none of its QR codes decode.
+
 ### Error analysis
 
 ![Main problems](reports/figures/problems.png)
