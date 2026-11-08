@@ -34,9 +34,12 @@ of shops the system never saw while I was tuning it."
    ("24 000.00" → "24 888.66"). Fix: the same amount is printed 3–4 times (Narx, Naqdsiz, Jami, To'lov uchun jami).
    For every copy I list what it could be if an 8/6/9 is really a 0, and pick the value the copies agree on.
    It never changes a number without support from another copy.
-2. **QR codes on crumpled paper.** Only 4 of 16 real photos decode: the paper bends the QR grid
-   ("checksum error") and creases make white dots inside the corner squares. More preprocessing can't fix
-   physical damage, so the system falls back to OCR for those fields (picture: `reports/figures/problems.png`).
+2. **QR codes that never decode.** Only 4 of 16 real photos decode. I grouped the results by shop:
+   ERA Tinda 0 of 9, even on a flat, sharp photo → that printer's codes are damaged; the other shops
+   fail only when the paper is crumpled. The system then falls back to OCR for those fields.
+   *Bonus story:* I first thought creases made white dots in the QR, but comparing the original photo with
+   the preprocessed one showed **my own shadow-removal step** created them. Lesson: always compare with the
+   original before blaming the data (picture: `reports/figures/problems.png`).
 3. **Sideways photos.** 7 photos were taken sideways; I added an orientation step
    (a receipt is long and narrow, so if it's wider than tall it's lying sideways; Tesseract OSD checks upside-down).
 

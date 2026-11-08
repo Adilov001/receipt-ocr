@@ -149,8 +149,8 @@ Real vs synthetic test photos (pre + post): field accuracy 55.7 % vs 39.3 % (Tes
   normalization, the dotted-zero repair and QR values.
 * Tesseract and EasyOCR end up equal on fields; Tesseract is ~3× faster on CPU, so it is the default.
   EasyOCR is better on raw photos (lower CER) but worse on Cyrillic (it can only load Latin *or* Cyrillic).
-* QR: retries add 4.7 points (52.4 % → 57.1 %). Only 4 of 16 real photos decode at all: the codes are
-  physically bent and creased (see below), which preprocessing cannot undo. When the QR decodes, its
+* QR: retries add 4.7 points (52.4 % → 57.1 %). Only 4 of 16 real photos decode at all: one shop's
+  printed codes are damaged and the others are crumpled (see below), which preprocessing cannot undo. When the QR decodes, its
   fiscal module, receipt number, date and fiscal sign are exact, which is why those fields are the best.
 * "Consistent" is ~0 %: one wrong digit in an item or the total breaks Σ items = total, so this is a
   strict end-to-end measure. Item F1 is low for the same reason (all four attributes must match).
@@ -165,11 +165,18 @@ Real vs synthetic test photos (pre + post): field accuracy 55.7 % vs 39.3 % (Tes
    ("24 000.00" → "24 888.66"). `src/receipt/repair.py` uses the fact that the amount is printed 3–4 times
    (Narx, Naqdsiz, Jami, To'lov uchun jami): it lists what each copy could be if an 8/6/9 is a 0 and keeps
    the value the copies agree on; a value is never changed without support from another copy.
-2. **Bent QR codes.** zxing finds the code but fails with a checksum error: crumpled paper moves the
-   modules off the grid, and reflections on creases put white dots in the finder patterns.
-3. **Sideways photos** (7 of 16): handled by the orientation step (aspect ratio + Tesseract OSD).
-4. **Deskew at its limit** (r06): the projection-profile search stopped at −8°, the edge of its range.
-5. **Unreadable digits on paper**: two fiscal-sign digits are hidden by creases even for a human (r10, r12).
+2. **QR codes that never decode.** Real photos decode by seller: ERA Tinda **0/9**, ERA Barkamol 2/5,
+   Akmal Farm 2/2. zxing finds every Tinda code but fails with a checksum error even on a new flat, sharp
+   photo, so the printed code itself seems damaged (worn thermal print head); on the other shops crumpling
+   is what breaks it. These fields then come from OCR only, and the OCR ↔ QR check says "нет данных".
+3. **An artefact of my own preprocessing.** Background division (shadow removal) estimates the paper
+   brightness with a large blur; inside a big black QR module that estimate is dark too, so the module
+   turns partly white (panel 2: original vs preprocessed). It does not change the QR rate here (the codes
+   fail on the original photo as well); the QR decoder works on the original photo first and uses the
+   preprocessed image only as its last retry.
+4. **Sideways photos** (7 of 16): handled by the orientation step (aspect ratio + Tesseract OSD).
+5. **Deskew at its limit** (r06): the projection-profile search stopped at −8°, the edge of its range.
+6. **Unreadable digits on paper**: two fiscal-sign digits are hidden by creases (r10 was checked on the paper receipt, r12 not yet).
 
 Automatic causes over all wrong fields (pre + post, both engines): *not found* 134, *text misread /
 wrong span* 61, *digits/amounts misread* 20, *digits misread* 7, *date/time misread* 5,
