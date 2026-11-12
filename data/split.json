@@ -1,9 +1,10 @@
 {
   "test": [
-    "akmal_farm",
-    "era_barkamol"
+    "era_barkamol",
+    "era_hamkorlik"
   ],
   "dev": [
+    "akmal_farm",
     "era_tinda"
   ]
 }

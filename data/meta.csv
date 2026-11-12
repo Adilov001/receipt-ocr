@@ -15,6 +15,10 @@ r12_a.jpg,r12,era_tinda,uz_latn,handheld;crumpled,1
 r13_a.jpg,r13,era_barkamol,uz_latn,handheld;crumpled,1
 r14_a.jpg,r14,era_tinda,uz_latn,clean,1
 r15_a.jpg,r15,era_barkamol,uz_latn,sideways;handheld,1
+r16_a.jpg,r16,akmal_farm,mixed,clean,1
+r17_a.jpg,r17,era_barkamol,uz_latn,clean,1
+r18_a.jpg,r18,era_barkamol,uz_latn,crumpled,1
+r19_a.jpg,r19,era_hamkorlik,uz_latn,crumpled,1
 r01_a_x1.jpg,r01,era_tinda,uz_latn,synthetic;crumpled;handheld;shadow;tilted,1
 r01_a_x2.jpg,r01,era_tinda,uz_latn,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,1
 r01_b_x1.jpg,r01,era_tinda,uz_latn,synthetic;crumpled;shadow;tilted,1
@@ -47,3 +51,11 @@ r14_a_x1.jpg,r14,era_tinda,uz_latn,synthetic;shadow;tilted,1
 r14_a_x2.jpg,r14,era_tinda,uz_latn,synthetic;faded;perspective,1
 r15_a_x1.jpg,r15,era_barkamol,uz_latn,synthetic;handheld;shadow;sideways;tilted,1
 r15_a_x2.jpg,r15,era_barkamol,uz_latn,synthetic;faded;handheld;perspective;sideways,1
+r16_a_x1.jpg,r16,akmal_farm,mixed,synthetic;shadow;tilted,1
+r16_a_x2.jpg,r16,akmal_farm,mixed,synthetic;faded;perspective,1
+r17_a_x1.jpg,r17,era_barkamol,uz_latn,synthetic;shadow;tilted,1
+r17_a_x2.jpg,r17,era_barkamol,uz_latn,synthetic;faded;perspective,1
+r18_a_x1.jpg,r18,era_barkamol,uz_latn,synthetic;crumpled;shadow;tilted,1
+r18_a_x2.jpg,r18,era_barkamol,uz_latn,synthetic;crumpled;faded;perspective,1
+r19_a_x1.jpg,r19,era_hamkorlik,uz_latn,synthetic;crumpled;shadow;tilted,1
+r19_a_x2.jpg,r19,era_hamkorlik,uz_latn,synthetic;crumpled;faded;perspective,1

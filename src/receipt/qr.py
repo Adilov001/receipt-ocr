@@ -1,4 +1,6 @@
 """QR detection, decoding with retries, and parsing of the fiscal link."""
+from functools import lru_cache
+from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 import cv2
@@ -35,6 +37,51 @@ def _decode_once(img):
     except cv2.error:
         pass
     return None, None
+
+
+WECHAT_MODELS = Path(__file__).resolve().parents[2] / "models" / "wechat_qrcode"
+ROI_SCALES = (0.2, 0.25, 0.33, 0.4, 0.5, 0.7, 1.0)
+
+
+@lru_cache(maxsize=1)
+def _wechat():
+    """OpenCV's WeChat QR detector (CNN detector + super-resolution), or None if unavailable."""
+    if not hasattr(cv2, "wechat_qrcode_WeChatQRCode"):
+        return None
+    files = [WECHAT_MODELS / f for f in ("detect.prototxt", "detect.caffemodel", "sr.prototxt", "sr.caffemodel")]
+    try:
+        return cv2.wechat_qrcode_WeChatQRCode(*map(str, files)) if all(f.exists() for f in files) \
+            else cv2.wechat_qrcode_WeChatQRCode()
+    except cv2.error:
+        return None
+
+
+def _decode_wechat(img):
+    det = _wechat()
+    if det is None:
+        return None
+    try:
+        res, _ = det.detectAndDecode(img if img.ndim == 3 else cv2.cvtColor(img, cv2.COLOR_GRAY2BGR))
+    except cv2.error:
+        return None
+    return res[0] if res and res[0] else None
+
+
+def _failed_boxes(gray, margin=0.12):
+    """Boxes of codes zxing found but could not read (checksum errors): where to retry."""
+    if zxingcpp is None:
+        return []
+    boxes = []
+    for r in zxingcpp.read_barcodes(gray, formats=zxingcpp.BarcodeFormat.QRCode, return_errors=True):
+        p = r.position
+        xs = [p.top_left.x, p.top_right.x, p.bottom_left.x, p.bottom_right.x]
+        ys = [p.top_left.y, p.top_right.y, p.bottom_left.y, p.bottom_right.y]
+        w, h = max(xs) - min(xs), max(ys) - min(ys)
+        if w < 20 or h < 20:
+            continue
+        m = int(margin * max(w, h))
+        boxes.append((max(0, min(xs) - m), max(0, min(ys) - m), max(xs) + m, max(ys) + m))
+    return boxes
 
 
 def _locate(img):
@@ -107,7 +154,25 @@ def decode_qr(img, extra_images=(), retries=True):
                 out.update(raw=text, decoded=True, attempt=f"roi+{name}")
                 return out
 
-    # 2) whole-image transforms
+    # 2) codes zxing found but could not read: crop exactly that box and retry at several sizes
+    #    with zxing and with WeChat (its super-resolution net helps small, blurry modules)
+    for x0, y0, x1, y1 in _failed_boxes(gray):
+        crop = gray[y0:y1, x0:x1]
+        for s in ROI_SCALES:
+            c = cv2.resize(crop, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else crop
+            text = _decode_once(c)[0] or _decode_wechat(c)
+            if text:
+                out.update(raw=text, decoded=True, attempt=f"failed_box@{s}",
+                           polygon=[[x0, y0], [x1, y0], [x1, y1], [x0, y1]], polygon_on="original")
+                return out
+
+    # 3) WeChat on the whole photo (its CNN detector finds codes zxing misses)
+    text = _decode_wechat(img)
+    if text:
+        out.update(raw=text, decoded=True, attempt="wechat")
+        return out
+
+    # 4) whole-image transforms
     for name, fn in _retries():
         try:
             text, poly = _decode_once(fn(gray))
@@ -117,7 +182,7 @@ def decode_qr(img, extra_images=(), retries=True):
             out.update(raw=text, decoded=True, attempt=name)
             return out
 
-    # 3) the preprocessed receipt image(s)
+    # 5) the preprocessed receipt image(s)
     for i, ex in enumerate(extra_images):
         text, poly = _decode_once(_gray(ex))
         if text:

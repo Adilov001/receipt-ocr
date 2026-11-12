@@ -1,0 +1,29 @@
+{
+  "_status": "draft",
+  "_note": "QR not decodable and the paper shows no seconds (Sana:11.11.2026 16:24), so seconds = 00 and the QR text cannot be rebuilt; receipt number = RS (paper Chek:145)",
+  "seller_name": "9-Этажка",
+  "seller_tin": null,
+  "address": null,
+  "datetime": "2026-11-11T16:24:00",
+  "receipt_number": "30722",
+  "fiscal_module": "UZ210317264829",
+  "fiscal_sign": "505306904858",
+  "vat": 2044.82,
+  "total": 19085.0,
+  "payment": null,
+  "items": [
+    {
+      "name": "Найз таб 100мг №20",
+      "quantity": 0.25,
+      "price": 33700.0,
+      "total": 8425.0
+    },
+    {
+      "name": "Ципрофлоксацин таб 500мг №100",
+      "quantity": 0.1,
+      "price": 106600.0,
+      "total": 10660.0
+    }
+  ],
+  "qr": null
+}
