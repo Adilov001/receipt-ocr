@@ -36,7 +36,7 @@ L = {
         rf"(ko{A}ch|kuchasi|tuman|shahar|shahri|viloyat|mahalla|\bmfy\b|massiv|\buy\b|\bул\.|улиц|район|"
         rf"\bг\.|област|кўча|туман|шаҳ|вилоят|manzil|адрес|манзил)", re.I),
     "address_label": re.compile(r"^\s*(yur\.?\s*manzil|yuridik\s*manzil|manzil|адрес|манзил)\s*[:.]?\s*", re.I),
-    "vat_free": re.compile(r"(qqs\s*siz|без\s*ндс|ққс\s*сиз)", re.I),
+    "vat_free": re.compile(r"(q[q0o]s\s*siz|без\s*ндс|ққс\s*сиз)", re.I),
     "narx": re.compile(r"^\s*(narx|нарх|цена)\b", re.I),
     "org": re.compile(r"\b(mchj|xk|yatt|qk|aj|ooo|ооо|мчж|ип|чп|ао|ат|llc|ltd)\b|[\"«“]", re.I),
 }
@@ -55,7 +55,7 @@ QTY_RE = re.compile(
 FRACTION_RE = re.compile(r"\(\s*(\d{1,4})\s*/\s*(\d{1,4})\s*\)")
 # lines between an item's name and its quantity line that are not the name
 ITEM_META_RE = re.compile(r"(ishlab|chiqaruvchi|ишлаб|^\s*(mk|мк|mxik|мхик)\b|qqs|ққс|ндс|narx|нарх)", re.I)
-ITEM_INDEX_RE = re.compile(r"^\s*\d{1,3}[.)]?\s+(?=\D)")
+ITEM_INDEX_RE = re.compile(r"^\s*\d{1,3}[.)]?\s*(?=[^\W\d_])")  # "1 Xurmo", "1. Xurmo", "1Xurmo"
 
 
 def _text(line):
@@ -119,15 +119,25 @@ def _item_name(texts, i, before):
     item metadata (manufacturer, marking code, VAT) - pharmacy names sit 2-3 lines higher."""
     name = before.strip()
     if len(re.sub(r"[^\w]", "", name)) >= 3:
-        return ITEM_INDEX_RE.sub("", name).strip(" .:-")
+        return _clean_name(name)
     for j in range(i - 1, max(i - 4, -1), -1):
         t = texts[j].strip()
-        if QTY_RE.search(t) or L["total"][0].search(t):
+        if QTY_RE.search(t) or L["total"][0].search(t) or parse_datetime(t) or L["receipt_number"].search(t):
             break
         if ITEM_META_RE.search(t) or len(re.sub(r"[^\w]", "", t)) < 3:
             continue
-        return ITEM_INDEX_RE.sub("", t).strip(" .:-") or None
+        return _clean_name(t)
     return None
+
+
+def _clean_name(t):
+    """Drop the item number and stray one-character tokens OCR adds at the edges ("\\ Шприц", "Margarin I")."""
+    words = ITEM_INDEX_RE.sub("", t).strip(" .:-").split()
+    while words and len(words[0]) == 1 and not words[0].isdigit():
+        words.pop(0)
+    while words and len(words[-1]) == 1 and not words[-1].isdigit():
+        words.pop()
+    return " ".join(words) or None
 
 
 def extract_items(lines, num):
@@ -221,8 +231,11 @@ def extract(lines, postprocess=True):
                 v, i = _last_amount(texts[j][m.end():]), j
                 break
     vat = num(v) if v else None
-    if postprocess and v and vat and could_be_zero(v) and any(L["vat_free"].search(t) for t in texts):
-        vat = 0.0  # every item is "QQS siz" (VAT-free) and the reading may be 0.00 misread
+    if postprocess and any(L["vat_free"].search(t) for t in texts) and not any(
+            re.search(r"\d+\s*%", t) for t in texts if L["vat"].search(t)):
+        # the items are "QQS siz" (VAT-free) and no VAT rate is printed: the receipt's VAT is 0;
+        # a reading such as "0.6" or "1" is a misread 0.00
+        vat = 0.0
     put("vat", vat, i)
 
     v = i = None
