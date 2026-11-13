@@ -83,7 +83,9 @@ def could_be_zero(text):
 
 def repair_item(item, receipt_total=None, single=False):
     """Choose quantity, price and total so that quantity × price = total (with fewest digit changes)."""
-    q = candidates(item.get("_raw_qty"), parse_qty) or ({item["quantity"]: 0} if item.get("quantity") is not None else {})
+    raw_q = item.get("_raw_qty") or ""
+    q = (None if "/" in raw_q else candidates(raw_q, parse_qty)) \
+        or ({item["quantity"]: 0} if item.get("quantity") is not None else {})  # "(10/30)" is already exact
     p = candidates(item.get("_raw_price")) or ({item["price"]: 0} if item.get("price") is not None else {})
     t = candidates(item.get("_raw_total")) or ({item["total"]: 0} if item.get("total") is not None else {})
     best, best_cost = None, None

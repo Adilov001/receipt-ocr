@@ -17,13 +17,16 @@ L = {
     "tin": re.compile(r"\b(stir|inn|инн|стир|jshshr|жшшир|pinfl)\b", re.I),
     "datetime": re.compile(r"\b(sana|vaqt|дата|время|сана|вақт)\b", re.I),
     "receipt_number": re.compile(r"(^|\s)(chek|чек)(\s*(raqami|№|no\.?|#))?(?!\s*(turi|kodi))\b", re.I),
-    "fiscal_sign": re.compile(r"(fiskal\s*(imzo|belgi|alomat)|фискал\w*\s*(признак|имзо|белги)|\bфп\b|\bfp\b)", re.I),
+    "fiscal_sign": re.compile(r"(fiskal\s*(imzo|belgi|alomat)|фискал\w*\s*(признак|имзо|белги)|\bфп\b|\bfp\b|\bfb\s*:)", re.I),
+    # fiscal receipt number printed as "RS:" (pharmacy); preferred over the shop's own "Chek:" counter
+    "rs": re.compile(r"\brs\s*:", re.I),
     "fiscal_module": re.compile(r"(\bfm\b|\bфм\b|fiskal\s*modul|фискал\w*\s*модул|\bzfm\b)", re.I),
     "vat_total": re.compile(rf"(jami\s*qqs|qqs\s*jami|итого\s*ндс|жами\s*ққс|ққс\s*жами|ндс\s*итого)", re.I),
     "vat": re.compile(r"\b(qqs|ндс|ққс)\b(?!\s*siz)", re.I),
     "total": [
         re.compile(rf"to{A}lov\s*uchun\s*jami|тўлов\s*учун\s*жами", re.I),
         re.compile(rf"jami\s*to{A}lov|итого\s*к\s*оплате|к\s*оплате|всего\s*к\s*оплате", re.I),
+        re.compile(rf"to{A}landi|тўланди|оплачено", re.I),
         re.compile(r"\b(итого|итог|всего|жами)\b(?!\s*(ндс|ққс))", re.I),
         re.compile(r"\bjami\b(?!\s*qqs)", re.I),
     ],
@@ -44,9 +47,14 @@ TIN_RE = re.compile(r"(?<!\d)(\d{14}|\d{9})(?!\d)")
 RECEIPT_NO_RE = re.compile(r"(?<![\d.:\-/])\d{1,10}(?![\d.:\-/])")
 FISCAL_SIGN_RE = re.compile(r"(?<!\d)\d{10,14}(?!\d)")
 FM_RE = re.compile(r"\b[A-Z]{2}[\dOIL]{12}\b")  # OCR may read 0 as O inside the code
+_PRICE = r"\d{1,3}(?:[  ']\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?"
+# "1,000 Kg X 24 000,00" (ERA)  |  "(10/30) x 16 000 = 5 333,33" (pharmacy: packs of a box)
 QTY_RE = re.compile(
-    r"(?<![\d.,])(?P<qty>\d{1,5}(?:[.,]\d{1,3})?)\s*(?P<unit>[^\W\d_]{0,6}\.?)\s*[xхX×*]\s*"
-    r"(?P<price>\d{1,3}(?:[  ']\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?)")
+    r"(?<![\d.,])(?P<qty>\(\s*\d{1,4}\s*/\s*\d{1,4}\s*\)|\d{1,5}(?:[.,]\d{1,3})?)\s*(?P<unit>[^\W\d_]{0,6}\.?)\s*"
+    rf"[xхX×*]\s*(?P<price>{_PRICE})(?:\s*=\s*(?P<total>{_PRICE}))?")
+FRACTION_RE = re.compile(r"\(\s*(\d{1,4})\s*/\s*(\d{1,4})\s*\)")
+# lines between an item's name and its quantity line that are not the name
+ITEM_META_RE = re.compile(r"(ishlab|chiqaruvchi|ишлаб|^\s*(mk|мк|mxik|мхик)\b|qqs|ққс|ндс|narx|нарх)", re.I)
 ITEM_INDEX_RE = re.compile(r"^\s*\d{1,3}[.)]?\s+(?=\D)")
 
 
@@ -98,6 +106,30 @@ class _Match:
 AMOUNT_LAST = _AmountRe()
 
 
+def _qty(raw, num):
+    """'1,000' -> 1.0; '(10/30)' -> 0.333 (10 packs of a box of 30)."""
+    m = FRACTION_RE.fullmatch(raw.strip())
+    if m and int(m.group(2)):
+        return round(int(m.group(1)) / int(m.group(2)), 3)
+    return num(raw, 3)
+
+
+def _item_name(texts, i, before):
+    """Name: text before the quantity on the same line, else the nearest line above that is not
+    item metadata (manufacturer, marking code, VAT) - pharmacy names sit 2-3 lines higher."""
+    name = before.strip()
+    if len(re.sub(r"[^\w]", "", name)) >= 3:
+        return ITEM_INDEX_RE.sub("", name).strip(" .:-")
+    for j in range(i - 1, max(i - 4, -1), -1):
+        t = texts[j].strip()
+        if QTY_RE.search(t) or L["total"][0].search(t):
+            break
+        if ITEM_META_RE.search(t) or len(re.sub(r"[^\w]", "", t)) < 3:
+            continue
+        return ITEM_INDEX_RE.sub("", t).strip(" .:-") or None
+    return None
+
+
 def extract_items(lines, num):
     texts = [_text(l) for l in lines]
     items = []
@@ -105,25 +137,23 @@ def extract_items(lines, num):
         m = QTY_RE.search(t)
         if not m or parse_datetime(t):
             continue
-        rest = t[m.end():]
-        total = _last_amount(rest)
-        if total is not None and len(total) < 3:
-            total = None  # a stray digit after the price, not the line total
+        total = m.group("total")  # "= 5 333,33" on the same line
+        if total is None:
+            total = _last_amount(t[m.end():])
+            if total is not None and len(total) < 3:
+                total = None  # a stray digit after the price, not the line total
         if total is None and i + 1 < len(texts) and not QTY_RE.search(texts[i + 1]):
             nxt = texts[i + 1].strip()
             if AMOUNT_RE.fullmatch(nxt) or L["narx"].search(nxt):
                 total = _last_amount(nxt)
         total_raw = total
-        name = t[:m.start()].strip()
-        if len(re.sub(r"[^\w]", "", name)) < 3 and i > 0:
-            name = texts[i - 1].strip()
-        name = ITEM_INDEX_RE.sub("", name).strip(" .:-")
-        qty, price = num(m.group("qty"), 3), num(m.group("price"), 2)
+        qty, price = _qty(m.group("qty"), num), num(m.group("price"), 2)
         total = num(total, 2) if total else None
         if total is None and qty is not None and price is not None:
             total = round(qty * price, 2)
-        items.append({"name": name or None, "quantity": qty, "price": price, "total": total, "_line": i,
-                      "_raw_qty": m.group("qty"), "_raw_price": m.group("price"), "_raw_total": total_raw})
+        items.append({"name": _item_name(texts, i, t[:m.start()]), "quantity": qty, "price": price,
+                      "total": total, "_line": i, "_raw_qty": m.group("qty"), "_raw_price": m.group("price"),
+                      "_raw_total": total_raw})
     return items
 
 
@@ -162,7 +192,9 @@ def extract(lines, postprocess=True):
         dt = repair_datetime(v)
     put("datetime", dt, i)
 
-    v, i = _search_near(lines, L["receipt_number"], RECEIPT_NO_RE)
+    v, i = _search_near(lines, L["rs"], RECEIPT_NO_RE, order=(0,))
+    if v is None:
+        v, i = _search_near(lines, L["receipt_number"], RECEIPT_NO_RE)
     put("receipt_number", v, i)
 
     v, i = _search_near(lines, L["fiscal_sign"], FISCAL_SIGN_RE, order=(0, 1, -1))
@@ -182,7 +214,12 @@ def extract(lines, postprocess=True):
 
     v, i = _search_near(lines, L["vat_total"], AMOUNT_LAST, order=(0, 1, -1))
     if v is None:
-        v, i = _search_near(lines, L["vat"], AMOUNT_LAST, order=(0,))
+        # last VAT line: items print their own VAT first, the receipt's VAT comes after them
+        for j in range(len(texts) - 1, -1, -1):
+            m = L["vat"].search(texts[j])
+            if m and _last_amount(texts[j][m.end():]):
+                v, i = _last_amount(texts[j][m.end():]), j
+                break
     vat = num(v) if v else None
     if postprocess and v and vat and could_be_zero(v) and any(L["vat_free"].search(t) for t in texts):
         vat = 0.0  # every item is "QQS siz" (VAT-free) and the reading may be 0.00 misread
@@ -202,7 +239,8 @@ def extract(lines, postprocess=True):
                   if L["card"].search(t) or L["narx"].search(t) or re.search(r"\buzs\b", t, re.I)
                   or re.match(r"^\s*(jami|жами|итого)\s", t, re.I)
                   for a in AMOUNT_RE.findall(t) if len(re.sub(r"\D", "", a)) >= 3]
-        others += [it[k] for it in items for k in ("_raw_price", "_raw_total")]
+        if len(items) == 1:  # one item: its price and line total are copies of the receipt total
+            others += [items[0][k] for k in ("_raw_price", "_raw_total")]
         others = [o for o in others if o and o != v]
         # 1) the total line, confirmed by another copy  2) two other copies that agree  3) the line as read
         total = (agree(v, others) if v else None) or consensus(others) or total
