@@ -9,7 +9,9 @@ masked by the terminal (561468******8721).
 How: the photo is preprocessed and read with Tesseract, the name lines are found
 on the straightened receipt, and their boxes are mapped back to the original
 photo with a homography found by SIFT feature matching.
-Always check the result by eye; --box x0,y0,x1,y1 adds a manual box (original pixels).
+Second pass (--pattern REGEX): RapidOCR reads the original photo directly (it also finds
+rotated text) and every text box matching the pattern is blacked out; used for names the
+first pass missed. Always check the result by eye; --box x0,y0,x1,y1 adds a manual box.
 """
 import argparse
 import re
@@ -66,6 +68,7 @@ def main():
     ap.add_argument("src")
     ap.add_argument("dst")
     ap.add_argument("--box", action="append", default=[], help="manual box x0,y0,x1,y1 in original pixels")
+    ap.add_argument("--pattern", default=None, help="regex: also black out RapidOCR text boxes that match it")
     args = ap.parse_args()
 
     cfg = load_config()
@@ -82,11 +85,21 @@ def main():
             poly = cv2.perspectiveTransform(pts.reshape(-1, 1, 2), h).astype(np.int32) if h is not None else None
             if poly is not None:
                 cv2.fillPoly(out, [poly], (0, 0, 0))
+    n_pattern = 0
+    if args.pattern:
+        from rapidocr_onnxruntime import RapidOCR
+        res, _ = RapidOCR()(out)
+        for pts, text, _ in res or []:
+            if re.search(args.pattern, text, re.I):
+                poly = np.array(pts, dtype=np.float32)
+                c = poly.mean(axis=0)
+                cv2.fillPoly(out, [(c + (poly - c) * 1.15).astype(np.int32)], (0, 0, 0))
+                n_pattern += 1
     for b in args.box:
         x0, y0, x1, y1 = map(int, b.split(","))
         cv2.rectangle(out, (x0, y0), (x1, y1), (0, 0, 0), -1)
     cv2.imwrite(args.dst, out, [cv2.IMWRITE_JPEG_QUALITY, 95])
-    print(f"{Path(args.src).name}: {len(boxes)} auto + {len(args.box)} manual boxes")
+    print(f"{Path(args.src).name}: {len(boxes)} auto + {n_pattern} pattern + {len(args.box)} manual boxes")
 
 
 if __name__ == "__main__":

@@ -13,7 +13,8 @@ import random
 from .config import ROOT
 
 CONDITIONS = ["clean", "crumpled", "shadow", "uneven_light", "tilted", "perspective", "faded", "long", "handheld",
-              "sideways", "synthetic"]
+              "sideways", "synthetic",
+              "blur", "partial"]  # partial = lower half of the receipt (QR close-up), QR metric only
 
 
 def _p(rel):

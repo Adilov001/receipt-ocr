@@ -48,10 +48,13 @@ RECEIPT_NO_RE = re.compile(r"(?<![\d.:\-/])\d{1,10}(?![\d.:\-/])")
 FISCAL_SIGN_RE = re.compile(r"(?<!\d)\d{10,14}(?!\d)")
 FM_RE = re.compile(r"\b[A-Z]{2}[\dOIL]{12}\b")  # OCR may read 0 as O inside the code
 _PRICE = r"\d{1,3}(?:[  ']\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?"
-# "1,000 Kg X 24 000,00" (ERA)  |  "(10/30) x 16 000 = 5 333,33" (pharmacy: packs of a box)
+_CURRENCY = r"(?:so[ʻʼ'`’‘]?m|сўм|сум|uzs)"
+# "1,000 Kg X 24 000,00" (ERA) | "(10/30) x 16 000 = 5 333,33" (pharmacy: packs of a box)
+# "19,520 kub. metr X 5 700,00" (gas) | "10 L X 12 200 SO'M = 122 000" (petrol)
 QTY_RE = re.compile(
-    r"(?<![\d.,])(?P<qty>\(\s*\d{1,4}\s*/\s*\d{1,4}\s*\)|\d{1,5}(?:[.,]\d{1,3})?)\s*(?P<unit>[^\W\d_]{0,6}\.?)\s*"
-    rf"[xхX×*]\s*(?P<price>{_PRICE})(?:\s*=\s*(?P<total>{_PRICE}))?")
+    r"(?<![\d.,])(?P<qty>\(\s*\d{1,4}\s*/\s*\d{1,4}\s*\)|\d{1,5}(?:[.,]\d{1,3})?)\s*"
+    r"(?P<unit>(?:[^\W\d_]{1,6}\.?\s*){0,2})"
+    rf"[xхX×*]\s*(?P<price>{_PRICE})\s*(?:{_CURRENCY}\b\.?)?(?:\s*=\s*(?P<total>{_PRICE}))?", re.I)
 FRACTION_RE = re.compile(r"\(\s*(\d{1,4})\s*/\s*(\d{1,4})\s*\)")
 # lines between an item's name and its quantity line that are not the name
 ITEM_META_RE = re.compile(r"(ishlab|chiqaruvchi|ишлаб|^\s*(mk|мк|mxik|мхик)\b|qqs|ққс|ндс|narx|нарх)", re.I)

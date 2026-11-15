@@ -1,0 +1,25 @@
+{
+  "_status": "draft",
+  "_note": "ERA \"AVTOGAZ\" MCHJ gas station; 16.873 x 5 500 = 92 801.50, the receipt prints 92 800.00",
+  "seller_name": "ERA",
+  "seller_tin": "202647034",
+  "address": "Farg'ona viloyat, Bag'dod tumani, Konizar MFY, Konizar qishlo'gi",
+  "datetime": "2026-11-01T14:39:42",
+  "receipt_number": "166009",
+  "fiscal_module": "YZ231006008925",
+  "fiscal_sign": "424109502220",
+  "vat": 9942.86,
+  "total": 92800.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Metan gaz",
+      "quantity": 16.873,
+      "price": 5500.0,
+      "total": 92800.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=YZ231006008925&r=166009&c=20261101143942&s=424109502220"
+  }
+}
