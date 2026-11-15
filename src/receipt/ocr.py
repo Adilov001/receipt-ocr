@@ -89,15 +89,19 @@ def run_easyocr(img, cfg):
     return group_into_lines(words)
 
 
+def rapidocr_engine(params=None):
+    """One shared RapidOCR instance (loading the ONNX models takes a second)."""
+    global _rapidocr
+    if _rapidocr is None:
+        from rapidocr_onnxruntime import RapidOCR
+        _rapidocr = RapidOCR(**(params or {}))
+    return _rapidocr
+
+
 def run_rapidocr(img, cfg):
     """PaddleOCR PP-OCRv4 models run through ONNX Runtime (RapidOCR): fast on CPU, strong on digits;
     its recognizer has no Cyrillic, so Cyrillic text comes out wrong."""
-    global _rapidocr
-    from rapidocr_onnxruntime import RapidOCR
-
-    if _rapidocr is None:
-        _rapidocr = RapidOCR(**cfg["ocr"].get("rapidocr", {}))
-    res, _ = _rapidocr(img if img.ndim == 3 else cv2.cvtColor(img, cv2.COLOR_GRAY2BGR))
+    res, _ = rapidocr_engine(cfg["ocr"].get("rapidocr", {}))(img if img.ndim == 3 else cv2.cvtColor(img, cv2.COLOR_GRAY2BGR))
     words = []
     for pts, text, conf in res or []:
         pts = np.array(pts)

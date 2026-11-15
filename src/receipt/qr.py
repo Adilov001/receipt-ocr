@@ -156,7 +156,8 @@ def decode_qr(img, extra_images=(), retries=True):
 
     # 2) codes zxing found but could not read: crop exactly that box and retry at several sizes
     #    with zxing and with WeChat (its super-resolution net helps small, blurry modules)
-    for x0, y0, x1, y1 in _failed_boxes(gray):
+    boxes = _failed_boxes(gray)
+    for x0, y0, x1, y1 in boxes:
         crop = gray[y0:y1, x0:x1]
         for s in ROI_SCALES:
             c = cv2.resize(crop, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else crop
@@ -165,6 +166,22 @@ def decode_qr(img, extra_images=(), retries=True):
                 out.update(raw=text, decoded=True, attempt=f"failed_box@{s}",
                            polygon=[[x0, y0], [x1, y0], [x1, y1], [x0, y1]], polygon_on="original")
                 return out
+
+    # 2b) the thermal printer leaves white gaps inside black modules: binarize the crop and
+    #     thicken the black (erosion of white) or smooth specks (median), then retry
+    for x0, y0, x1, y1 in boxes:
+        crop = gray[y0:y1, x0:x1]
+        for s in ROI_SCALES[:-1]:
+            c = cv2.resize(crop, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
+            b = cv2.threshold(c, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+            for name, fixed in ((f"erode2", cv2.erode(b, np.ones((2, 2), np.uint8))),
+                                (f"erode3", cv2.erode(b, np.ones((3, 3), np.uint8))),
+                                ("median3", cv2.medianBlur(b, 3))):
+                text = _decode_once(fixed)[0] or _decode_wechat(fixed)
+                if text:
+                    out.update(raw=text, decoded=True, attempt=f"failed_box@{s}+{name}",
+                               polygon=[[x0, y0], [x1, y0], [x1, y1], [x0, y1]], polygon_on="original")
+                    return out
 
     # 3) WeChat on the whole photo (its CNN detector finds codes zxing misses)
     text = _decode_wechat(img)

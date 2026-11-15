@@ -121,6 +121,28 @@ def osd_rotation(gray):
         return 0
 
 
+def _qr_centers_y(gray):
+    """Relative vertical positions (0 = top) of QR codes found in the image, read or not."""
+    try:
+        import zxingcpp
+    except ImportError:
+        return []
+    small = cv2.resize(gray, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    ys = []
+    for r in zxingcpp.read_barcodes(small, formats=zxingcpp.BarcodeFormat.QRCode, return_errors=True):
+        p = r.position
+        ys.append((p.top_left.y + p.bottom_right.y) / 2 / small.shape[0])
+    return ys
+
+
+def confirmed_rotation(gray):
+    """180° only when the receipt's own layout says so: the fiscal QR code is printed at the end
+    of a receipt, so a QR code found in the top 40 % means the photo is upside down.
+    Tesseract OSD is not used for this: on our receipts it claimed 180° on 10 upright photos."""
+    ys = _qr_centers_y(gray)
+    return 2 if ys and min(ys) < 0.4 and max(ys) < 0.4 else 0
+
+
 def _rot90(img, k):
     """Rotate by k * 90 degrees clockwise."""
     return np.rot90(img, -k).copy() if img is not None and k % 4 else img
@@ -173,7 +195,7 @@ def preprocess(img, cfg):
         stages["background_masked"] = gray
 
     if p.get("orient"):
-        k = osd_rotation(gray) // 90
+        k = confirmed_rotation(gray)
         if k:
             gray = _rot90(gray, k)
             info["rotated"] = (info.get("rotated", 0) + 90 * k) % 360
