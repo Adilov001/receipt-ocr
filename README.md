@@ -33,14 +33,17 @@ together with its measured time, so a second run is fast and the timings stay ho
 |---|---|
 | `configs/default.yaml` | every parameter (preprocessing steps, OCR languages, tolerances, experiments) |
 | `src/receipt/preprocess.py` | receipt detection + perspective warp, background masking, deskew, illumination, CLAHE, binarization |
-| `src/receipt/ocr.py` | Tesseract and EasyOCR behind one interface (lines with boxes and confidence) |
-| `src/receipt/qr.py` | QR decoding with retries (ROI warp, upscale, CLAHE, Otsu, adaptive) and link parsing |
+| `src/receipt/ocr.py` | Tesseract, EasyOCR and RapidOCR behind one interface (lines with boxes and confidence) |
+| `src/receipt/repair.py` | repair of the dotted zero read as 8/6/9, using the copies of each amount printed on the receipt |
+| `src/receipt/qr.py` | QR decoding with retries (crop of a code found but not read, WeChat CNN + super-resolution, ROI warp, CLAHE, Otsu, adaptive) and link parsing |
 | `src/receipt/normalize.py` | numbers, apostrophes, look-alike letters, dates; **metric normalization rules** |
 | `src/receipt/extract.py` | field and item extraction |
 | `src/receipt/reconcile.py` | arithmetic checks, OCR ↔ QR comparison |
 | `src/receipt/metrics.py` | CER, WER, field accuracy, item F1 |
 | `scripts/evaluate.py` | engines × configs table, by condition and language, ablation, error analysis |
 | `app.py` | Gradio UI |
+| `scripts/mask_pii.py`, `scripts/augment.py` | masking of personal data; synthetic variants |
+| `models/wechat_qrcode/` | WeChat QR detector + super-resolution models (OpenCV contrib) |
 
 ## Output JSON
 
@@ -63,15 +66,19 @@ lives in `configs/default.yaml` (`qr.param_map`).
 
 | | |
 |---|---|
-| Unique receipts | 15 real paper receipts (Fergana, Oct–Nov 2026) from 3 sellers |
-| Sellers | `era_tinda` (8 receipts, TIN 31709886970015), `era_barkamol` (5, TIN 31802964140017), `akmal_farm` (2, pharmacy) |
-| Images | 48 = 16 real photos (one receipt shot twice) + 32 synthetic variants (`scripts/augment.py`) |
-| With QR | 48 (every receipt prints a fiscal QR code) |
-| Languages | Uzbek Latin (13 receipts), mixed Uzbek/Russian Cyrillic + Latin (2, pharmacy) |
-| Split | seller-disjoint (`data/split.json`): **dev** = `era_tinda` (8 receipts, 27 images), **test** = `era_barkamol` + `akmal_farm` (7 receipts, 21 images) |
-| Personal data | cardholder names and pharmacy staff names blacked out (`scripts/mask_pii.py`, checked by eye); card numbers are already masked by the terminal |
+| Unique receipts | **29** real paper receipts (Fergana region, Oct–Nov 2026) from **7 sellers** |
+| Sellers | `era_tinda` 8, `era_barkamol` 14, `akmal_farm` 3 (pharmacy, Cyrillic), `era_hamkorlik` 1, `diyor_neft` 1 (petrol station, own layout), `era_avtomobilist` 1, `era_avtogaz` 1 (gas stations) |
+| Real photos | **78**: 49 whole-receipt photos + 29 photos of the lower half (totals + QR close-up) |
+| Synthetic | 40 variants of the first 20 real photos (`scripts/augment.py`), reported separately |
+| With QR | every receipt prints a fiscal QR code |
+| Conditions | clean, crumpled, shadow, held in hand, tilted, sideways, blurred; synthetic: shadow, faded, perspective |
+| Split | seller-disjoint (`data/split.json`): **dev** = `era_tinda`, `akmal_farm`, `era_hamkorlik`, `era_avtogaz` (13 receipts); **test** = `era_barkamol`, `diyor_neft`, `era_avtomobilist` (16 receipts) |
+| Personal data | cardholder, cashier and pharmacy staff names blacked out (`scripts/mask_pii.py`, two OCR passes, every image checked); card numbers are already masked by the terminal |
 
-**Why synthetic variants.** Only 15 receipts could be collected, so each real photo got two
+**Lower-half photos** (`*_q.jpg`, condition `partial`) show only the totals and the QR code; they count for the
+QR decode rate only, not for text or field metrics.
+
+**Why synthetic variants.** The first 20 photos got two
 generated versions: (1) a shadow across the receipt + rotation, (2) faded print + blur + perspective +
 strong JPEG compression. A variant shares the receipt id, seller and ground truth of its source photo
 and therefore always sits in the same split: there is no leakage between dev and test.
@@ -119,63 +126,117 @@ removed, case ignored for CER/WER; amounts compared as numbers, digit fields as 
 
 ## Results
 
-Test split: 21 images (7 real + 14 synthetic), 7 receipts, 2 sellers never seen during tuning
-(MacBook CPU). Full tables: `reports/results.md`; dev split and ablation: `reports/dev/results.md`.
+Test split: 16 receipts from 3 sellers that were **never used for tuning** (ERA Barkamol, the
+DIYOR NEFT petrol station, the ERA AVTOMOBILIST gas station; the petrol layout is not in dev at all).
+CPU: MacBook (x86-64). All tables: `reports/results.md`; dev split and ablation: `reports/dev/results.md`.
 
-| engine | config | CER % | WER % | field acc % | item F1 % | QR plain % | QR final % | consistent % | s / receipt |
-|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Tesseract | baseline (raw photo) | 94.7 | 96.9 | 9.5 | 0.0 | 52.4 | 57.1 | 0.0 | 3.9 |
-| Tesseract | + preprocessing | 50.2 | 83.6 | 17.6 | 0.0 | 52.4 | 57.1 | 0.0 | 6.1 |
-| Tesseract | + pre + post-processing | 50.2 | 83.6 | **44.8** | 4.1 | 52.4 | 57.1 | 0.0 | 6.2 |
-| EasyOCR | baseline (raw photo) | 79.8 | 97.3 | 10.5 | 0.0 | 52.4 | 57.1 | 0.0 | 43.0 |
-| EasyOCR | + preprocessing | 52.7 | 84.1 | 20.5 | 0.0 | 52.4 | 57.1 | 4.8 | 17.3 |
-| EasyOCR | + pre + post-processing | 52.7 | 84.1 | **44.3** | 0.0 | 52.4 | 57.1 | 0.0 | 17.5 |
+### Real photos (23 whole-receipt photos)
 
-Field accuracy with pre + post-processing, %:
+| engine                        | config                  |   fields % |   item F1 % |   CER % |   WER % |   QR plain % |   QR final % |   consistent % |   s / receipt |
+|:------------------------------|:------------------------|-----------:|------------:|--------:|--------:|-------------:|-------------:|---------------:|--------------:|
+| Tesseract 5                   | baseline (raw photo)    |        7   |         0   |    88.9 |    93.5 |         47.8 |         60.9 |            0   |           7.9 |
+| Tesseract 5                   | + preprocessing         |       20.4 |         5   |    33.3 |    67.8 |         47.8 |         60.9 |            4.3 |           9.2 |
+| Tesseract 5                   | + pre + post-processing |       60   |        15   |    33.3 |    67.8 |         47.8 |         60.9 |            4.3 |           9.2 |
+| EasyOCR                       | baseline (raw photo)    |       27.4 |         0   |    60.6 |    87.2 |         47.8 |         60.9 |            0   |          44.4 |
+| EasyOCR                       | + preprocessing         |       33.5 |         0   |    23.5 |    69.3 |         47.8 |         60.9 |            4.3 |          23   |
+| EasyOCR                       | + pre + post-processing |       59.6 |         0   |    23.5 |    69.3 |         47.8 |         60.9 |            0   |          20.2 |
+| RapidOCR (PP-OCRv4, ONNX)     | baseline (raw photo)    |       57.4 |        35.6 |    47.7 |    65.8 |         47.8 |         60.9 |           26.1 |           7.9 |
+| RapidOCR (PP-OCRv4, ONNX)     | + preprocessing         |       61.7 |        54.2 |    16.9 |    46.1 |         47.8 |         60.9 |           56.5 |           8.4 |
+| RapidOCR (PP-OCRv4, ONNX)     | + pre + post-processing |       82.6 |        79.2 |    16.9 |    46.1 |         47.8 |         60.9 |           65.2 |           8.6 |
+| Hybrid (RapidOCR + Tesseract) | baseline (raw photo)    |       57.4 |        35.6 |    47.7 |    65.8 |         47.8 |         60.9 |           26.1 |          11.5 |
+| Hybrid (RapidOCR + Tesseract) | + preprocessing         |       61.7 |        54.2 |    16.9 |    46.1 |         47.8 |         60.9 |           56.5 |          12.7 |
+| Hybrid (RapidOCR + Tesseract) | + pre + post-processing |       82.6 |        79.2 |    16.9 |    46.1 |         47.8 |         60.9 |           60.9 |          12.5 |
 
-| engine | seller | TIN | address | date | receipt no. | FM | fiscal sign | VAT | total | payment |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Tesseract | 23.8 | 38.1 | 23.8 | 57.1 | 66.7 | 57.1 | 71.4 | 4.8 | 23.8 | 81.0 |
-| EasyOCR | 9.5 | 47.6 | 28.6 | 66.7 | 71.4 | 61.9 | 61.9 | 23.8 | 19.0 | 52.4 |
+*s / receipt* in this table was measured while other experiments shared the CPU. A clean run (RapidOCR,
+no OCR cache, nothing else running): **8.3 s mean**, 5.8 s median per receipt (preprocessing 0.35 s,
+QR 5.1 s, OCR 2.9 s); QR retries on codes that do not decode take most of the time (worst receipt 26.5 s).
 
-Real vs synthetic test photos (pre + post): field accuracy 55.7 % vs 39.3 % (Tesseract),
-60.0 % vs 36.4 % (EasyOCR).
+### Field accuracy per field (RapidOCR, pre + post, real photos)
+
+|                          |   seller_name |   seller_tin |   address |   datetime |   receipt_number |   fiscal_module |   fiscal_sign |   vat |   total |   payment |
+|:-------------------------|--------------:|-------------:|----------:|-----------:|-----------------:|----------------:|--------------:|------:|--------:|----------:|
+| RapidOCR, real photos, % |            87 |         69.6 |      30.4 |       91.3 |               87 |            91.3 |            87 |  95.7 |    95.7 |      91.3 |
+
+### Synthetic variants (14 photos: shadow + tilt, faded + blur + perspective + JPEG)
+
+| engine                        | config                  |   fields % |   item F1 % |   CER % |   WER % |   QR plain % |   QR final % |   consistent % |   s / receipt |
+|:------------------------------|:------------------------|-----------:|------------:|--------:|--------:|-------------:|-------------:|---------------:|--------------:|
+| Tesseract 5                   | baseline (raw photo)    |        0.7 |         0   |    97.8 |    98.8 |         28.6 |         42.9 |            0   |           7.3 |
+| Tesseract 5                   | + preprocessing         |       12.1 |         0   |    57.2 |    90.5 |         28.6 |         42.9 |            0   |           9.5 |
+| Tesseract 5                   | + pre + post-processing |       35   |         0   |    57.2 |    90.5 |         28.6 |         42.9 |            7.1 |           9.5 |
+| EasyOCR                       | baseline (raw photo)    |        5   |         0   |    85.2 |   100.5 |         28.6 |         42.9 |            0   |          45.4 |
+| EasyOCR                       | + preprocessing         |       10.7 |         0   |    62.1 |    91.1 |         28.6 |         42.9 |            0   |          22.5 |
+| EasyOCR                       | + pre + post-processing |       28.6 |         0   |    62.1 |    91.1 |         28.6 |         42.9 |            0   |          22.5 |
+| RapidOCR (PP-OCRv4, ONNX)     | baseline (raw photo)    |       25.7 |         8.3 |    78.4 |    88.5 |         28.6 |         42.9 |           14.3 |           7.9 |
+| RapidOCR (PP-OCRv4, ONNX)     | + preprocessing         |       26.4 |        27.3 |    50.5 |    76.6 |         28.6 |         42.9 |            7.1 |           8.3 |
+| RapidOCR (PP-OCRv4, ONNX)     | + pre + post-processing |       50.7 |        36.4 |    50.5 |    76.6 |         28.6 |         42.9 |           21.4 |           9.2 |
+| Hybrid (RapidOCR + Tesseract) | baseline (raw photo)    |       25.7 |         8.3 |    78.4 |    88.5 |         28.6 |         42.9 |           14.3 |           9.7 |
+| Hybrid (RapidOCR + Tesseract) | + preprocessing         |       27.9 |        27.3 |    50.5 |    76.6 |         28.6 |         42.9 |            7.1 |          12.1 |
+| Hybrid (RapidOCR + Tesseract) | + pre + post-processing |       52.9 |        36.4 |    50.5 |    76.6 |         28.6 |         42.9 |           28.6 |          11.9 |
+
+### QR decoding by photo type
+
+| kind      |   images |   QR plain % |   QR final % |
+|:----------|---------:|-------------:|-------------:|
+| lower half (QR close-up)   |       16 |         62.5 |         68.8 |
+| whole receipt, real      |       23 |         47.8 |         60.9 |
+| whole receipt, synthetic |       14 |         28.6 |         42.9 |
+
+*QR plain* = one attempt on the raw photo; *final* = after retries (crop of the code zxing found but could
+not read at several sizes, the same crop with printed gaps filled, WeChat CNN detector with
+super-resolution, ROI warp, CLAHE, Otsu, …).
+
+### Against the target values
+
+| target | result (test, real photos) | status |
+|---|---|---|
+| field accuracy ≥ 85 % | **82.6 %** (VAT 95.7, total 95.7, date 91.3, FM 91.3, payment 91.3; address 30.4) | close; address is the main gap |
+| item F1 ≥ 75 % | **79.2 %** | reached |
+| QR decoded ≥ 95 % | **60.9 %** whole photo, **68.8 %** QR close-up | not reached: printed codes with gaps, crumpled paper |
+| CER ≤ 10 %, WER ≤ 20 % | **16.9 % / 46.1 %**; 7.6–12.2 % CER on 7 of the 10 photos with full-text labels | not reached on average |
+| arithmetic checks 100 % correct | **100 %**: on all 29 labelled receipts every check is "совпадает", and deliberately broken values are caught (`tests/test_reconcile.py`) | reached |
+| ≤ 10 s per receipt on CPU | **8.3 s** mean (RapidOCR) | reached |
 
 **What the numbers say**
 
-* Preprocessing halves the character error rate (CER 95 % → 50 % for Tesseract): on raw photos OCR
-  reads the wooden table, the keyboard and sideways text. Post-processing does not change the text
-  (CER is the same) but more than doubles field accuracy (18 % → 45 %): label rules, digit/apostrophe
-  normalization, the dotted-zero repair and QR values.
-* Tesseract and EasyOCR end up equal on fields; Tesseract is ~3× faster on CPU, so it is the default.
-  EasyOCR is better on raw photos (lower CER) but worse on Cyrillic (it can only load Latin *or* Cyrillic).
-* QR: retries add 4.7 points (52.4 % → 57.1 %). Only 4 of 16 real photos decode at all: one shop's
-  printed codes are damaged and the others are crumpled (see below), which preprocessing cannot undo. When the QR decodes, its
-  fiscal module, receipt number, date and fiscal sign are exact, which is why those fields are the best.
-* "Consistent" is ~0 %: one wrong digit in an item or the total breaks Σ items = total, so this is a
-  strict end-to-end measure. Item F1 is low for the same reason (all four attributes must match).
-* WER stays high (~84 %) because one wrong character spoils a whole word and receipts are mostly
-  short tokens (numbers, codes).
+* **From the baseline to the final system:** field accuracy 7 % → 82.6 %, item F1 0 → 79.2 %, CER 89 → 17 %.
+* **The OCR engine matters most.** RapidOCR runs PaddleOCR's PP-OCRv4 models through ONNX Runtime; with the
+  same pre- and post-processing it reaches 82.6 % field accuracy against 60 % for Tesseract and EasyOCR, and it
+  is the fastest. It is the default engine.
+* **Preprocessing** cuts CER by 2.5–3× for every engine (Tesseract 89 → 33 %, RapidOCR 48 → 17 %).
+  **Post-processing** does not change the text but adds 21–40 points of field accuracy (label rules,
+  dotted-zero repair, QR values) and turns item F1 from 54 % into 79 %.
+* **Hybrid** (RapidOCR + Tesseract for what RapidOCR misses and for Cyrillic) gives the same accuracy on this
+  Latin-only test split and is slower; it helps on the Cyrillic pharmacy receipts in dev.
+* **Photo resolution decides QR decoding.** The first photos were sent through Telegram, which halves the
+  resolution: 4 of 16 decoded. The same receipts re-shot at full resolution: 40 of 62.
+* **Hard conditions still hurt:** on synthetic shadow / blur / perspective variants field accuracy is 50.7 %
+  and QR 42.9 %.
 
 ### Preprocessing ablation (dev split, Tesseract, post-processing on)
 
-Steps added one by one, and each step removed from the default:
+Steps are added one by one, and each one is removed from the default; field accuracy, %:
 
-| added step | field acc % | | default without | field acc % | drop |
-|---|---:|---|---|---:|---:|
-| none (raw image) | 1.9 | | — (default) | 17.0 | |
-| + crop | 7.4 | | crop | 15.2 | −1.8 |
-| + orient | 7.4 | | orient | 15.6 | −1.4 |
-| + deskew | 10.0 | | deskew | 12.2 | −4.8 |
-| + illumination | 12.6 | | illumination | 7.4 | **−9.6** |
-| + clahe | **17.0** | | clahe | 12.6 | −4.4 |
-| + binarize | 7.4 | | | | |
+| added step | real | synthetic | | default without | real | synthetic |
+|---|---:|---:|---|---|---:|---:|
+| none (raw photo) | 33.1 | 21.5 | | — (default) | 49.6 | 31.9 |
+| + crop (find receipt, perspective) | 44.2 | 21.9 | | crop | 46.2 | 34.2 |
+| + orient | 43.8 | 21.9 | | orient | 49.6 | 30.4 |
+| + deskew | 46.9 | 23.5 | | deskew | 50.0 | 25.8 |
+| + illumination (shadow removal) | 44.6 | 30.0 | | illumination | 43.8 | 26.5 |
+| + CLAHE (contrast) | **49.6** | **31.9** | | CLAHE | 44.6 | 30.0 |
+| + binarize | 34.6 | 23.8 | | | | |
 
-Shadow removal (illumination) matters most; deskew and contrast (CLAHE) come next. Adaptive binarization
-**hurts** (17.0 → 7.4: it breaks thin thermal strokes), so it is off by default; that choice was made on dev.
-Orientation adds little here because the perspective warp already turns most receipts upright; it is a
-safety net for photos where no receipt outline is found. Dev numbers are lower than test because dev
-(ERA Tinda) has the most crumpled receipts and none of its QR codes decode.
+* **Cropping** gives the largest single gain on real photos (+11 points): without it OCR also reads the table
+  and background.
+* **Shadow removal and CLAHE** matter most for hard conditions: on the synthetic shadow / faded photos
+  illumination adds 6.5 points, and removing either step costs 5–6 points on real photos.
+* **Deskew and orientation** help on the tilted synthetic photos (−6.1 and −1.5 points without them) and are
+  neutral on the real photos, which were mostly shot straight.
+* **Binarization hurts** (49.6 → 34.6): it breaks the thin strokes of thermal print, so it is off by default.
+  All these choices were made on dev only.
+* Ablation was run with Tesseract before the last orientation fix (see error analysis), which changed the
+  preprocessing of 4 dev photos.
 
 ### Error analysis
 
@@ -185,24 +246,28 @@ safety net for photos where no receipt outline is found. Dev numbers are lower t
    ("24 000.00" → "24 888.66"). `src/receipt/repair.py` uses the fact that the amount is printed 3–4 times
    (Narx, Naqdsiz, Jami, To'lov uchun jami): it lists what each copy could be if an 8/6/9 is a 0 and keeps
    the value the copies agree on; a value is never changed without support from another copy.
-2. **QR codes that never decode.** Real photos decode by seller: ERA Tinda **0/9**, ERA Barkamol 2/5,
-   Akmal Farm 2/2. The Tinda printer leaves white gaps in its codes (a worn thermal print head), which
-   use up most of the QR error correction; zxing then fails with a checksum error as soon as anything
-   else is wrong (code small in the frame, bent paper, blur). Separate sharp close-ups of r10 and r12 decoded
-   on the first try, and their text matched our rebuilt ground truth exactly. On the other shops crumpling is
-   what breaks the code. These fields then come from OCR only, and the OCR ↔ QR check says "нет данных".
-3. **An artefact of my own preprocessing.** Background division (shadow removal) estimates the paper
-   brightness with a large blur; inside a big black QR module that estimate is dark too, so the module
-   turns partly white (panel 2: original vs preprocessed). It does not change the QR rate here (the codes
-   fail on the original photo as well); the QR decoder works on the original photo first and uses the
-   preprocessed image only as its last retry.
-4. **Sideways photos** (7 of 16): handled by the orientation step (aspect ratio + Tesseract OSD).
-5. **Deskew at its limit** (r06): the projection-profile search stopped at −8°, the edge of its range.
-6. **Unreadable digits on paper**: two fiscal-sign digits were hidden by creases in the photos (r10, r12); both were checked on the paper receipts.
+2. **Photo resolution decides the QR rate.** The first 16 photos came through Telegram, which halves
+   the resolution: 4 of 16 decoded (ERA Tinda 0 of 9). The same receipts re-shot at full resolution: 40 of 62.
+3. **Printed gaps in the QR code.** The ERA Tinda printer leaves white gaps inside black modules
+   (a worn thermal print head). They use up most of the QR error correction, so zxing fails with a checksum
+   error as soon as anything else is wrong. A retry binarizes the crop of the code that zxing found and
+   thickens the black to fill the gaps (dev: 18 → 21 of 39 real photos decoded).
+4. **An artefact of my own preprocessing.** Background division (shadow removal) estimates the paper
+   brightness with a large blur; inside a big black QR module that estimate is dark too, so the module turns
+   partly white (panel 2). The QR decoder therefore works on the original photo first.
+5. **Orientation detector turned upright receipts upside down.** Tesseract OSD claimed "rotate 180°" on 10
+   upright receipts; one of them (r11_c) was flipped and its text came out in reverse order (CER 81 %). Now a
+   receipt is turned only when its own layout says so: the fiscal QR code is printed at the end, so a QR code
+   found in the top 40 % means upside down (0 of 49 upright photos rotated, 39 of 49 flipped copies corrected).
+   Sideways photos are turned by the aspect ratio of the receipt.
+6. **Strong shadow cuts a hole in the receipt** (r20_a): the paper mask treats the shadowed half as
+   background. Not fixed yet.
+7. **Deskew at its limit** (r06): the projection-profile search stopped at −8°, the edge of its range.
+8. **Long addresses** (field accuracy 26 %): one wrong letter in a 70-character address makes the field wrong,
+   and wrapped address lines are sometimes cut. The metric is exact match, as required.
 
-Automatic causes over all wrong fields (pre + post, both engines): *not found* 134, *text misread /
-wrong span* 61, *digits/amounts misread* 20, *digits misread* 7, *date/time misread* 5,
-*wrong line picked* 3, *digits missing/extra* 2, *spurious value* 1. Every wrong field is listed in
+Automatic causes of the wrong fields (RapidOCR, pre + post, test): *not found* 57, *text misread /
+wrong span* 35, *digits misread* 6, *digits/amounts misread* 5, *digits missing/extra* 3, *date/time misread* 3. Every wrong field is listed in
 `reports/errors.csv` with its cause and shooting conditions; examples are in `reports/results.md`.
 
 ## Licenses
@@ -215,4 +280,7 @@ wrong span* 61, *digits/amounts misread* 20, *digits misread* 7, *date/time misr
 | OpenCV 4.11 | Apache 2.0 |
 | Gradio 6, pandas, RapidFuzz | Apache 2.0 / BSD / MIT |
 | PyTorch 2.2.2 | BSD-3 |
+| RapidOCR 1.4.4 + PaddleOCR PP-OCRv4 models | Apache 2.0 |
+| ONNX Runtime 1.20 | MIT |
+| WeChat QR models (opencv_3rdparty) | Apache 2.0 |
 | Dataset | own photos, personal data masked |

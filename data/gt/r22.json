@@ -1,0 +1,25 @@
+{
+  "_status": "verified",
+  "_note": "petrol station, different layout (KASSIR line masked); seller_name = first printed line",
+  "seller_name": "DIYOR NEFT PETROLEUM",
+  "seller_tin": "309031294",
+  "address": "YANGI MARG'ILON YANGI OBOD MFY, BARKAMOL AVLOD KO'CHASI, 34",
+  "datetime": "2026-10-16T07:26:44",
+  "receipt_number": "14197",
+  "fiscal_module": "YZ231006030589",
+  "fiscal_sign": "404193494557",
+  "vat": 13071.42,
+  "total": 122000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "АВТОБЕНЗИН АИ-92 UZ",
+      "quantity": 10.0,
+      "price": 12200.0,
+      "total": 122000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=YZ231006030589&r=14197&c=20261016072644&s=404193494557"
+  }
+}

@@ -9,6 +9,7 @@ ocr:
   easyocr:
     langs: [uz, en]      # EasyOCR cannot mix Latin and Cyrillic models in one reader
     gpu: false
+  rapidocr: {}           # RapidOCR defaults: PP-OCRv4 det + rec (ONNX, bundled with the package)
 
 preprocess:
   crop: true             # detect receipt on background, perspective warp
@@ -47,7 +48,7 @@ data:
 
 eval:
   lowercase: true        # CER/WER are case-insensitive
-  engines: [tesseract, easyocr]
+  engines: [tesseract, easyocr, rapidocr, hybrid]
   configs:
     baseline: {preprocess: false, postprocess: false}
     pre:      {preprocess: true,  postprocess: false}

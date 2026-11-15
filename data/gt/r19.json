@@ -1,0 +1,25 @@
+{
+  "_status": "verified",
+  "_note": "new seller KIRGULI O'RAMCHASI; QR text rebuilt from printed fields",
+  "seller_name": "ERA",
+  "seller_tin": "312599814",
+  "address": "Farg'ona viloyati, Farg'ona shahri, Hamkorlik MFY, Nizomiy ko'chasi, 28 B uy",
+  "fiscal_module": "LG420211627855",
+  "datetime": "2026-11-10T19:40:28",
+  "receipt_number": "5673",
+  "fiscal_sign": "238219455515",
+  "vat": 0.0,
+  "total": 33000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Kaboblar",
+      "quantity": 3.3,
+      "price": 10000.0,
+      "total": 33000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211627855&r=5673&c=20261110194028&s=238219455515"
+  }
+}

@@ -7,6 +7,7 @@ Writes CSV tables and reports/results.md.
 """
 import argparse
 import sys
+import time
 import traceback
 from collections import defaultdict
 from pathlib import Path
@@ -21,6 +22,7 @@ from receipt.dataset import load_gt, rows_for  # noqa: E402
 from receipt.metrics import field_matches, item_counts, prf, text_counts  # noqa: E402
 from receipt.normalize import CYR2LAT, norm_field, unify_apostrophes  # noqa: E402
 from receipt.pipeline import load_image, process  # noqa: E402
+from receipt.qr import decode_qr  # noqa: E402
 
 
 def classify_error(field, gt, pred, gt_all):
@@ -52,11 +54,25 @@ def classify_error(field, gt, pred, gt_all):
     return "text misread / wrong span"
 
 
+def _qr_only(r, gt, label, engine):
+    t = time.perf_counter()
+    q = decode_qr(load_image(r["path"]))
+    gq = ((gt or {}).get("qr") or {}).get("raw")
+    ok = bool(q["raw"]) and (gq is None or q["raw"].strip() == gq.strip())
+    return {"config": label, "engine": engine, "image": r["image"], "receipt_id": r["receipt_id"],
+            "seller": r["seller"], "lang": r.get("lang", ""), "conditions": ";".join(r["conditions"]),
+            "seconds": time.perf_counter() - t, "qr_plain": q["plain_success"] and ok, "qr_final": q["decoded"] and ok}
+
+
 def evaluate(cfg, rows, engine, pre, post, cache_dir, label):
     agg = defaultdict(float)
     per_image, errors = [], []
     for r in rows:
         gt, gt_text = load_gt(cfg, r["receipt_id"])
+        if "partial" in r["conditions"]:
+            # lower half of a receipt (totals + QR close-up): counts only for the QR decode rate
+            per_image.append(_qr_only(r, gt, label, engine))
+            continue
         try:
             out = process(load_image(r["path"]), cfg, engine=engine, preprocess=pre, postprocess=post, cache_dir=cache_dir)
         except Exception:

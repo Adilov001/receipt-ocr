@@ -87,3 +87,23 @@ def test_reconcile():
 def test_long_code_is_not_an_item():
     _, items, _, _ = _run("MXIK 0190500700100006x0\n1 Non\n2 x 4 000.00 8 000.00")
     assert [(i["name"], i["quantity"], i["total"]) for i in items] == [("Non", 2.0, 8000.0)]
+
+
+def test_pharmacy_items_with_fractions():
+    text = """1. Омиезо капс 20мг №30 (Комомес)
+Ishlab chiqaruvchi: Комбитик
+MK: 0108908001750981217EEbSuaNn5vOw
+(10/30) x 16 000 = 5 333,33
+sh. j. QQS (12%) 571,43
+2. Аллохол таб №50
+Ishlab chiqaruvchi: Бельмедпрепарат
+(10/50) x 18 000 = 3 600
+sh. j. QQS (12%) 385,71
+Savdo: 8 933,33
+sh. j. QQS: 957,14
+To'landi: 8 933,33"""
+    f, items, _, _ = _run(text)
+    assert [(i["name"], i["quantity"], i["price"], i["total"]) for i in items] == [
+        ("Омиезо капс 20мг №30 (Комомес)", 0.333, 16000.0, 5333.33),
+        ("Аллохол таб №50", 0.2, 18000.0, 3600.0)]
+    assert f["total"] == 8933.33 and f["vat"] == 957.14

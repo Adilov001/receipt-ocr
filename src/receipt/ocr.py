@@ -8,8 +8,9 @@ import shutil
 import cv2
 import numpy as np
 
-ENGINES = ("tesseract", "easyocr")
+ENGINES = ("tesseract", "easyocr", "rapidocr", "hybrid")  # hybrid: rapidocr + tesseract (pipeline.py)
 _easyocr_readers = {}
+_rapidocr = None
 
 
 def _rgb(img):
@@ -88,9 +89,32 @@ def run_easyocr(img, cfg):
     return group_into_lines(words)
 
 
+def rapidocr_engine(params=None):
+    """One shared RapidOCR instance (loading the ONNX models takes a second)."""
+    global _rapidocr
+    if _rapidocr is None:
+        from rapidocr_onnxruntime import RapidOCR
+        _rapidocr = RapidOCR(**(params or {}))
+    return _rapidocr
+
+
+def run_rapidocr(img, cfg):
+    """PaddleOCR PP-OCRv4 models run through ONNX Runtime (RapidOCR): fast on CPU, strong on digits;
+    its recognizer has no Cyrillic, so Cyrillic text comes out wrong."""
+    res, _ = rapidocr_engine(cfg["ocr"].get("rapidocr", {}))(img if img.ndim == 3 else cv2.cvtColor(img, cv2.COLOR_GRAY2BGR))
+    words = []
+    for pts, text, conf in res or []:
+        pts = np.array(pts)
+        words.append({"text": text, "conf": float(conf),
+                      "box": [int(pts[:, 0].min()), int(pts[:, 1].min()), int(pts[:, 0].max()), int(pts[:, 1].max())]})
+    return group_into_lines(words)
+
+
 def run_ocr(engine, img, cfg):
     if engine == "tesseract":
         return run_tesseract(img, cfg)
     if engine == "easyocr":
         return run_easyocr(img, cfg)
+    if engine == "rapidocr":
+        return run_rapidocr(img, cfg)
     raise ValueError(f"unknown OCR engine: {engine}")

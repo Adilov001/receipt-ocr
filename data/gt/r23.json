@@ -1,0 +1,25 @@
+{
+  "_status": "verified",
+  "_note": "ERA \"AVTOMOBILIST\" XK gas station",
+  "seller_name": "ERA",
+  "seller_tin": "200152368",
+  "address": "Farg'ona viloyati, Marg'ilon shahar, Yangiobod MFY, Yangi Hayot ko'chasi, 6-uy",
+  "datetime": "2026-10-17T07:39:10",
+  "receipt_number": "23668",
+  "fiscal_module": "VG544170009803",
+  "fiscal_sign": "060402094744",
+  "vat": 11921.14,
+  "total": 111264.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Metan",
+      "quantity": 19.52,
+      "price": 5700.0,
+      "total": 111264.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=VG544170009803&r=23668&c=20261017073910&s=060402094744"
+  }
+}

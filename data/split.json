@@ -1,9 +1,13 @@
 {
   "test": [
-    "akmal_farm",
+    "diyor_neft",
+    "era_avtomobilist",
     "era_barkamol"
   ],
   "dev": [
+    "akmal_farm",
+    "era_avtogaz",
+    "era_hamkorlik",
     "era_tinda"
   ]
 }
