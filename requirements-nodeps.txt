@@ -1,0 +1,3 @@
+# installed with --no-deps: rapidocr pulls in opencv-python, which would replace
+# opencv-contrib-python-headless (needed for the WeChat QR detector)
+rapidocr-onnxruntime==1.4.4

@@ -3,7 +3,8 @@ PY ?= .venv/bin/python
 .PHONY: setup test augment split prefill eval app
 
 setup:            ## create venv and install pinned dependencies (also: brew install tesseract tesseract-lang)
-	python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
+	python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt \
+		&& .venv/bin/pip install --no-deps -r requirements-nodeps.txt
 
 test:             ## unit tests: number normalization, QR parsing, metrics, extraction
 	$(PY) -m pytest -q

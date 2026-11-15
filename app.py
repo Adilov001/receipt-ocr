@@ -167,7 +167,7 @@ with gr.Blocks(title="Распознавание кассовых чеков") a
     with gr.Row():
         with gr.Column(scale=1):
             inp = gr.Image(type="filepath", label="Фото чека")
-            engine = gr.Dropdown(list(ENGINES), value="tesseract", label="OCR-движок")
+            engine = gr.Dropdown(list(ENGINES), value="rapidocr", label="OCR-движок")
             pre = gr.Checkbox(True, label="Предобработка")
             post = gr.Checkbox(True, label="Постобработка")
             gt_file = gr.File(label="Эталон JSON (необязательно)", file_types=[".json"])
