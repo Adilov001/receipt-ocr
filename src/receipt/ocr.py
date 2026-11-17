@@ -10,7 +10,7 @@ import numpy as np
 
 ENGINES = ("tesseract", "easyocr", "rapidocr", "hybrid")  # hybrid: rapidocr + tesseract (pipeline.py)
 _easyocr_readers = {}
-_rapidocr = None
+_rapidocr = {}
 
 
 def _rgb(img):
@@ -90,12 +90,19 @@ def run_easyocr(img, cfg):
 
 
 def rapidocr_engine(params=None):
-    """One shared RapidOCR instance (loading the ONNX models takes a second)."""
-    global _rapidocr
-    if _rapidocr is None:
+    """One RapidOCR instance per configuration (loading the ONNX models takes a second).
+    params may name another recognition model: rec_model_path + rec_keys_path (relative to the project)."""
+    from .config import ROOT
+
+    params = dict(params or {})
+    for k in ("rec_model_path", "rec_keys_path", "det_model_path"):
+        if params.get(k):
+            params[k] = str(ROOT / params[k])
+    key = tuple(sorted(params.items()))
+    if key not in _rapidocr:
         from rapidocr_onnxruntime import RapidOCR
-        _rapidocr = RapidOCR(**(params or {}))
-    return _rapidocr
+        _rapidocr[key] = RapidOCR(**params)
+    return _rapidocr[key]
 
 
 def run_rapidocr(img, cfg):

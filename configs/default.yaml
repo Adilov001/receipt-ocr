@@ -9,7 +9,9 @@ ocr:
   easyocr:
     langs: [uz, en]      # EasyOCR cannot mix Latin and Cyrillic models in one reader
     gpu: false
-  rapidocr: {}           # RapidOCR defaults: PP-OCRv4 det + rec (ONNX, bundled with the package)
+  rapidocr:              # RapidOCR: PP-OCRv4 detector (bundled) + recognizer chosen on dev (scripts/compare_rec_models.py)
+    rec_model_path: models/rec/cyrillic_PP-OCRv5_mobile_rec_onnx/inference.onnx   # Cyrillic + Latin, keeps spaces
+    rec_keys_path: models/rec/cyrillic_PP-OCRv5_mobile_rec_onnx/keys.txt
 
 preprocess:
   crop: true             # detect receipt on background, perspective warp
