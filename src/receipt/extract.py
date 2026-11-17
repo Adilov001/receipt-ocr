@@ -170,6 +170,97 @@ def extract_items(lines, num):
     return items
 
 
+# lines that end the "Manzil" address block
+ADDRESS_STOP_RE = re.compile(
+    rf"^\s*(yur\b|yuridik|\w{{0,2}}ir\s*/|stir|\w?shshr|inn|инн|стир|sana|\w{{0,2}}a\s*va\s*vaqt|сана|chek|чек|"
+    rf"tel\b|тел\b|telefon|дорихона|kassir|savdo|ro{A}yxat|sn\s*kkm)", re.I)  # tolerant: "Yur,Manz1l", "IIR/DSHSHR"
+REGION_RE = re.compile(r"(viloyat|вилоят|област)", re.I)
+ADDRESS_WORDS = [  # standard words of Uzbek addresses (no shop-specific names)
+    "viloyati", "viloyat", "shahri", "shahar", "tumani", "tuman", "mfy", "koʻchasi", "koʻcha", "qishlogʻi",
+    "mahallasi", "massivi", "uy", "Fargʻona", "Margʻilon", "Qoʻqon", "Toshkent", "Samarqand", "Buxoro",
+    "Andijon", "Namangan", "Navoiy", "Xorazm", "Qashqadaryo", "Surxondaryo", "Jizzax", "Sirdaryo",
+    "Qoraqalpogʻiston", "Nukus", "Bagʻdod", "Yangi"]
+
+
+def _word_key(w):
+    return re.sub(r"[ʻʼ'`’‘]", "", w).casefold()
+
+
+_ADDRESS_KEYS = {_word_key(w): w for w in ADDRESS_WORDS}
+
+
+def correct_address_words(text):
+    """Snap near-miss words to the address vocabulary: 'Fargʻond' -> 'Fargʻona', 'koʻchas1' -> 'koʻchasi'.
+    One edit allowed for words of 5+ letters, two for 8+; case style of the original word is kept."""
+    from rapidfuzz.distance import Levenshtein
+
+    def fix(m):
+        w = m.group(0)
+        k = _word_key(w)
+        if len(k) < 5 or k in _ADDRESS_KEYS:
+            return w
+        best = min(_ADDRESS_KEYS, key=lambda v: Levenshtein.distance(k, v))
+        d = Levenshtein.distance(k, best)
+        if d <= (2 if len(k) >= 8 else 1) and abs(len(best) - len(k)) <= 1:
+            out = _ADDRESS_KEYS[best]
+            return out.upper() if w.isupper() else out
+        return w
+
+    def join(m):  # the apostrophe of oʻ/gʻ read as a space: "Farg ona" -> "Fargʻona"
+        k = _word_key(m.group(1) + m.group(2))
+        if k in _ADDRESS_KEYS or min(Levenshtein.distance(k, v) for v in _ADDRESS_KEYS) <= 1 and len(k) >= 7:
+            return m.group(1) + "ʻ" + m.group(2)
+        return m.group(0)
+
+    text = re.sub(r"\b([^\W\d_]{2,6}[gG]?)\s([^\W\d_]{2,6})\b", join, text)
+    text = re.sub(r"(?i)\bmfy(?=[^\W\d_])", "MFY ", text)  # "MFyYangi" -> "MFY Yangi"
+    text = re.sub(r"(?<=[a-zʻʼ])(?=MF[Yy]\b)", " ", text)  # "HamkorlikMFy" -> "Hamkorlik MFy"
+    return re.sub(r"[^\W\d_][^\W_ʻʼ'`’‘]*(?:[ʻʼ'`’‘][^\W_]+)*", fix, text)
+
+
+def extract_address(texts, postprocess=True):
+    """Address of the shop: every line from the "Manzil" label to the next label.
+
+    - text after the label on the same line is kept only if it looks like an address
+      (on curved receipts OCR merges the label with the owner's name printed next to it);
+    - an address line that slid onto the "Yur.Manzil" row (the legal address starts with the
+      region on the next line) is moved back to the shop address.
+    Receipts without a "Manzil" label: the first group of address-like lines near the top.
+    Returns (address, index of the first address line)."""
+    start = next((j for j, t in enumerate(texts[:25])
+                  if L["address_label"].search(t) and not re.match(r"^\s*yur", t, re.I)), None)
+    if start is None:
+        addr, first = [], None
+        for j, t in enumerate(texts[:20]):
+            if L["address"].search(t) and not L["tin"].search(t):
+                if first is not None and j != first + len(addr):
+                    break
+                first = j if first is None else first
+                addr.append(t.strip(" ,"))
+            elif addr:
+                break
+        out = ", ".join(a for a in addr if a) or None
+        return (correct_address_words(out) if out and postprocess else out), first
+
+    parts = []
+    rest = L["address_label"].sub("", texts[start]).strip(" ,.:")
+    if rest and (L["address"].search(rest) or REGION_RE.search(rest)):
+        parts.append(rest)
+    for j in range(start + 1, min(start + 8, len(texts))):
+        t = texts[j].strip()
+        if ADDRESS_STOP_RE.search(t):
+            if re.match(r"^\s*yur", t, re.I):
+                tail = re.sub(r"^\s*yur\W*\S*\s*", "", t, flags=re.I).strip(" ,.")  # also "Yur,Manz1l"
+                nxt = texts[j + 1] if j + 1 < len(texts) else ""
+                if tail and not REGION_RE.search(tail) and REGION_RE.search(nxt):
+                    parts.append(tail)
+            break
+        if t:
+            parts.append(t.strip(" ,"))
+    out = ", ".join(p for p in parts if p) or None
+    return (correct_address_words(out) if out and postprocess else out), start
+
+
 def extract(lines, postprocess=True):
     """lines: OCR line dicts (or strings) in reading order."""
     lines = [l for l in lines if not is_separator(_text(l))]
@@ -286,30 +377,26 @@ def extract(lines, postprocess=True):
         pay, pi = None, None
     put("payment", pay, pi)
 
-    # address: first group of consecutive address-like lines near the top
-    addr, first = [], None
-    for j, t in enumerate(texts[:20]):
-        if L["address"].search(t) and not L["tin"].search(t):
-            if first is not None and (j != first + len(addr) or L["address_label"].search(t)):
-                break
-            first = j if first is None else first
-            addr.append(L["address_label"].sub("", t).strip(" ,"))
-        elif addr:
-            break
-    put("address", ", ".join(a for a in addr if a) or None, first)
+    addr, first = extract_address(texts, postprocess)
+    put("address", addr, first)
 
     # seller: an organisation-looking line at the top, else the first wordy non-label line
     seller, si = None, None
     if postprocess and first is not None:
-        # shop name printed under the logo: the nearest wordy line above the address,
-        # skipping the owner's full name (3+ capitalised words)
+        # shop name printed under the logo: the nearest wordy line above the address, skipping
+        # address lines (curved paper lifts them above the "Manzil" label) and, once, the line with
+        # the owner's / legal name in capitals ("ADHAMJON MAMADALIYEV ...", "\"AVTOGAZ\" MCHJ")
+        owner_skipped = False
         for j in range(first - 1, -1, -1):
             t = texts[j].strip()
             chars = [c for c in t if not c.isspace()]
             letters = sum(c.isalpha() for c in chars)
             if letters < 3 or letters / max(len(chars), 1) < 0.7 or ANY_LABEL.search(t):
                 continue
-            if len(t.split()) >= 3 and t.upper() == t:
+            if L["address"].search(t) or REGION_RE.search(t):
+                continue
+            if not owner_skipped and len(t.split()) >= 2 and t.upper() == t:
+                owner_skipped = True
                 continue
             seller, si = t, j
             break

@@ -107,3 +107,51 @@ To'landi: 8 933,33"""
         ("Омиезо капс 20мг №30 (Комомес)", 0.333, 16000.0, 5333.33),
         ("Аллохол таб №50", 0.2, 18000.0, 3600.0)]
     assert f["total"] == 8933.33 and f["vat"] == 957.14
+
+
+def test_address_block_until_next_label():
+    text = """ERA
+Tinda
+ADHAMJON MAMADALIYEV ASKARALIYEVICH
+Manzil Farg'ona viloyati ,
+Farg ona shahar , 64-
+Barkamol MFyYangi asr
+Yur,Manz1l ko chasi 130-uy
+FARG'ONA VILOYATI,
+FARG'ONA SHAHRI
+STIR/JSHSHR 31709886970015"""
+    f, *_ = _run(text)
+    # all wrapped lines kept, a garbled "Yur" label still stops the block, the line that slid
+    # onto the Yur row comes back, "Farg ona" (apostrophe read as a space) is joined
+    assert f["address"] == "Fargʻona viloyati, Fargʻona shahar , 64-, Barkamol MFY Yangi asr, koʻchasi 130-uy"
+    assert f["seller_name"] == "Tinda"
+
+
+def test_label_merged_with_owner_name_is_not_address():
+    text = """ERA
+ERA
+Manzil KIRGULI O'RAMCHASI
+Farg'ona viloyati.
+Hamkorlik MFY, Nizomiy
+STIR/JSHSHR 312599814"""
+    f, *_ = _run(text)
+    assert f["address"] == "Fargʻona viloyati., Hamkorlik MFY, Nizomiy"
+    assert f["seller_name"] == "ERA"
+
+
+def test_seller_printed_in_capitals_is_kept():
+    # petrol station: the name is printed twice in capitals and there is no "Manzil" label
+    text = """DIYOR NEFT PETROLEUM
+DIYOR NEFT PETROLEUM
+YANGI MARG'ILON YANGI OBOD MFY, BARKAMOL
+AVLOD KO'CHASI, 34
+STIR: 309031294"""
+    f, *_ = _run(text)
+    assert f["seller_name"] == "DIYOR NEFT PETROLEUM"
+    assert f["address"].startswith("YANGI MARGʻILON")
+
+
+def test_address_vocabulary_is_strict():
+    from receipt.extract import correct_address_words as fix
+    assert fix("Farg'ond shahar, koʻchas1") == "Fargʻona shahar, koʻchasi"
+    assert fix("Yangiobod MFY, Konizar qishlo'gi") == "Yangiobod MFY, Konizar qishlo'gi"  # real words stay
