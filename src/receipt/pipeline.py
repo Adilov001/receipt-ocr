@@ -48,12 +48,17 @@ def merge_hybrid(main, helper, helper_text):
     return fields, items, src1, filled
 
 
+# bump when the way an engine's words are grouped into lines changes (invalidates its OCR cache)
+GROUPING_VERSION = {"rapidocr": 3, "easyocr": 3}
+
+
 def _ocr_cached(engine, img, cfg, cache_dir, key_extra):
     """OCR with an on-disk cache; the measured OCR time is cached too, so timings stay honest."""
     t = time.perf_counter()
     if not cache_dir:
         return run_ocr(engine, img, cfg), time.perf_counter() - t, False
-    h = hashlib.sha1(img.tobytes() + json.dumps([engine, key_extra, cfg["ocr"][engine]], sort_keys=True).encode()).hexdigest()
+    key = [engine, key_extra, cfg["ocr"][engine]] + ([GROUPING_VERSION[engine]] if engine in GROUPING_VERSION else [])
+    h = hashlib.sha1(img.tobytes() + json.dumps(key, sort_keys=True).encode()).hexdigest()
     path = Path(cache_dir) / f"{h}.json"
     if path.exists():
         d = json.loads(path.read_text())

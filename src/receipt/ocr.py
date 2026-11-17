@@ -32,21 +32,59 @@ def _make_line(words):
     }
 
 
-def group_into_lines(words):
-    """Cluster word boxes into text lines by vertical center."""
-    if not words:
-        return []
-    heights = [w["box"][3] - w["box"][1] for w in words]
-    tol = 0.5 * float(np.median(heights))
-    words = sorted(words, key=lambda w: (w["box"][1] + w["box"][3]) / 2)
-    lines, cur, cur_y = [], [], None
+def _word_slope(w):
+    """Slope (dy/dx) of a word's top edge, or None if its rotated box is too short to tell."""
+    p = w.get("poly")
+    if p is None:
+        return None
+    (x0, y0), (x1, y1) = p[0], p[1]  # top-left, top-right
+    if x1 - x0 < 120:
+        return None
+    s = (y1 - y0) / (x1 - x0)
+    return s if abs(s) < 0.2 else None
+
+
+def local_slopes(words, window=300):
+    """Text slope around every word: median slope of the long words within `window` px above and
+    below. Crumpled receipts are curved, so the slope changes from top to bottom."""
+    known = [((w["box"][1] + w["box"][3]) / 2, _word_slope(w)) for w in words]
+    known = [(y, s) for y, s in known if s is not None]
+    if len(known) < 5:
+        return [0.0] * len(words)
+    glob = float(np.median([s for _, s in known]))
+    out = []
     for w in words:
         cy = (w["box"][1] + w["box"][3]) / 2
+        near = [s for y, s in known if abs(y - cy) <= window]
+        out.append(float(np.median(near)) if len(near) >= 3 else glob)
+    return out
+
+
+def group_into_lines(words):
+    """Cluster word boxes into text lines.
+
+    The vertical position of a word is measured along the local text slope (y - slope * x), so on
+    a tilted or curved receipt a value on the right stays on the line of its label on the left
+    instead of joining the next line."""
+    if not words:
+        return []
+    slopes = local_slopes(words)
+    levels = {}
+    for w, s in zip(words, slopes):
+        cx, cy = (w["box"][0] + w["box"][2]) / 2, (w["box"][1] + w["box"][3]) / 2
+        levels[id(w)] = cy - s * cx
+    heights = [max(w["box"][3] - w["box"][1] - abs(s) * (w["box"][2] - w["box"][0]), 1)
+               for w, s in zip(words, slopes)]  # an axis-aligned box of tilted text is too tall
+    tol = 0.5 * float(np.median(heights))
+    words = sorted(words, key=lambda w: levels[id(w)])
+    lines, cur, cur_y = [], [], None
+    for w in words:
+        cy = levels[id(w)]
         if cur and abs(cy - cur_y) > tol:
             lines.append(cur)
             cur = []
         cur.append(w)
-        cur_y = float(np.mean([(x["box"][1] + x["box"][3]) / 2 for x in cur]))
+        cur_y = float(np.mean([levels[id(x)] for x in cur]))
     lines.append(cur)
     return [_make_line(l) for l in lines]
 
@@ -84,7 +122,7 @@ def run_easyocr(img, cfg):
     words = []
     for pts, text, conf in res:
         pts = np.array(pts)
-        words.append({"text": text, "conf": float(conf),
+        words.append({"text": text, "conf": float(conf), "poly": pts.tolist(),
                       "box": [int(pts[:, 0].min()), int(pts[:, 1].min()), int(pts[:, 0].max()), int(pts[:, 1].max())]})
     return group_into_lines(words)
 
@@ -112,7 +150,7 @@ def run_rapidocr(img, cfg):
     words = []
     for pts, text, conf in res or []:
         pts = np.array(pts)
-        words.append({"text": text, "conf": float(conf),
+        words.append({"text": text, "conf": float(conf), "poly": pts.tolist(),
                       "box": [int(pts[:, 0].min()), int(pts[:, 1].min()), int(pts[:, 0].max()), int(pts[:, 1].max())]})
     return group_into_lines(words)
 

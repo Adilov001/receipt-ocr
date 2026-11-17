@@ -1,0 +1,49 @@
+Tinda
+ADHAMJON MAMADALIYEV ASKARALIYEVICH
+Manzil Farg'ona viloyati ,
+Farg'ona shahar , 64-
+Barkamol MFY Yangi asr
+ko'chasi 130-uy
+Yur.Manzil FARG'ONA VILOYATI,
+FARG'ONA SHAHRI
+STIR/JSHSHR 31709886970015
+Sana va vaqt 03-11-2026 17:38:16
+Chek 36762
+Savdo raqami 14994611036760
+Savdo
+1 Xurmo
+1,000 Kg X 30 000,00
+Narx 30 000.00
+QQS siz 0
+MXIK 00810999018000000
+Naqd 0.00
+Naqdsiz 30 000.00
+Karta turi Shaxsiy
+KONTAKSIZ OPERATSIYA
+Operatsiya raqami 21097
+Terminal 48050887
+Savdogar 000000904812351
+POS versiyasi Era POS v1.9.1
+RRN 032391805062
+Sana 03-11-2026 17:38:12
+Karta 561468******4634
+Turi UZCARD
+Jami 30 000.00
+Javob kodi: 000
+To'lov uchun jami
+30 000.00 UZS
+Jami QQS 0.00
+Terminal S/R 1170914994
+Dasturiy ta'minot 3.5.5
+versiyasi:
+FM ID NA000000006920
+Fiskal imzo 532227412590
+Siz
+xaridning
+1%
+miqdorida
+"Keshbek"
+olish
+huquqiga
+ega
+bo'ldingiz!
