@@ -64,10 +64,26 @@ def fix_digits(token):
     return token
 
 
+_L = r"[^\W\d_]"  # any letter
+
+
+def fix_letters(word):
+    """Digits read inside a word are letters: 'p0s' -> 'pos', 's1z' -> 'siz', 'koʻchas1' -> 'koʻchasi'.
+    Only a 0 / 1 between two letters, or a final 1 after 4+ letters; codes (LG420211609580, v1.9.1)
+    and numbers are not touched."""
+    def to(letter):  # same case as the letter before it
+        return lambda m: letter.upper() if m.group(1).isupper() else letter
+
+    word = re.sub(rf"({_L})0(?={_L})", lambda m: m.group(1) + to("o")(m), word)
+    word = re.sub(rf"({_L})1(?={_L})", lambda m: m.group(1) + to("i")(m), word)
+    return re.sub(rf"(?<={_L}{{3}})({_L})1$", lambda m: m.group(1) + to("i")(m), word)
+
+
 def clean_line(text):
     text = unicodedata.normalize("NFC", text)
     text = unify_apostrophes(text)
-    words = [fix_digits(fix_mixed_script(w)) for w in text.split()]
+    text = re.sub(r"(?<=[\d\s])×(?=[\s\d])", "x", text)  # look-alike multiplication sign
+    words = [fix_letters(fix_digits(fix_mixed_script(w))) for w in text.split()]
     return " ".join(words)
 
 
@@ -141,13 +157,21 @@ def parse_datetime(s):
 
 # ---------------------------------------------------------------- metric normalization
 
+def _norm_numbers(line):
+    """Number normalization of the spec (4.5): no spaces between digit groups, the decimal comma
+    becomes a point: "24 000,00" -> "24000.00", "1,000 Kg" -> "1.000 Kg"."""
+    line = re.sub(r"(?<=\d)[ \u00a0](?=\d{3}(?!\d))", "", line)
+    return re.sub(r"(?<=\d),(?=\d)", ".", line)
+
+
 def norm_text_for_metric(text, lowercase=True):
-    """Canonical full text for CER/WER: NFC, unified apostrophes, single spaces,
-    no empty or separator-only lines."""
+    """Canonical full text for CER/WER, applied to the label and to the OCR text alike:
+    NFC, unified apostrophes, single spaces, numbers normalized as in the spec (digit-group
+    spaces removed, decimal comma -> point), no empty or separator-only lines."""
     text = unify_apostrophes(unicodedata.normalize("NFC", text or ""))
     lines = []
     for line in text.splitlines():
-        line = " ".join(line.split())
+        line = _norm_numbers(" ".join(line.split()))
         if line and not is_separator(line):
             lines.append(line.lower() if lowercase else line)
     return "\n".join(lines)

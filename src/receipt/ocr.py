@@ -144,12 +144,17 @@ def rapidocr_engine(params=None):
 
 
 def run_rapidocr(img, cfg):
-    """PaddleOCR PP-OCRv4 models run through ONNX Runtime (RapidOCR): fast on CPU, strong on digits;
-    its recognizer has no Cyrillic, so Cyrillic text comes out wrong."""
-    res, _ = rapidocr_engine(cfg["ocr"].get("rapidocr", {}))(img if img.ndim == 3 else cv2.cvtColor(img, cv2.COLOR_GRAY2BGR))
+    """PaddleOCR models run through ONNX Runtime (RapidOCR): PP-OCRv4 detector + the recognizer
+    set in the config. A white border (ocr.border px) is added first: the text detector misses
+    letters that touch the image edge ("Fiskal" -> "iskal"); boxes are shifted back afterwards."""
+    b = int(cfg["ocr"].get("border", 0))
+    bgr = img if img.ndim == 3 else cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+    if b:
+        bgr = cv2.copyMakeBorder(bgr, b, b, b, b, cv2.BORDER_CONSTANT, value=(255, 255, 255))
+    res, _ = rapidocr_engine(cfg["ocr"].get("rapidocr", {}))(bgr)
     words = []
     for pts, text, conf in res or []:
-        pts = np.array(pts)
+        pts = np.array(pts, dtype=float) - b
         words.append({"text": text, "conf": float(conf), "poly": pts.tolist(),
                       "box": [int(pts[:, 0].min()), int(pts[:, 1].min()), int(pts[:, 0].max()), int(pts[:, 1].max())]})
     return group_into_lines(words)

@@ -16,7 +16,8 @@ def test_cer_uses_normalization():
 
 def test_wer_basic():
     assert wer("jami 32 000.00", "jami 32 000.00") == 0
-    assert wer("jami 32 000.00", "jami 32 900.00") == pytest.approx(1 / 3)
+    # "32 000.00" is one number = one word after the spec's number normalization: 1 of 2 words wrong
+    assert wer("jami 32 000.00", "jami 32 900.00") == pytest.approx(1 / 2)
     assert wer("a b c d", "a c d") == pytest.approx(0.25)
 
 
@@ -43,3 +44,12 @@ def test_items_f1():
 def test_prf_empty():
     assert prf(0, 0, 0) == (1.0, 1.0, 1.0)
     assert prf(0, 2, 0)[2] == 0.0
+
+
+def test_text_metric_normalizes_numbers_like_the_spec():
+    from receipt.normalize import norm_text_for_metric as n
+    assert n("Narx 24 000,00") == n("narx 24000.00") == "narx 24000.00"
+    assert n("1,000 Kg X 32 000,00") == "1.000 kg x 32000.00"
+    assert n("Chek 36785") == "chek 36785"                      # a lone number is unchanged
+    assert n("Sana 04-11-2026 13:47:26") == "sana 04-11-2026 13:47:26"
+    assert n("Terminal 48050887 2841051470") == "terminal 48050887 2841051470"  # long codes stay apart

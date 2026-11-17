@@ -58,6 +58,8 @@ def _ocr_cached(engine, img, cfg, cache_dir, key_extra):
     if not cache_dir:
         return run_ocr(engine, img, cfg), time.perf_counter() - t, False
     key = [engine, key_extra, cfg["ocr"][engine]] + ([GROUPING_VERSION[engine]] if engine in GROUPING_VERSION else [])
+    if engine == "rapidocr" and cfg["ocr"].get("border"):
+        key.append({"border": cfg["ocr"]["border"]})
     h = hashlib.sha1(img.tobytes() + json.dumps(key, sort_keys=True).encode()).hexdigest()
     path = Path(cache_dir) / f"{h}.json"
     if path.exists():

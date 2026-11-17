@@ -79,3 +79,14 @@ def test_norm_field():
     assert norm_field("fiscal_module", "na000000006920") == "NA000000006920"
     assert norm_field("seller_name", '"ANVAR" MChJ') == norm_field("seller_name", "«Anvar» mchj")
     assert norm_field("address", None) is None
+
+
+def test_digits_inside_words_become_letters():
+    from receipt.normalize import clean_line
+    assert clean_line("P0S versiyasi") == "POS versiyasi"
+    assert clean_line("QQS s1z") == "QQS siz"
+    assert clean_line("koʻchas1 130-uy") == "koʻchasi 130-uy"
+    assert clean_line("1,000 Kg × 30 000.00") == "1,000 Kg x 30 000.00"
+    # codes and numbers stay as they are
+    assert clean_line("FM ID LG420211609580 Era POS v1.9.1 1Ikkinchi A0000000031010") == \
+        "FM ID LG420211609580 Era POS v1.9.1 1Ikkinchi A0000000031010"
