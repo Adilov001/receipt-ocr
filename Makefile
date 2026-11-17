@@ -5,6 +5,11 @@ PY ?= .venv/bin/python
 setup:            ## create venv and install pinned dependencies (also: brew install tesseract tesseract-lang)
 	python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt \
 		&& .venv/bin/pip install --no-deps -r requirements-nodeps.txt
+	# easyocr pulls in opencv-python-headless, which overwrites cv2 from the contrib build;
+	# keep only the contrib build (it has the WeChat QR detector) and check it
+	.venv/bin/pip uninstall -y opencv-python-headless
+	.venv/bin/pip install --no-deps --force-reinstall opencv-contrib-python-headless==4.11.0.86
+	.venv/bin/python -c "import cv2; assert hasattr(cv2, 'wechat_qrcode_WeChatQRCode'), 'OpenCV contrib missing'"
 
 test:             ## unit tests: number normalization, QR parsing, metrics, extraction
 	$(PY) -m pytest -q

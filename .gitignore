@@ -7,3 +7,4 @@ __pycache__/
 logs/
 INTERVIEW_NOTES.md
 LABELS_TO_CHECK.md
+.vscode/
