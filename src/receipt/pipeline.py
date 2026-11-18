@@ -84,7 +84,7 @@ def process(img, cfg, engine="tesseract", preprocess=True, postprocess=True, cac
     timings["preprocess"] = time.perf_counter() - t0
 
     t = time.perf_counter()
-    qr = decode_qr(img, extra_images=[pre["final"]] if preprocess else [])
+    qr = decode_qr(img, extra_images=[pre["final"]] if preprocess else [], time_budget=cfg["qr"].get("time_budget"))
     qr_parsed = parse_qr(qr["raw"], cfg["qr"]["param_map"])
     timings["qr"] = time.perf_counter() - t
 

@@ -1,0 +1,10 @@
+.venv
+.git
+.cache
+.pytest_cache
+logs
+reports
+data
+tests
+*.md
+!README.md

@@ -27,6 +27,46 @@ make split && make eval                      # all metrics → reports/results.m
 `make eval` recomputes every metric with one command. OCR output is cached in `.cache/ocr`
 together with its measured time, so a second run is fast and the timings stay honest.
 
+## REST API (for integration)
+
+```bash
+make api                                   # or: uvicorn api:app --host 0.0.0.0 --port 8000
+docker build -t receipt-ocr . && docker run -p 8000:8000 receipt-ocr   # same, in Docker
+```
+
+Interactive docs (Swagger): `http://localhost:8000/docs`.
+
+| method | path | what |
+|---|---|---|
+| `GET` | `/api/v1/health` | `{"status": "ok"}` once the models are loaded |
+| `POST` | `/api/v1/recognize` | multipart field `file` = receipt photo → JSON |
+
+```bash
+curl -X POST "http://localhost:8000/api/v1/recognize" -F "file=@receipt.jpg"
+```
+
+Response (shortened):
+
+```json
+{
+  "result": {"seller_name": "ERA", "seller_tin": "306263261", "datetime": "2026-11-18T13:29:12",
+             "receipt_number": "1738", "fiscal_module": "VG544170024923", "fiscal_sign": "006628644216",
+             "items": [{"name": "Мучные продукты", "quantity": 1.0, "price": 69000.0, "total": 69000.0}],
+             "vat": 7392.86, "total": 69000.0, "payment": "card",
+             "qr": {"raw": "https://ofd.soliq.uz/check?...", "decoded": true, "fields": {}}},
+  "checks": [{"check": "Σ items = total", "status": "match", "expected": 69000.0, "actual": 69000.0}],
+  "consistent": true,
+  "field_source": {"total": "ocr", "fiscal_sign": "qr"},
+  "timings": {"preprocess": 0.5, "qr": 2.4, "ocr": 2.4, "request": 5.4}
+}
+```
+
+* Formats: JPEG, PNG, WebP, BMP, TIFF, up to 15 MB. HEIC (iPhone) → `415`, convert to JPEG first.
+* Errors: `400` empty file, `413` too large, `415` not an image, `422` wrong parameter.
+* Optional query parameters: `engine=rapidocr|tesseract|hybrid` (default `rapidocr`), `preprocess`, `postprocess`.
+* Missing fields are `null`; amounts are numbers; `status` of each check is `match` / `mismatch` / `no_data`.
+* Requests run one at a time (OCR uses all CPU cores); for more throughput run several containers.
+
 ## Layout
 
 | Path | What |

@@ -29,6 +29,7 @@ postprocess:
   fill_from_qr: true     # QR values override missing/mismatched OCR values (after the OCR<->QR check)
 
 qr:
+  time_budget: null      # seconds for QR retries (null = no limit); the API sets its own limit
   # query parameter -> output field, for ofd.soliq.uz links
   param_map:
     t: fiscal_module

@@ -1,6 +1,6 @@
 PY ?= .venv/bin/python
 
-.PHONY: setup test augment split prefill eval app
+.PHONY: setup test augment split prefill eval app api docker
 
 setup:            ## create venv and install pinned dependencies (also: brew install tesseract tesseract-lang)
 	python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt \
@@ -28,3 +28,9 @@ eval:             ## all metrics + ablation -> reports/results.md
 
 app:              ## web UI on http://127.0.0.1:7860
 	$(PY) app.py
+
+api:              ## REST API on http://localhost:8000 (docs: /docs)
+	$(PY) -m uvicorn api:app --host 0.0.0.0 --port 8000
+
+docker:           ## build the API image (run: docker run -p 8000:8000 receipt-ocr)
+	docker build -t receipt-ocr .

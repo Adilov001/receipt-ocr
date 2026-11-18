@@ -1,4 +1,5 @@
 """QR detection, decoding with retries, and parsing of the fiscal link."""
+import time
 from functools import lru_cache
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -125,8 +126,20 @@ def _retries():
     ]
 
 
-def decode_qr(img, extra_images=(), retries=True):
+class _Budget:
+    """Time limit for the retries: a code that cannot be read must not cost 30+ seconds."""
+
+    def __init__(self, seconds):
+        self.end = None if seconds is None else time.perf_counter() + seconds
+
+    def over(self):
+        return self.end is not None and time.perf_counter() > self.end
+
+
+def decode_qr(img, extra_images=(), retries=True, time_budget=None):
     """Decode the QR code of a receipt photo.
+
+    time_budget (seconds, None = no limit): retries stop when it is used up.
 
     Returns dict(raw, decoded, attempt, plain_success, polygon, polygon_on).
     'plain' = a single attempt on the unprocessed image; everything after it
@@ -143,12 +156,16 @@ def decode_qr(img, extra_images=(), retries=True):
     if not retries:
         return out
 
+    budget = _Budget(time_budget)
+
     # 1) locate the code, warp it to a square, then enhance
     pts = _locate(gray)
     if pts is not None:
         out.update(polygon=pts.tolist(), polygon_on="original")
         roi = _warp_region(gray, pts)
         for name, fn in [("roi", lambda g: g)] + _retries():
+            if budget.over():
+                return out
             text, _ = _decode_once(fn(roi))
             if text:
                 out.update(raw=text, decoded=True, attempt=f"roi+{name}")
@@ -160,6 +177,8 @@ def decode_qr(img, extra_images=(), retries=True):
     for x0, y0, x1, y1 in boxes:
         crop = gray[y0:y1, x0:x1]
         for s in ROI_SCALES:
+            if budget.over():
+                return out
             c = cv2.resize(crop, None, fx=s, fy=s, interpolation=cv2.INTER_AREA) if s < 1 else crop
             text = _decode_once(c)[0] or _decode_wechat(c)
             if text:
@@ -172,6 +191,8 @@ def decode_qr(img, extra_images=(), retries=True):
     for x0, y0, x1, y1 in boxes:
         crop = gray[y0:y1, x0:x1]
         for s in ROI_SCALES[:-1]:
+            if budget.over():
+                return out
             c = cv2.resize(crop, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
             b = cv2.threshold(c, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
             for name, fixed in ((f"erode2", cv2.erode(b, np.ones((2, 2), np.uint8))),
@@ -184,6 +205,8 @@ def decode_qr(img, extra_images=(), retries=True):
                     return out
 
     # 3) WeChat on the whole photo (its CNN detector finds codes zxing misses)
+    if budget.over():
+        return out
     text = _decode_wechat(img)
     if text:
         out.update(raw=text, decoded=True, attempt="wechat")
@@ -191,6 +214,8 @@ def decode_qr(img, extra_images=(), retries=True):
 
     # 4) whole-image transforms
     for name, fn in _retries():
+        if budget.over():
+            return out
         try:
             text, poly = _decode_once(fn(gray))
         except cv2.error:
