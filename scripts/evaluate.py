@@ -125,6 +125,20 @@ def summarize(df):
     })
 
 
+def qr_rates(df):
+    """QR decode rate per photo type, and per receipt: a receipt counts as decoded when any of its
+    real photos (whole receipt or QR close-up) decodes, as when a user takes a second photo."""
+    rows = []
+    for (engine, config), d in df[df["qr_final"].notna()].groupby(["engine", "config"], sort=False):
+        kind = d["conditions"].map(lambda c: "synthetic" if "synthetic" in c else ("close-up" if "partial" in c else "whole"))
+        real = d[kind != "synthetic"]
+        rows.append({"engine": engine, "config": config,
+                     "whole photo %": 100 * d[kind == "whole"]["qr_final"].astype(float).mean(),
+                     "QR close-up %": 100 * d[kind == "close-up"]["qr_final"].astype(float).mean(),
+                     "per receipt (any real photo) %": 100 * real.groupby("receipt_id")["qr_final"].max().astype(float).mean()})
+    return pd.DataFrame(rows).set_index(["engine", "config"]) if rows else pd.DataFrame()
+
+
 def md(df, floatfmt=".1f"):
     return df.to_markdown(floatfmt=floatfmt) if len(df) else "_no data_"
 
@@ -176,7 +190,8 @@ def main():
              "## Engines × configurations\n", md(main_tbl),
              "\n\n## Field accuracy, %\n", md(per_field),
              "\n\n## By shooting condition\n", md(by_cond),
-             "\n\n## By language\n", md(by_lang)]
+             "\n\n## By language\n", md(by_lang),
+             "\n\n## QR decoded per photo and per receipt\n", md(qr_rates(df))]
 
     if args.ablation:
         eng = cfg["eval"]["ablation_engine"]
