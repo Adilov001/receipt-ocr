@@ -12,6 +12,8 @@ ocr:
   rapidocr:              # RapidOCR: PP-OCRv4 detector (bundled) + recognizer chosen on dev (scripts/compare_rec_models.py)
     rec_model_path: models/rec/cyrillic_PP-OCRv5_mobile_rec_onnx/inference.onnx   # Cyrillic + Latin, keeps spaces
     rec_keys_path: models/rec/cyrillic_PP-OCRv5_mobile_rec_onnx/keys.txt
+    intra_op_num_threads: 4   # ONNX Runtime threads; more is slower in Docker VMs (5-12 s -> 2.5 s OCR)
+    inter_op_num_threads: 1
 
 preprocess:
   crop: true             # detect receipt on background, perspective warp
