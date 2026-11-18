@@ -11,11 +11,15 @@ from receipt.dataset import load_meta, make_split  # noqa: E402
 
 cfg = load_config(sys.argv[1] if len(sys.argv) > 1 else None)
 rows = load_meta(cfg)
-split = make_split(rows, cfg["data"]["test_fraction"], cfg["data"]["seed"])
+old = json.loads((ROOT / cfg["data"]["split"]).read_text()) if (ROOT / cfg["data"]["split"]).exists() else {}
+holdout = set(old.get("holdout", []))  # the holdout receipts never take part in the dev/test split
+split = make_split([r for r in rows if r["receipt_id"] not in holdout], cfg["data"]["test_fraction"], cfg["data"]["seed"])
+if holdout:
+    split["holdout"] = sorted(holdout)
 (ROOT / cfg["data"]["split"]).write_text(json.dumps(split, indent=2, ensure_ascii=False))
 
 for name in ("dev", "test"):
-    part = [r for r in rows if r["seller"] in split[name]]
+    part = [r for r in rows if r["seller"] in split[name] and r["receipt_id"] not in holdout]
     qr = sum(r["has_qr"] for r in part)
     conds = Counter(c for r in part for c in r["conditions"])
     print(f"{name}: {len(split[name])} sellers, {len({r['receipt_id'] for r in part})} receipts, "

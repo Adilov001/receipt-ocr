@@ -64,7 +64,10 @@ def rows_for(cfg, split):
     sp = load_split(cfg)
     if sp is None:
         raise SystemExit("No split yet: run `make split` first.")
-    return [r for r in rows if r["seller"] in sp[split]]
+    holdout = set(sp.get("holdout", []))  # receipt ids collected after all tuning, measured once
+    if split == "holdout":
+        return [r for r in rows if r["receipt_id"] in holdout]
+    return [r for r in rows if r["seller"] in sp[split] and r["receipt_id"] not in holdout]
 
 
 def load_gt(cfg, receipt_id):
