@@ -1,0 +1,200 @@
+config,engine,image,conditions,field,gt,pred,cause
+baseline,tesseract,h01_a.jpg,clean,seller_name,"""DXB BENIFIT GROUP"" MCHJ","| iy ""DXB BENIFIT GROUP"" MCHJ |",text misread / wrong span
+baseline,tesseract,h01_a.jpg,clean,address,Toshkent sh. Yunusobod,,not found
+baseline,tesseract,h01_a.jpg,clean,receipt_number,20281,194,digits missing/extra
+baseline,tesseract,h01_a.jpg,clean,fiscal_module,LG420230646667,,not found
+baseline,tesseract,h01_a.jpg,clean,fiscal_sign,023590943064,,not found
+baseline,tesseract,h02_a.jpg,clean,seller_name,Bon! Atlas Chimgan,CAFE FRANGAIS |,text misread / wrong span
+baseline,tesseract,h02_a.jpg,clean,seller_tin,200992329,,not found
+baseline,tesseract,h02_a.jpg,clean,address,"Toshkent sh., M. Ulugbek tumani koch. T. Malik, 3A-uy","| =: Koch, 7. Malik, ЗА-иу",text misread / wrong span
+baseline,tesseract,h02_a.jpg,clean,datetime,2026-11-16T16:19:46,,not found
+baseline,tesseract,h02_a.jpg,clean,receipt_number,96890,,not found
+baseline,tesseract,h02_a.jpg,clean,fiscal_module,LG420230632412,,not found
+baseline,tesseract,h02_a.jpg,clean,fiscal_sign,441117549441,,not found
+baseline,tesseract,h02_a.jpg,clean,vat,6321.43,,not found
+baseline,tesseract,h02_a.jpg,clean,total,59000.0,,not found
+baseline,tesseract,h03_a.jpg,clean,seller_name,,"Wark: 18500 .0040.498Kr.=8049 ово"",",spurious value
+baseline,tesseract,h03_a.jpg,clean,seller_tin,305645847,,not found
+baseline,tesseract,h03_a.jpg,clean,datetime,2026-11-16T22:19:09,2028-11-18T22:19:00,date/time misread
+baseline,tesseract,h03_a.jpg,clean,receipt_number,155132,10074,digits missing/extra
+baseline,tesseract,h03_a.jpg,clean,fiscal_module,LG420211614982,,not found
+baseline,tesseract,h03_a.jpg,clean,fiscal_sign,010301300230,,not found
+baseline,tesseract,h03_a.jpg,clean,vat,862.28,,not found
+baseline,tesseract,h03_a.jpg,clean,total,8048.0,0.0,digits/amounts misread
+baseline,tesseract,h03_a.jpg,clean,payment,card,,not found
+baseline,tesseract,h04_a.jpg,clean,seller_name,KFC Чимган,Shaxsiy karta ;,text misread / wrong span
+baseline,tesseract,h04_a.jpg,clean,datetime,2026-11-17T13:23:25,,not found
+baseline,tesseract,h04_a.jpg,clean,receipt_number,2201,,not found
+baseline,tesseract,h04_a.jpg,clean,fiscal_module,LG420211610337,,not found
+baseline,tesseract,h04_a.jpg,clean,fiscal_sign,273402590931,,not found
+baseline,tesseract,h04_a.jpg,clean,vat,4714.29,,not found
+baseline,tesseract,h04_a.jpg,clean,total,44000.0,,not found
+baseline,tesseract,h04_a.jpg,clean,payment,card,,not found
+baseline,tesseract,h05_a.jpg,clean,seller_name,,QIFAIMS =e,spurious value
+baseline,tesseract,h05_a.jpg,clean,seller_tin,309263742,,not found
+baseline,tesseract,h05_a.jpg,clean,datetime,2026-11-16T19:24:14,,not found
+baseline,tesseract,h05_a.jpg,clean,receipt_number,9776,,not found
+baseline,tesseract,h05_a.jpg,clean,fiscal_module,VG544170018528,,not found
+baseline,tesseract,h05_a.jpg,clean,fiscal_sign,036262266701,,not found
+baseline,tesseract,h05_a.jpg,clean,vat,1564.29,,not found
+baseline,tesseract,h05_a.jpg,clean,total,14600.0,,not found
+baseline,tesseract,h05_a.jpg,clean,payment,card,,not found
+baseline,tesseract,h06_a.jpg,clean,seller_name,ERA,"""ARO BREAD"" XK",text misread / wrong span
+baseline,tesseract,h06_a.jpg,clean,seller_tin,306263261,306265261,digits misread
+baseline,tesseract,h06_a.jpg,clean,address,"Toshkent sh., M.Ulug'bek tum., Yalang'och bozori hududida","fum., Yalangʻoch bozori, hududida",text misread / wrong span
+baseline,tesseract,h06_a.jpg,clean,fiscal_module,VG544170024923,,not found
+baseline,tesseract,h06_a.jpg,clean,fiscal_sign,006628644216,90662864494,digits missing/extra
+baseline,tesseract,h06_a.jpg,clean,total,69000.0,2.0,digits/amounts misread
+baseline,tesseract,h06_a.jpg,clean,payment,card,cash,text misread / wrong span
+pre,tesseract,h01_a.jpg,clean,seller_name,"""DXB BENIFIT GROUP"" MCHJ","""DXB ВЕМТЕТТ GROUP"" MCHJ a |",text misread / wrong span
+pre,tesseract,h01_a.jpg,clean,seller_tin,310219511,,not found
+pre,tesseract,h01_a.jpg,clean,address,Toshkent sh. Yunusobod,,not found
+pre,tesseract,h01_a.jpg,clean,datetime,2026-11-17T21:00:47,,not found
+pre,tesseract,h01_a.jpg,clean,receipt_number,20281,,not found
+pre,tesseract,h01_a.jpg,clean,fiscal_module,LG420230646667,,not found
+pre,tesseract,h01_a.jpg,clean,fiscal_sign,023590943064,,not found
+pre,tesseract,h02_a.jpg,clean,seller_name,Bon! Atlas Chimgan,Ei || “Жи куки,text misread / wrong span
+pre,tesseract,h02_a.jpg,clean,seller_tin,200992329,,not found
+pre,tesseract,h02_a.jpg,clean,address,"Toshkent sh., M. Ulugbek tumani koch. T. Malik, 3A-uy",,not found
+pre,tesseract,h02_a.jpg,clean,datetime,2026-11-16T16:19:46,,not found
+pre,tesseract,h02_a.jpg,clean,receipt_number,96890,,not found
+pre,tesseract,h02_a.jpg,clean,fiscal_module,LG420230632412,,not found
+pre,tesseract,h02_a.jpg,clean,fiscal_sign,441117549441,441117549447,digits misread
+pre,tesseract,h02_a.jpg,clean,vat,6321.43,,not found
+pre,tesseract,h02_a.jpg,clean,total,59000.0,,not found
+pre,tesseract,h03_a.jpg,clean,seller_name,,ESS i,spurious value
+pre,tesseract,h03_a.jpg,clean,seller_tin,305645847,,not found
+pre,tesseract,h03_a.jpg,clean,datetime,2026-11-16T22:19:09,,not found
+pre,tesseract,h03_a.jpg,clean,fiscal_module,LG420211614982,,not found
+pre,tesseract,h03_a.jpg,clean,fiscal_sign,010301300230,,not found
+pre,tesseract,h03_a.jpg,clean,vat,862.28,,not found
+pre,tesseract,h03_a.jpg,clean,total,8048.0,0.0,digits/amounts misread
+pre,tesseract,h03_a.jpg,clean,payment,card,,not found
+pre,tesseract,h04_a.jpg,clean,seller_name,KFC Чимган,Qeratok: 0.00 mica!,text misread / wrong span
+pre,tesseract,h04_a.jpg,clean,datetime,2026-11-17T13:23:25,,not found
+pre,tesseract,h04_a.jpg,clean,receipt_number,2201,,not found
+pre,tesseract,h04_a.jpg,clean,fiscal_module,LG420211610337,,not found
+pre,tesseract,h04_a.jpg,clean,fiscal_sign,273402590931,,not found
+pre,tesseract,h04_a.jpg,clean,vat,4714.29,,not found
+pre,tesseract,h04_a.jpg,clean,total,44000.0,,not found
+pre,tesseract,h04_a.jpg,clean,payment,card,,not found
+pre,tesseract,h05_a.jpg,clean,seller_name,,"""ое",spurious value
+pre,tesseract,h05_a.jpg,clean,seller_tin,309263742,,not found
+pre,tesseract,h05_a.jpg,clean,receipt_number,9776,,not found
+pre,tesseract,h05_a.jpg,clean,fiscal_sign,036262266701,,not found
+pre,tesseract,h05_a.jpg,clean,vat,1564.29,,not found
+pre,tesseract,h05_a.jpg,clean,total,14600.0,,not found
+pre,tesseract,h05_a.jpg,clean,payment,card,,not found
+pre,tesseract,h06_a.jpg,clean,seller_name,ERA,"""ARD BREAD"" XK",text misread / wrong span
+pre,tesseract,h06_a.jpg,clean,seller_tin,306263261,,not found
+pre,tesseract,h06_a.jpg,clean,address,"Toshkent sh., M.Ulug'bek tum., Yalang'och bozori hududida","= < tum., Yalangʻoch bozori, SE Sire apy, emcee hududida, —= Yur.Manzil Toshkent sh. , M.Ulugʻbek, tum., Yalangʻoch bozori",text misread / wrong span
+pre,tesseract,h06_a.jpg,clean,datetime,2026-11-18T13:29:12,2826-11-18T13:29:12,date/time misread
+pre,tesseract,h06_a.jpg,clean,fiscal_module,VG544170024923,,not found
+pre,tesseract,h06_a.jpg,clean,fiscal_sign,006628644216,,not found
+pre_post,tesseract,h01_a.jpg,clean,seller_name,"""DXB BENIFIT GROUP"" MCHJ","""DXB ВЕМТЕТТ GROUP"" MCHJ a |",text misread / wrong span
+pre_post,tesseract,h01_a.jpg,clean,seller_tin,310219511,,not found
+pre_post,tesseract,h01_a.jpg,clean,address,Toshkent sh. Yunusobod,,not found
+pre_post,tesseract,h01_a.jpg,clean,datetime,2026-11-17T21:00:47,2026-11-17T21:00:43,date/time misread
+pre_post,tesseract,h01_a.jpg,clean,total,19000.0,4000.0,digits/amounts misread
+pre_post,tesseract,h02_a.jpg,clean,seller_name,Bon! Atlas Chimgan,Ei || “Жи куки,text misread / wrong span
+pre_post,tesseract,h02_a.jpg,clean,seller_tin,200992329,,not found
+pre_post,tesseract,h02_a.jpg,clean,address,"Toshkent sh., M. Ulugbek tumani koch. T. Malik, 3A-uy",,not found
+pre_post,tesseract,h02_a.jpg,clean,datetime,2026-11-16T16:19:46,,not found
+pre_post,tesseract,h02_a.jpg,clean,receipt_number,96890,,not found
+pre_post,tesseract,h02_a.jpg,clean,fiscal_module,LG420230632412,,not found
+pre_post,tesseract,h02_a.jpg,clean,fiscal_sign,441117549441,441117549447,digits misread
+pre_post,tesseract,h02_a.jpg,clean,vat,6321.43,,not found
+pre_post,tesseract,h02_a.jpg,clean,total,59000.0,,not found
+pre_post,tesseract,h03_a.jpg,clean,seller_name,,ESS i,spurious value
+pre_post,tesseract,h03_a.jpg,clean,seller_tin,305645847,,not found
+pre_post,tesseract,h03_a.jpg,clean,datetime,2026-11-16T22:19:09,,not found
+pre_post,tesseract,h03_a.jpg,clean,fiscal_module,LG420211614982,,not found
+pre_post,tesseract,h03_a.jpg,clean,fiscal_sign,010301300230,,not found
+pre_post,tesseract,h03_a.jpg,clean,vat,862.28,,not found
+pre_post,tesseract,h03_a.jpg,clean,total,8048.0,0.0,digits/amounts misread
+pre_post,tesseract,h03_a.jpg,clean,payment,card,,not found
+pre_post,tesseract,h04_a.jpg,clean,seller_name,KFC Чимган,Qeratok: 0.00 mica!,text misread / wrong span
+pre_post,tesseract,h04_a.jpg,clean,vat,4714.29,,not found
+pre_post,tesseract,h04_a.jpg,clean,total,44000.0,,not found
+pre_post,tesseract,h04_a.jpg,clean,payment,card,,not found
+pre_post,tesseract,h05_a.jpg,clean,seller_name,,"""ое",spurious value
+pre_post,tesseract,h05_a.jpg,clean,seller_tin,309263742,,not found
+pre_post,tesseract,h05_a.jpg,clean,vat,1564.29,,not found
+pre_post,tesseract,h05_a.jpg,clean,total,14600.0,,not found
+pre_post,tesseract,h05_a.jpg,clean,payment,card,,not found
+pre_post,tesseract,h06_a.jpg,clean,seller_name,ERA,"""ARD BREAD"" XK",text misread / wrong span
+pre_post,tesseract,h06_a.jpg,clean,seller_tin,306263261,,not found
+pre_post,tesseract,h06_a.jpg,clean,address,"Toshkent sh., M.Ulug'bek tum., Yalang'och bozori hududida","= < tum., Yalangʻoch bozori, SE Sire apy, emcee hududida, —= Yur.Manzil Toshkent sh. , M.Ulugʻbek, tum., Yalangʻoch bozori",text misread / wrong span
+pre_post,tesseract,h06_a.jpg,clean,fiscal_module,VG544170024923,,not found
+pre_post,tesseract,h06_a.jpg,clean,fiscal_sign,006628644216,,not found
+baseline,rapidocr,h01_a.jpg,clean,address,Toshkent sh. Yunusobod,,not found
+baseline,rapidocr,h01_a.jpg,clean,receipt_number,20281,194,digits missing/extra
+baseline,rapidocr,h02_a.jpg,clean,seller_name,Bon! Atlas Chimgan,CAFÉ FRANÇAIS BON! BOULANGERIE,text misread / wrong span
+baseline,rapidocr,h02_a.jpg,clean,seller_tin,200992329,,not found
+baseline,rapidocr,h02_a.jpg,clean,datetime,2026-11-16T16:19:46,,not found
+baseline,rapidocr,h02_a.jpg,clean,receipt_number,96890,670120,digits missing/extra
+baseline,rapidocr,h03_a.jpg,clean,seller_name,,Kassa raqami: 2,spurious value
+baseline,rapidocr,h03_a.jpg,clean,datetime,2026-11-16T22:19:09,2026-11-16T22:19:00,date/time misread
+baseline,rapidocr,h03_a.jpg,clean,vat,862.28,800.0,digits/amounts misread
+baseline,rapidocr,h03_a.jpg,clean,total,8048.0,800.0,digits/amounts misread
+baseline,rapidocr,h03_a.jpg,clean,payment,card,,not found
+baseline,rapidocr,h04_a.jpg,clean,seller_name,KFC Чимган,Остаток: 0.00,text misread / wrong span
+baseline,rapidocr,h04_a.jpg,clean,datetime,2026-11-17T13:23:25,,not found
+baseline,rapidocr,h04_a.jpg,clean,receipt_number,2201,,not found
+baseline,rapidocr,h04_a.jpg,clean,vat,4714.29,,not found
+baseline,rapidocr,h04_a.jpg,clean,total,44000.0,,not found
+baseline,rapidocr,h05_a.jpg,clean,seller_name,,"Мухаммадюсуф д.68, д. 39",spurious value
+baseline,rapidocr,h05_a.jpg,clean,address,,. Ташкент. ул. Подшобог МфИ ул.,spurious value
+baseline,rapidocr,h05_a.jpg,clean,fiscal_sign,036262266701,,not found
+baseline,rapidocr,h06_a.jpg,clean,seller_name,ERA,"""ARO BREAD"" XK",text misread / wrong span
+baseline,rapidocr,h06_a.jpg,clean,address,"Toshkent sh., M.Ulug'bek tum., Yalang'och bozori hududida","tum., Yalangʻoch bozori, hududida",text misread / wrong span
+pre,rapidocr,h01_a.jpg,clean,address,Toshkent sh. Yunusobod,,not found
+pre,rapidocr,h01_a.jpg,clean,receipt_number,20281,194,digits missing/extra
+pre,rapidocr,h02_a.jpg,clean,seller_name,Bon! Atlas Chimgan,CAFÉ FRANCAIS BON! BOULANGERIE,text misread / wrong span
+pre,rapidocr,h02_a.jpg,clean,datetime,2026-11-16T16:19:46,,not found
+pre,rapidocr,h02_a.jpg,clean,receipt_number,96890,67013970,digits missing/extra
+pre,rapidocr,h03_a.jpg,clean,seller_name,,aqami : 224 Kassa raqаmi: 2,spurious value
+pre,rapidocr,h03_a.jpg,clean,datetime,2026-11-16T22:19:09,2026-11-16T22:19:00,date/time misread
+pre,rapidocr,h03_a.jpg,clean,fiscal_sign,010301300230,,not found
+pre,rapidocr,h03_a.jpg,clean,vat,862.28,,not found
+pre,rapidocr,h03_a.jpg,clean,total,8048.0,,not found
+pre,rapidocr,h03_a.jpg,clean,payment,card,,not found
+pre,rapidocr,h04_a.jpg,clean,seller_name,KFC Чимган,VISA),text misread / wrong span
+pre,rapidocr,h04_a.jpg,clean,datetime,2026-11-17T13:23:25,,not found
+pre,rapidocr,h04_a.jpg,clean,receipt_number,2201,,not found
+pre,rapidocr,h04_a.jpg,clean,fiscal_sign,273402590931,,not found
+pre,rapidocr,h04_a.jpg,clean,vat,4714.29,,not found
+pre,rapidocr,h04_a.jpg,clean,total,44000.0,,not found
+pre,rapidocr,h04_a.jpg,clean,payment,card,,not found
+pre,rapidocr,h05_a.jpg,clean,seller_name,,RM T13-Дагестанская,spurious value
+pre,rapidocr,h05_a.jpg,clean,seller_tin,309263742,,not found
+pre,rapidocr,h05_a.jpg,clean,address,,л. Подшобог МФИ ул.,spurious value
+pre,rapidocr,h05_a.jpg,clean,receipt_number,9776,,not found
+pre,rapidocr,h05_a.jpg,clean,fiscal_sign,036262266701,,not found
+pre,rapidocr,h05_a.jpg,clean,vat,1564.29,,not found
+pre,rapidocr,h05_a.jpg,clean,total,14600.0,,not found
+pre,rapidocr,h05_a.jpg,clean,payment,card,,not found
+pre,rapidocr,h06_a.jpg,clean,seller_name,ERA,"""ARO BREAD"" XK",text misread / wrong span
+pre,rapidocr,h06_a.jpg,clean,address,"Toshkent sh., M.Ulug'bek tum., Yalang'och bozori hududida","tum., Yalangʻoch bozori, hududida",text misread / wrong span
+pre_post,rapidocr,h01_a.jpg,clean,address,Toshkent sh. Yunusobod,,not found
+pre_post,rapidocr,h01_a.jpg,clean,datetime,2026-11-17T21:00:47,2026-11-17T21:00:43,date/time misread
+pre_post,rapidocr,h01_a.jpg,clean,total,19000.0,15000.0,digits/amounts misread
+pre_post,rapidocr,h02_a.jpg,clean,datetime,2026-11-16T16:19:46,,not found
+pre_post,rapidocr,h02_a.jpg,clean,receipt_number,96890,3,digits missing/extra
+pre_post,rapidocr,h03_a.jpg,clean,seller_name,,raqami : 224 Kassa raqami: 2,spurious value
+pre_post,rapidocr,h03_a.jpg,clean,datetime,2026-11-16T22:19:09,2026-11-16T22:19:00,date/time misread
+pre_post,rapidocr,h03_a.jpg,clean,fiscal_sign,010301300230,,not found
+pre_post,rapidocr,h03_a.jpg,clean,vat,862.28,,not found
+pre_post,rapidocr,h03_a.jpg,clean,total,8048.0,,not found
+pre_post,rapidocr,h03_a.jpg,clean,payment,card,,not found
+pre_post,rapidocr,h04_a.jpg,clean,seller_name,KFC Чимган,VISA),text misread / wrong span
+pre_post,rapidocr,h04_a.jpg,clean,vat,4714.29,,not found
+pre_post,rapidocr,h04_a.jpg,clean,total,44000.0,,not found
+pre_post,rapidocr,h04_a.jpg,clean,payment,card,,not found
+pre_post,rapidocr,h05_a.jpg,clean,seller_name,,RM Т13-Дагестанская,spurious value
+pre_post,rapidocr,h05_a.jpg,clean,seller_tin,309263742,,not found
+pre_post,rapidocr,h05_a.jpg,clean,address,,л. Подшобог МФИ ул.,spurious value
+pre_post,rapidocr,h05_a.jpg,clean,vat,1564.29,,not found
+pre_post,rapidocr,h05_a.jpg,clean,total,14600.0,,not found
+pre_post,rapidocr,h05_a.jpg,clean,payment,card,,not found
+pre_post,rapidocr,h06_a.jpg,clean,address,"Toshkent sh., M.Ulug'bek tum., Yalang'och bozori hududida","tum., Yalangʻoch bozori, hududida",text misread / wrong span
