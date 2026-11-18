@@ -11,3 +11,5 @@ LABELS_TO_CHECK.md
 # recognizer candidates from the comparison (download: see scripts/compare_rec_models.py); only the chosen one is kept in git
 models/rec/*
 !models/rec/cyrillic_PP-OCRv5_mobile_rec_onnx/
+# public datasets used only for robustness checks (not committed)
+data/external/
