@@ -1,0 +1,18 @@
+{
+  "_status": "draft",
+  "_note": "CHECK on paper: seller name (…AL PHARM T13), address, item name cut in photo; cashier name masked",
+  "seller_name": null,
+  "seller_tin": "309263742",
+  "address": null,
+  "datetime": "2026-11-16T19:24:14",
+  "receipt_number": "9776",
+  "fiscal_module": "VG544170018528",
+  "fiscal_sign": "036262266701",
+  "vat": 1564.29,
+  "total": 14600.0,
+  "payment": "card",
+  "items": [],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=VG544170018528&r=9776&c=20261116192414&s=036262266701"
+  }
+}

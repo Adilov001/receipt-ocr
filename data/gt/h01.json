@@ -1,0 +1,31 @@
+{
+  "_status": "draft",
+  "_note": "paper shows 'Chek raqami #194'; receipt_number = fiscal number from the QR (20281). No VAT line printed.",
+  "seller_name": "\"DXB BENIFIT GROUP\" MCHJ",
+  "seller_tin": "310219511",
+  "address": "Toshkent sh. Yunusobod",
+  "datetime": "2026-11-17T21:00:47",
+  "receipt_number": "20281",
+  "fiscal_module": "LG420230646667",
+  "fiscal_sign": "023590943064",
+  "vat": null,
+  "total": 19000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "LIMAX QALIN PAYPOQ",
+      "quantity": 1.0,
+      "price": 15000.0,
+      "total": 15000.0
+    },
+    {
+      "name": "DAFNA IPAK FOR MEN NAM SALETKA 20X",
+      "quantity": 1.0,
+      "price": 4000.0,
+      "total": 4000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420230646667&r=20281&c=20261117210043&s=023590943064"
+  }
+}

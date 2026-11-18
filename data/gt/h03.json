@@ -1,0 +1,25 @@
+{
+  "_status": "draft",
+  "_note": "CHECK top of paper: no shop name/address visible in photo; paper time 22:19, seconds from QR; 0.435 x 18 500 = 8 047.50 printed as 8 048.00",
+  "seller_name": null,
+  "seller_tin": "305645847",
+  "address": null,
+  "datetime": "2026-11-16T22:19:09",
+  "receipt_number": "155132",
+  "fiscal_module": "LG420211614982",
+  "fiscal_sign": "010301300230",
+  "vat": 862.28,
+  "total": 8048.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "MEVA BANAN VYETNAM KG",
+      "quantity": 0.435,
+      "price": 18500.0,
+      "total": 8048.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211614982&r=155132&c=20261116221909&s=010301300230"
+  }
+}

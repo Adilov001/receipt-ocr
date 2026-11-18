@@ -1,0 +1,37 @@
+{
+  "_status": "draft",
+  "_note": "CHECK: legal name MIRZO-BOBUR M.Ch.J., shop name 'Bon! Atlas Chimgan' chosen as seller. Cashier name masked.",
+  "seller_name": "Bon! Atlas Chimgan",
+  "seller_tin": "200992329",
+  "address": "Toshkent sh., M. Ulugbek tumani koch. T. Malik, 3A-uy",
+  "datetime": "2026-11-16T16:19:46",
+  "receipt_number": "96890",
+  "fiscal_module": "LG420230632412",
+  "fiscal_sign": "441117549441",
+  "vat": 6321.43,
+  "total": 59000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Латте 300мл",
+      "quantity": 1.0,
+      "price": 30000.0,
+      "total": 30000.0
+    },
+    {
+      "name": "Американо 250мл",
+      "quantity": 1.0,
+      "price": 24000.0,
+      "total": 24000.0
+    },
+    {
+      "name": "Стакан воды без газа",
+      "quantity": 1.0,
+      "price": 5000.0,
+      "total": 5000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420230632412&r=96890&c=20261116161946&s=441117549441"
+  }
+}

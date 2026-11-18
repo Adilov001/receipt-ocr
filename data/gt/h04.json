@@ -1,0 +1,25 @@
+{
+  "_status": "draft",
+  "_note": "CHECK on paper: TIN/address not visible in photo (null); paper Sana 13:23:00, seconds from QR; combo = one item",
+  "seller_name": "KFC Чимган",
+  "seller_tin": null,
+  "address": null,
+  "datetime": "2026-11-17T13:23:25",
+  "receipt_number": "2201",
+  "fiscal_module": "LG420211610337",
+  "fiscal_sign": "273402590931",
+  "vat": 4714.29,
+  "total": 44000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "ЧИЗБУРГЕР ЛАНЧ БОКС",
+      "quantity": 1.0,
+      "price": 44000.0,
+      "total": 44000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211610337&r=2201&c=20261117132325&s=273402590931"
+  }
+}

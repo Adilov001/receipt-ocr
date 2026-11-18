@@ -9,5 +9,12 @@
     "era_avtogaz",
     "era_hamkorlik",
     "era_tinda"
+  ],
+  "holdout": [
+    "h01",
+    "h02",
+    "h03",
+    "h04",
+    "h05"
   ]
 }

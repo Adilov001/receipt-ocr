@@ -77,6 +77,16 @@ r28_a.jpg,r28,era_barkamol,uz_latn,clean,1
 r28_q.jpg,r28,era_barkamol,uz_latn,partial,1
 r29_a.jpg,r29,era_barkamol,uz_latn,clean,1
 r29_q.jpg,r29,era_barkamol,uz_latn,partial,1
+h01_a.jpg,h01,dxb_benefit,uz_latn,clean,1
+h01_q.jpg,h01,dxb_benefit,uz_latn,partial,1
+h02_a.jpg,h02,bon_chimgan,mixed,clean,1
+h02_q.jpg,h02,bon_chimgan,mixed,partial,1
+h03_a.jpg,h03,supermarket_305645847,uz_latn,clean,1
+h03_q.jpg,h03,supermarket_305645847,uz_latn,partial,1
+h04_a.jpg,h04,kfc_chimgan,mixed,clean,1
+h04_q.jpg,h04,kfc_chimgan,mixed,partial,1
+h05_a.jpg,h05,pharm_t13,mixed,clean,1
+h05_q.jpg,h05,pharm_t13,mixed,partial,1
 r01_a_x1.jpg,r01,era_tinda,uz_latn,synthetic;crumpled;handheld;shadow;tilted,1
 r01_a_x2.jpg,r01,era_tinda,uz_latn,synthetic;crumpled;faded;handheld;perspective;shadow;tilted,1
 r01_b_x1.jpg,r01,era_tinda,uz_latn,synthetic;crumpled;shadow;tilted,1
