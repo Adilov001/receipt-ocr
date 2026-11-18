@@ -1,0 +1,25 @@
+{
+  "_status": "draft",
+  "_note": "new seller ERA \"ARO BREAD\" XK (Tashkent); QR text rebuilt from printed fields (code not decoded); cardholder name masked",
+  "seller_name": "ERA",
+  "seller_tin": "306263261",
+  "address": "Toshkent sh., M.Ulug'bek tum., Yalang'och bozori hududida",
+  "datetime": "2026-11-18T13:29:12",
+  "receipt_number": "1738",
+  "fiscal_module": "VG544170024923",
+  "fiscal_sign": "006628644216",
+  "vat": 7392.86,
+  "total": 69000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Мучные продукты",
+      "quantity": 1.0,
+      "price": 69000.0,
+      "total": 69000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=VG544170024923&r=1738&c=20261118132912&s=006628644216"
+  }
+}
