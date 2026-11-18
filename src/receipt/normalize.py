@@ -79,12 +79,52 @@ def fix_letters(word):
     return re.sub(rf"(?<={_L}{{3}})({_L})1$", lambda m: m.group(1) + to("i")(m), word)
 
 
+# Fixed label words of Uzbek fiscal receipts (printed by the fiscal module / terminal software,
+# the same on every receipt of a layout). No shop, product or address names.
+LABEL_WORDS = """sana vaqt chek savdo raqami narx qqs siz mxik naqd naqdsiz karta turi shaxsiy kontaksiz
+operatsiya terminal savdogar versiyasi uzcard humo javob kodi toʻlov uchun jami dasturiy taʼminot fiskal
+imzo xaridning miqdorida keshbek olish huquqiga boʻldingiz manzil avtorizatsiya ishlab chiqaruvchi
+toʻlandi kassir sotuvchi smena pozitsiyalar kartasi tasdiqlanadi""".split()
+_LABEL_KEYS = {re.sub(r"[ʻʼ'`’‘]", "", w): w for w in LABEL_WORDS}
+
+
+def _like(word, template):
+    """Give `template` the case style of `word` (UPPER, Title or lower)."""
+    if word.isupper():
+        return template.upper()
+    return template[0].upper() + template[1:] if word[:1].isupper() else template
+
+
+def fix_label_words(line):
+    """Snap OCR near-misses of receipt label words: one wrong letter in 5+ letter words (two in 8+):
+    'iskal' -> 'Fiskal', 'operatstya' -> 'operatsiya'; and, for the first word of a line only, up to
+    3 letters lost at the receipt's left edge: 'minal' -> 'Terminal', 'sturiy' -> 'Dasturiy'."""
+    from rapidfuzz.distance import Levenshtein
+
+    words = line.split(" ")
+    for i, w in enumerate(words):
+        core = re.sub(r"[^\w ʻʼ'`’‘]", "", w)
+        k = re.sub(r"[ʻʼ'`’‘]", "", core).casefold()
+        if len(k) < 4 or not k.isalpha() or k in _LABEL_KEYS:
+            continue
+        best = min(_LABEL_KEYS, key=lambda v: Levenshtein.distance(k, v))
+        d = Levenshtein.distance(k, best)
+        ok = len(k) >= 5 and d <= (2 if len(k) >= 8 else 1) and abs(len(best) - len(k)) <= 1
+        if not ok and i == 0:  # left edge cut: a label word that lost 1-3 leading letters
+            tails = [v for v in _LABEL_KEYS if v.endswith(k) and 1 <= len(v) - len(k) <= 3]
+            if len(tails) == 1:
+                best, ok = tails[0], True
+        if ok:
+            words[i] = w.replace(core, _like(core, _LABEL_KEYS[best]))
+    return " ".join(words)
+
+
 def clean_line(text):
     text = unicodedata.normalize("NFC", text)
     text = unify_apostrophes(text)
     text = re.sub(r"(?<=[\d\s])×(?=[\s\d])", "x", text)  # look-alike multiplication sign
     words = [fix_letters(fix_digits(fix_mixed_script(w))) for w in text.split()]
-    return " ".join(words)
+    return fix_label_words(" ".join(words))
 
 
 def is_separator(text):

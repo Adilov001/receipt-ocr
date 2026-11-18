@@ -90,3 +90,16 @@ def test_digits_inside_words_become_letters():
     # codes and numbers stay as they are
     assert clean_line("FM ID LG420211609580 Era POS v1.9.1 1Ikkinchi A0000000031010") == \
         "FM ID LG420211609580 Era POS v1.9.1 1Ikkinchi A0000000031010"
+
+
+def test_label_words_are_snapped():
+    from receipt.normalize import fix_label_words as f
+    assert f("iskal imzo 352606397030") == "fiskal imzo 352606397030"  # the cut capital is unknown
+    assert f("Operatstya raqani 21167") == "Operatsiya raqami 21167"
+    assert f("minal 48050887") == "terminal 48050887"           # first letters lost at the edge
+    assert f("sturiy taʼminot 3.5.5") == "dasturiy taʼminot 3.5.5"
+    assert f("KONTAKSIZ OPERATSTYA") == "KONTAKSIZ OPERATSIYA"   # case style kept
+    # real words, names and numbers are not touched
+    assert f("1 Margarin 5 000.00") == "1 Margarin 5 000.00"
+    assert f("Tinda ADHAMJON MAMADALIYEV") == "Tinda ADHAMJON MAMADALIYEV"
+    assert f("Guruch Gilos Xurmo Aralashmalar") == "Guruch Gilos Xurmo Aralashmalar"
