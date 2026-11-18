@@ -139,6 +139,51 @@ def qr_rates(df):
     return pd.DataFrame(rows).set_index(["engine", "config"]) if rows else pd.DataFrame()
 
 
+def _real_whole(df):
+    return df[~df["conditions"].str.contains("synthetic|partial", regex=True)]
+
+
+def _metrics(d):
+    tp, npred, ngt = d["item_tp"].sum(), d["item_pred"].sum(), d["item_gt"].sum()
+    out = {"field acc %": 100 * d["field_acc"].mean(), "item F1 %": 100 * prf(tp, npred, ngt)[2],
+           "consistent %": 100 * d["consistent"].astype(float).mean()}
+    if "char_n" in d and d["char_n"].sum():
+        out["CER %"] = 100 * d["char_err"].sum() / d["char_n"].sum()
+        out["WER %"] = 100 * d["word_err"].sum() / d["word_n"].sum()
+    return out
+
+
+def confidence_intervals(df, n_boot=1000, seed=0):
+    """Resample whole receipts (all photos of a receipt together) with replacement; report the
+    2.5 / 97.5 percentiles. With ~16 test receipts the intervals are wide: that is the point."""
+    import numpy as np
+
+    rng = np.random.default_rng(seed)
+    rows = []
+    for (engine, config), d in _real_whole(df[df["config"] == "pre_post"]).groupby(["engine", "config"], sort=False):
+        groups = [g for _, g in d.groupby("receipt_id")]
+        point = _metrics(d)
+        boots = {k: [] for k in point}
+        for _ in range(n_boot):
+            sample = pd.concat([groups[i] for i in rng.integers(0, len(groups), len(groups))])
+            for k, v in _metrics(sample).items():
+                boots[k].append(v)
+        row = {"engine": engine, "receipts": len(groups)}
+        for k, v in point.items():
+            lo, hi = np.percentile([b for b in boots[k] if b == b], [2.5, 97.5])
+            row[k] = f"{v:.1f} [{lo:.1f}–{hi:.1f}]"
+        rows.append(row)
+    return pd.DataFrame(rows).set_index("engine") if rows else pd.DataFrame()
+
+
+def per_seller(df):
+    d = _real_whole(df[df["config"] == "pre_post"])
+    rows = []
+    for (engine, seller), g in d.groupby(["engine", "seller"], sort=False):
+        rows.append({"engine": engine, "seller": seller, "photos": len(g), **{k: round(v, 1) for k, v in _metrics(g).items()}})
+    return pd.DataFrame(rows).set_index(["engine", "seller"]) if rows else pd.DataFrame()
+
+
 def md(df, floatfmt=".1f"):
     return df.to_markdown(floatfmt=floatfmt) if len(df) else "_no data_"
 
@@ -191,7 +236,10 @@ def main():
              "\n\n## Field accuracy, %\n", md(per_field),
              "\n\n## By shooting condition\n", md(by_cond),
              "\n\n## By language\n", md(by_lang),
-             "\n\n## QR decoded per photo and per receipt\n", md(qr_rates(df))]
+             "\n\n## QR decoded per photo and per receipt\n", md(qr_rates(df)),
+             "\n\n## 95 % confidence intervals (bootstrap over receipts, real whole-receipt photos, "
+             "pre + post)\n", md(confidence_intervals(df)),
+             "\n\n## Per seller (real whole-receipt photos, pre + post)\n", md(per_seller(df))]
 
     if args.ablation:
         eng = cfg["eval"]["ablation_engine"]
