@@ -289,30 +289,49 @@ our line crops, or FP16. Two fixes were needed to quantize this export at all: i
   variants); the holdout was measured once.
 * Full-text labels (CER/WER) exist for 15 receipts; 8 dev ones were built from the ERA template.
 
-### Preprocessing ablation (dev split, Tesseract, post-processing on)
+### Preprocessing ablation (dev split, RapidOCR, post-processing on)
 
-Steps are added one by one, and each one is removed from the default; field accuracy, %:
+Field accuracy, %; steps are added one by one, then each step is removed from the default.
 
-| added step | real | synthetic | | default without | real | synthetic |
-|---|---:|---:|---|---|---:|---:|
-| none (raw photo) | 33.1 | 21.5 | | — (default) | 49.6 | 31.9 |
-| + crop (find receipt, perspective) | 44.2 | 21.9 | | crop | 46.2 | 34.2 |
-| + orient | 43.8 | 21.9 | | orient | 49.6 | 30.4 |
-| + deskew | 46.9 | 23.5 | | deskew | 50.0 | 25.8 |
-| + illumination (shadow removal) | 44.6 | 30.0 | | illumination | 43.8 | 26.5 |
-| + CLAHE (contrast) | **49.6** | **31.9** | | CLAHE | 44.6 | 30.0 |
-| + binarize | 34.6 | 23.8 | | | | |
+| variant                      |   real photos |   synthetic photos |
+|:-----------------------------|--------------:|-------------------:|
+| none (raw image)             |          80.0 |               59.2 |
+| + crop                       |          86.5 |               48.8 |
+| + orient                     |          85.4 |               49.2 |
+| + deskew                     |          83.8 |               47.7 |
+| + illumination               |          83.1 |               50.8 |
+| + clahe                      |          86.9 |               51.9 |
+| + binarize                   |          69.2 |               36.5 |
+| default without crop         |          87.3 |               68.5 |
+| default without orient       |          86.9 |               51.2 |
+| default without deskew       |          86.9 |               50.8 |
+| default without illumination |          85.0 |               54.2 |
+| default without clahe        |          83.1 |               50.8 |
 
-* **Cropping** gives the largest single gain on real photos (+11 points): without it OCR also reads the table
-  and background.
-* **Shadow removal and CLAHE** matter most for hard conditions: on the synthetic shadow / faded photos
-  illumination adds 6.5 points, and removing either step costs 5–6 points on real photos.
-* **Deskew and orientation** help on the tilted synthetic photos (−6.1 and −1.5 points without them) and are
-  neutral on the real photos, which were mostly shot straight.
-* **Binarization hurts** (49.6 → 34.6): it breaks the thin strokes of thermal print, so it is off by default.
-  All these choices were made on dev only.
-* Ablation was run with Tesseract before the last orientation fix (see error analysis), which changed the
-  preprocessing of 4 dev photos.
+By shooting condition (number of photos in brackets; synthetic variants included):
+
+| variant                      |   clean (14) |   crumpled (27) |   shadow (15) |   tilted (17) |   sideways (11) |   handheld (9) |   faded (13) |   perspective (13) |
+|:-----------------------------|-------------:|----------------:|--------------:|--------------:|----------------:|---------------:|-------------:|-------------------:|
+| none (raw image)             |           96 |              54 |            75 |            74 |              28 |             46 |           42 |                 42 |
+| + crop                       |           94 |              54 |            54 |            55 |              55 |             44 |           46 |                 46 |
+| + orient                     |           91 |              54 |            55 |            56 |              55 |             47 |           45 |                 45 |
+| + deskew                     |           88 |              53 |            56 |            56 |              54 |             49 |           42 |                 42 |
+| + illumination               |           87 |              55 |            57 |            57 |              55 |             48 |           46 |                 46 |
+| + clahe                      |           89 |              58 |            57 |            59 |              61 |             47 |           48 |                 48 |
+| + binarize                   |           79 |              37 |            45 |            43 |              42 |             34 |           30 |                 30 |
+| default without crop         |           94 |              69 |            83 |            81 |              72 |             49 |           52 |                 52 |
+| default without orient       |           89 |              57 |            56 |            58 |              59 |             44 |           48 |                 48 |
+| default without deskew       |           92 |              56 |            55 |            56 |              60 |             43 |           47 |                 47 |
+| default without illumination |           89 |              59 |            59 |            61 |              60 |             48 |           50 |                 50 |
+| default without clahe        |           87 |              55 |            57 |            57 |              55 |             48 |           46 |                 46 |
+
+* With the RapidOCR engine, **cropping the receipt hurts**: without it dev accuracy is 87.3 % instead of
+  86.9 % on real photos and **68.5 % instead of 51.9 %** on the synthetic shadow / tilt / perspective photos.
+  RapidOCR has its own text detector, and the paper mask sometimes cuts off part of a shadowed or tilted
+  receipt. (With Tesseract cropping was the most useful step, +11 points: the finding depends on the engine.)
+* **Contrast (CLAHE)** helps most on real photos (83.1 → 86.9 %), especially sideways and crumpled ones.
+* **Binarization hurts** everywhere (−17 to −20 points): it breaks the thin thermal strokes. Off by default.
+* Shadow removal helps on crumpled photos and hurts slightly overall; deskew and orientation are close to neutral.
 
 ### Error analysis
 

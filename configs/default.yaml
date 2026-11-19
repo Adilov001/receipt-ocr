@@ -58,7 +58,7 @@ eval:
     baseline: {preprocess: false, postprocess: false}
     pre:      {preprocess: true,  postprocess: false}
     pre_post: {preprocess: true,  postprocess: true}
-  ablation_engine: tesseract
+  ablation_engine: rapidocr
   ablation_steps: [crop, orient, deskew, illumination, clahe, binarize]
   cache_dir: .cache/ocr
   reports_dir: reports
