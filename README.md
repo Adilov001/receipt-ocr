@@ -176,35 +176,37 @@ development and measured **once**, with no change to the code afterwards.
 
 | engine                        | config                  |   fields % |   item F1 % |   CER % |   WER % |   consistent % |   s / receipt |
 |:------------------------------|:------------------------|-----------:|------------:|--------:|--------:|---------------:|--------------:|
-| Tesseract 5                   | baseline (raw photo)    |        7.0 |         0.0 |    89.0 |    94.1 |            0.0 |           7.9 |
-| Tesseract 5                   | + preprocessing         |       20.9 |         5.0 |    33.3 |    69.6 |            4.3 |           9.4 |
-| Tesseract 5                   | + pre + post-processing |       60.9 |        15.0 |    33.3 |    69.2 |            4.3 |           9.6 |
-| EasyOCR                       | baseline (raw photo)    |       27.4 |         0.0 |    60.8 |    88.6 |            0.0 |          46.7 |
-| EasyOCR                       | + preprocessing         |       33.9 |         0.0 |    21.6 |    71.5 |            4.3 |          22.6 |
-| EasyOCR                       | + pre + post-processing |       63.0 |         0.0 |    20.6 |    65.9 |            0.0 |          21.7 |
-| RapidOCR (cyrillic PP-OCRv5)  | baseline (raw photo)    |       60.9 |        55.8 |    47.4 |    58.8 |           43.5 |           9.9 |
-| RapidOCR (cyrillic PP-OCRv5)  | + preprocessing         |       68.3 |        78.3 |     9.8 |    26.3 |           60.9 |           8.9 |
-| RapidOCR (cyrillic PP-OCRv5)  | + pre + post-processing |       89.6 |        87.0 |     9.4 |    24.3 |           73.9 |           8.8 |
-| Hybrid (RapidOCR + Tesseract) | baseline (raw photo)    |       60.9 |        55.8 |    47.4 |    58.8 |           43.5 |          13.0 |
-| Hybrid (RapidOCR + Tesseract) | + preprocessing         |       68.7 |        78.3 |     9.8 |    26.3 |           56.5 |          13.8 |
-| Hybrid (RapidOCR + Tesseract) | + pre + post-processing |       89.6 |        87.0 |     9.4 |    24.3 |           69.6 |          13.1 |
+| Tesseract 5 | baseline (raw photo) | 7.0 | 0.0 | 89.0 | 94.1 | 0.0 | 8.2 |
+| Tesseract 5 | + preprocessing | 26.1 | 0.0 | 42.4 | 92.1 | 0.0 | 14.0 |
+| Tesseract 5 | + pre + post-processing | 59.1 | 19.0 | 42.3 | 91.3 | 30.4 | 13.3 |
+| EasyOCR | baseline (raw photo) | 27.4 | 0.0 | 60.8 | 88.6 | 0.0 | 46.6 |
+| EasyOCR | + preprocessing | 36.5 | 3.9 | 26.0 | 69.8 | 0.0 | 51.1 |
+| EasyOCR | + pre + post-processing | 62.2 | 7.8 | 25.3 | 65.4 | 4.3 | 50.4 |
+| RapidOCR (cyrillic PP-OCRv5) | baseline (raw photo) | 60.9 | 55.8 | 47.4 | 58.8 | 43.5 | 9.2 |
+| RapidOCR (cyrillic PP-OCRv5) | + preprocessing | 77.0 | 73.9 | 10.0 | 24.6 | 73.9 | 9.6 |
+| RapidOCR (cyrillic PP-OCRv5) | + pre + post-processing | **94.8** | **87.0** | **9.8** | 23.4 | **82.6** | 9.8 |
+| Hybrid (RapidOCR + Tesseract) | baseline (raw photo) | 60.9 | 55.8 | 47.4 | 58.8 | 43.5 | 12.1 |
+| Hybrid (RapidOCR + Tesseract) | + preprocessing | 77.4 | 73.9 | 10.0 | 24.6 | 73.9 | 17.6 |
+| Hybrid (RapidOCR + Tesseract) | + pre + post-processing | 94.8 | 87.0 | 9.8 | 23.4 | 82.6 | 16.8 |
 
 Field accuracy per field (RapidOCR, pre + post):
 
 |                          |   seller_name |   seller_tin |   address |   datetime |   receipt_number |   fiscal_module |   fiscal_sign |   vat |   total |   payment |
 |:-------------------------|--------------:|-------------:|----------:|-----------:|-----------------:|----------------:|--------------:|------:|--------:|----------:|
-| RapidOCR, real photos, % |          95.7 |         73.9 |      60.9 |       91.3 |             91.3 |            95.7 |          91.3 |   100 |    95.7 |       100 |
+| RapidOCR, real photos, % |          95.7 |         91.3 |      78.3 |       95.7 |             95.7 |           100   |          95.7 |   100 |   100   |      95.7 |
 
 95 % confidence intervals (bootstrap over receipts, pre + post) — with 16 receipts the ranges are wide:
 
 | engine    |   receipts | field acc %      | item F1 %         | consistent %     | CER %            | WER %            |
 |:----------|-----------:|:-----------------|:------------------|:-----------------|:-----------------|:-----------------|
-| tesseract |         16 | 60.9 [50.0–71.0] | 15.0 [0.0–33.3]   | 4.3 [0.0–15.0]   | 33.3 [20.1–52.3] | 69.2 [53.9–90.5] |
-| easyocr   |         16 | 63.0 [53.9–71.7] | 0.0 [0.0–0.0]     | 0.0 [0.0–0.0]    | 20.6 [15.1–28.3] | 65.9 [57.9–75.1] |
-| rapidocr  |         16 | 89.6 [82.9–95.0] | 87.0 [72.7–100.0] | 73.9 [55.0–90.5] | 9.4 [4.5–16.0]   | 24.3 [18.0–31.8] |
-| hybrid    |         16 | 89.6 [83.2–95.0] | 87.0 [73.9–100.0] | 69.6 [50.0–84.6] | 9.4 [4.3–16.0]   | 24.3 [17.6–32.4] |
+| tesseract |         16 | 59.1 [51.2–66.5] | 19.0 [0.0–39.0]   | 30.4 [11.5–52.4] | 42.3 [34.4–51.1] | 91.3 [71.0–110.4] |
+| easyocr   |         16 | 62.2 [54.8–68.6] | 7.8 [0.0–20.4]    | 4.3 [0.0–13.6]   | 25.3 [19.2–30.7] | 65.4 [56.5–73.4]  |
+| rapidocr  |         16 | 94.8 [91.4–98.0] | 87.0 [75.0–100.0] | 82.6 [68.0–95.5] | 9.8 [5.6–13.9]   | 23.4 [17.2–29.5]  |
+| hybrid    |         16 | 94.8 [91.3–98.0] | 87.0 [75.0–100.0] | 82.6 [68.2–95.7] | 9.8 [5.3–14.3]   | 23.4 [17.2–29.8]  |
 
 ### Holdout: 6 new shops, measured once (6 whole-receipt photos)
+
+Measured on 18 Nov, *before* the receipt crop was switched off; a new holdout is needed to check that change.
 
 | engine                       | config                  |   fields % |   item F1 % |   consistent % |   s / receipt |
 |:-----------------------------|:------------------------|-----------:|------------:|---------------:|--------------:|
@@ -241,13 +243,13 @@ labelled total matches it.
 
 | target | test | holdout (new layouts) | status |
 |---|---:|---:|---|
-| field accuracy ≥ 85 % | **89.6 %** [82.9–95.0] | 63.3 % | reached on test; not on new layouts |
-| item F1 ≥ 75 % | **87.0 %** [72.7–100] | 53.3 % | reached on test |
-| CER ≤ 10 % | **9.4 %** [4.5–16.0] | — (no full-text labels) | reached on test |
-| WER ≤ 20 % | 24.3 % [18.0–31.8] | — | not reached |
+| field accuracy ≥ 85 % | **94.8 %** [91.4–98.0] | 63.3 % | reached on test; not on new layouts |
+| item F1 ≥ 75 % | **87.0 %** [75.0–100] | 53.3 % | reached on test |
+| CER ≤ 10 % | **9.8 %** [5.6–13.9] | — (no full-text labels) | reached on test (just) |
+| WER ≤ 20 % | 23.4 % [17.2–29.5] | — | not reached |
 | QR decoded ≥ 95 % | 60.9 % per photo, 81.2 % per receipt | 50 % / 83.3 % | not reached |
 | arithmetic checks 100 % correct | **100 %** (`tests/test_reconcile.py`, all 29 labelled dev + test receipts) | | reached |
-| ≤ 10 s per receipt on CPU | **8.0 s** mean (RapidOCR) | 8.2 s | reached |
+| ≤ 10 s per receipt on CPU | **6.4 s** mean through the API in Docker (3 s QR limit); 21 of 23 photos ≤ 10 s, max 11.7 s on a busy Mac. Offline evaluation without the QR limit: 9.8 s | 8.2 s | reached on average |
 
 ### What changed in the last iteration (each step chosen on dev, then confirmed on test)
 
@@ -257,7 +259,8 @@ labelled total matches it.
 | A1: recognizer `cyrillic_PP-OCRv5` (chosen among 5 on dev) | 84.3 | 82.6 | 14.4 | 30.3 |
 | A2: address = block from `Manzil` to the next label | 87.4 | 82.6 | 14.4 | 30.3 |
 | A3: line grouping along the local text slope | 89.1 | 87.0 | 10.0 | 26.8 |
-| label vocabulary, spec number normalization, look-alike letters | **89.6** | **87.0** | **9.4** | **24.3** |
+| label vocabulary, spec number normalization, look-alike letters | 89.6 | 87.0 | 9.4 | 24.3 |
+| preprocessing: receipt crop switched off (ablation on dev) | **94.8** | **87.0** | 9.8 | **23.4** |
 
 Tried on dev and **rejected** (made results worse): a white margin before OCR, 3 text-detector settings,
 a larger rotation canvas, switching deskew off, the OpenCV Aruco QR decoder, rebuilding the QR grid.
@@ -325,7 +328,8 @@ By shooting condition (number of photos in brackets; synthetic variants included
 | default without illumination |           89 |              59 |            59 |            61 |              60 |             48 |           50 |                 50 |
 | default without clahe        |           87 |              55 |            57 |            57 |              55 |             48 |           46 |                 46 |
 
-* With the RapidOCR engine, **cropping the receipt hurts**: without it dev accuracy is 87.3 % instead of
+* With the RapidOCR engine, **cropping the receipt hurts**, so it is **off by default** since 19 Nov (confirmed
+  once on test: fields 89.6 → 94.8 %, consistent receipts 73.9 → 82.6 %, CER 9.4 → 9.8 %). On dev it is 87.3 % instead of
   86.9 % on real photos and **68.5 % instead of 51.9 %** on the synthetic shadow / tilt / perspective photos.
   RapidOCR has its own text detector, and the paper mask sometimes cuts off part of a shadowed or tilted
   receipt. (With Tesseract cropping was the most useful step, +11 points: the finding depends on the engine.)
