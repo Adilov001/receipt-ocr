@@ -262,6 +262,25 @@ labelled total matches it.
 Tried on dev and **rejected** (made results worse): a white margin before OCR, 3 text-detector settings,
 a larger rotation canvas, switching deskew off, the OpenCV Aruco QR decoder, rebuilding the QR grid.
 
+### Quantization of the recognizer (spec bonus: speed-up and quality loss)
+
+`scripts/quantize_rec.py`, recognizer `cyrillic_PP-OCRv5`, dev split (26 real photos), full pipeline:
+
+| model | size | ms per text line (CPU, 4 threads) | field acc % | item F1 % | CER % | WER % |
+|---|---:|---:|---:|---:|---:|---:|
+| FP32 (used) | 7.7 MB | 21 | **86.9** | **74.3** | **12.3** | **30.2** |
+| INT8 dynamic (MatMul) | 6.8 MB | 29 (slower) | — | — | — | — |
+| INT8 static, Conv + MatMul (calibrated on 240 dev text lines) | **2.2 MB** | 20 | 53.5 | 9.2 | 27.3 | 64.4 |
+| INT8 static, Conv only | 3.1 MB | 21 | text 43–74 % identical to FP32 on 3 photos | | | |
+
+Post-training quantization makes the model 3.6× smaller but gives **no speed-up** on this x86 CPU (the
+recognizer is small and convolution-bound; dynamic quantization even adds conversion cost) and
+**loses a lot of accuracy** (CER 12 → 27 %): the thin-stroke thermal font needs the full precision of the
+activations. Decision: keep FP32. Next options if size matters: quantization-aware training (QAT) on
+our line crops, or FP16. Two fixes were needed to quantize this export at all: its weights are stored as
+`Constant` nodes (moved to initializers) and its opset 7 `BatchNormalization` carries the removed
+`spatial` attribute.
+
 ### Limits (read before trusting the numbers)
 
 * Small data: 16 test and 6 holdout receipts; see the confidence intervals.
