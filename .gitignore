@@ -13,3 +13,4 @@ models/rec/*
 !models/rec/cyrillic_PP-OCRv5_mobile_rec_onnx/
 # public datasets used only for robustness checks (not committed)
 data/external/
+data/gt_drafts/
