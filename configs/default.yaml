@@ -16,7 +16,7 @@ ocr:
     inter_op_num_threads: 1
 
 preprocess:
-  crop: true             # detect receipt on background, perspective warp
+  crop: false            # detect receipt + perspective warp; off: hurts with RapidOCR (ablation, dev and test)
   orient: true           # turn a sideways / upside-down receipt upright (aspect ratio + Tesseract OSD)
   deskew: true           # projection-profile skew search
   illumination: true     # background division (shadows, uneven light)
