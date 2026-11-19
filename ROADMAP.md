@@ -9,17 +9,18 @@ keep the time ≤ 10 s per receipt.
 
 | target (HR) | now | status |
 |---|---:|---|
-| field accuracy ≥ 85 % | 89.6 % [82.9–95.0] | reached (holdout of 6 new shops: 63.3 %) |
+| field accuracy ≥ 85 % | 94.8 % [91.4–98.0] | reached (holdout of 6 new shops, measured before crop off: 63.3 %) |
 | item F1 ≥ 75 % | 87.0 % | reached |
-| CER ≤ 10 % | 9.4 % | reached |
-| WER ≤ 20 % | 24.3 % | not reached |
+| CER ≤ 10 % | 9.8 % | reached (just) |
+| WER ≤ 20 % | 23.4 % | not reached |
 | QR ≥ 95 % | 60.9 % per photo, 81.2 % per receipt | not reached |
 | arithmetic checks 100 % | 100 % | reached |
-| ≤ 10 s per receipt | 6–8 s (also in Docker) | reached |
+| ≤ 10 s per receipt | 6.4 s mean via the API in Docker (21 of 23 photos ≤ 10 s) | reached on average |
 
 Done in the first part of the internship (17–18 Nov): recognizer chosen among 5 (`cyrillic_PP-OCRv5`),
 address block, line grouping on curved paper, label vocabulary, confidence intervals, QR check on 150
 public receipts, 6-shop holdout, REST API + Docker.
+19 Nov: quantization tested (kept FP32), ablation by condition, receipt crop switched off (test fields 89.6 → 94.8 %).
 
 ## Phase 1 — close the gaps the specification requires
 
