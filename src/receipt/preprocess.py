@@ -1,4 +1,6 @@
 """Receipt image preprocessing. Each step can be switched off in the config for ablation."""
+import re
+
 import cv2
 import numpy as np
 
@@ -121,25 +123,34 @@ def osd_rotation(gray):
         return 0
 
 
+FISCAL_QR_RE = re.compile(r"soliq\.uz|ofd\.", re.I)
+
+
 def _qr_centers_y(gray):
-    """Relative vertical positions (0 = top) of QR codes found in the image, read or not."""
+    """[(relative vertical position (0 = top), is_fiscal)] of the QR codes found in the image, read or
+    not. is_fiscal: the code was read and is the tax authority's link (not a shop's promo code)."""
     try:
         import zxingcpp
     except ImportError:
         return []
     small = cv2.resize(gray, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
-    ys = []
+    out = []
     for r in zxingcpp.read_barcodes(small, formats=zxingcpp.BarcodeFormat.QRCode, return_errors=True):
         p = r.position
-        ys.append((p.top_left.y + p.bottom_right.y) / 2 / small.shape[0])
-    return ys
+        out.append(((p.top_left.y + p.bottom_right.y) / 2 / small.shape[0], bool(FISCAL_QR_RE.search(r.text or ""))))
+    return out
 
 
 def confirmed_rotation(gray):
     """180° only when the receipt's own layout says so: the fiscal QR code is printed at the end
     of a receipt, so a QR code found in the top 40 % means the photo is upside down.
-    Tesseract OSD is not used for this: on our receipts it claimed 180° on 10 upright photos."""
-    ys = _qr_centers_y(gray)
+    Some receipts also print a promo QR code at the top (KFC); when the fiscal code is read, its
+    position alone decides. Tesseract OSD is not used: on our receipts it claimed 180° on 10 upright photos."""
+    found = _qr_centers_y(gray)
+    fiscal = [y for y, f in found if f]
+    if fiscal:
+        return 2 if max(fiscal) < 0.4 else 0
+    ys = [y for y, _ in found]
     return 2 if ys and min(ys) < 0.4 and max(ys) < 0.4 else 0
 
 

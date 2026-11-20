@@ -35,6 +35,8 @@ def reconcile(fields, items, qr_fields, cfg):
     for field, qv in (qr_fields or {}).items():
         ov = fields.get(field)
         a, b = norm_field(field, ov), norm_field(field, qv)
+        if field == "datetime" and a and b and str(a).endswith(":00") and str(a)[:16] == str(b)[:16]:
+            b = a  # the paper prints the minute only ("20:17:00"), the QR has the seconds ("20:17:51")
         st = NO_DATA if a is None or b is None else (MATCH if a == b else MISMATCH)
         checks.append({"check": f"OCR ↔ QR: {field}", "status": st, "expected": qv, "actual": ov, "kind": "qr"})
     return checks

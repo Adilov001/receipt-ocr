@@ -25,8 +25,8 @@ DIGIT_FIX = str.maketrans("OoОоlI|", "0000111")
 SEPARATOR_RE = re.compile(r"^[\s\-=*_~.#+]{3,}$")
 _CURRENCY_RE = re.compile(r"(so[ʻʼ'`’‘]?m|сўм|сум|sum|uzs)\.?", re.I)
 
-# Amount as printed on receipts: 32 000.00 / 12 500,00 / 32000 / 1'500.00
-AMOUNT_RE = re.compile(r"\d{1,3}(?:[  ']\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?")
+# Amount as printed on receipts: 32 000.00 / 12 500,00 / 32000 / 1'500.00 / 6ʼ900.00 (apostrophe as unified)
+AMOUNT_RE = re.compile(r"\d{1,3}(?:[  'ʼ’]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?")
 
 
 def unify_apostrophes(text):

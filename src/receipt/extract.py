@@ -16,7 +16,7 @@ A = "[ʻʼ'`’‘]?"  # optional apostrophe of any kind
 L = {
     "tin": re.compile(r"\b(stir|inn|инн|стир|jshshr|жшшир|pinfl)\b", re.I),
     "datetime": re.compile(r"\b(sana|vaqt|дата|время|сана|вақт)\b", re.I),
-    "receipt_number": re.compile(r"(^|\s)(chek|чек)(\s*(raqami|№|no\.?|#))?(?!\s*(turi|kodi))\b", re.I),
+    "receipt_number": re.compile(r"(^|\s)(chek|чек)(\s*(raqami|№|no\.?|#))?(?!\s*(turi|kodi|-?\s*invo))\b", re.I),
     "fiscal_sign": re.compile(r"(fiskal\s*(imzo|belgi|alomat)|фискал\w*\s*(признак|имзо|белги)|\bфп\b|\bfp\b|\bfb\s*:)", re.I),
     # fiscal receipt number printed as "RS:" (pharmacy); preferred over the shop's own "Chek:" counter
     "rs": re.compile(r"\brs\s*:", re.I),
@@ -25,12 +25,12 @@ L = {
     "vat": re.compile(r"\b(qqs|ндс|ққс)\b(?!\s*siz)", re.I),
     "total": [
         re.compile(rf"to{A}lov\s*uchun\s*jami|тўлов\s*учун\s*жами", re.I),
-        re.compile(rf"jami\s*to{A}lov|итого\s*к\s*оплате|к\s*оплате|всего\s*к\s*оплате", re.I),
+        re.compile(rf"jami\s*to{A}lov|umumiy\s*to{A}lov|итого\s*к\s*оплате|к\s*оплате|всего\s*к\s*оплате", re.I),
         re.compile(rf"to{A}landi|тўланди|оплачено", re.I),
         re.compile(r"\b(итого|итог|всего|жами)\b(?!\s*(ндс|ққс))", re.I),
-        re.compile(r"\bjami\b(?!\s*qqs)", re.I),
+        re.compile(r"(?<!qqs )(?<!qqs)\bjami\b(?!\s*qqs)", re.I),  # not "QQS JAMI 12%=739.29" (VAT)
     ],
-    "card": re.compile(r"(naqdsiz|plastik|bank\s*karta|безнал|карт[аой]|uzcard|humo|нақдсиз)", re.I),
+    "card": re.compile(r"(naqdsiz|plastik|bank\s*karta|bank\s*card|безнал|карт[аой]|uzcard|humo|нақдсиз)", re.I),
     "cash": re.compile(r"(\bnaqd\b(?!\s*siz)|наличн|\bнақд\b)", re.I),
     "address": re.compile(
         rf"(ko{A}ch|kuchasi|tuman|shahar|shahri|viloyat|mahalla|\bmfy\b|massiv|\buy\b|\bул\.|улиц|район|"
@@ -39,15 +39,22 @@ L = {
     "vat_free": re.compile(r"(q[q0o]s\s*siz|без\s*ндс|ққс\s*сиз)", re.I),
     "narx": re.compile(r"^\s*(narx|нарх|цена)\b", re.I),
     "org": re.compile(r"\b(mchj|xk|yatt|qk|aj|ooo|ооо|мчж|ип|чп|ао|ат|llc|ltd)\b|[\"«“]", re.I),
+    # the fiscal receipt number, printed next to the FM; a shop's own counter ("Savdo Cheki: 309") is not it
+    "receipt_number_fiscal": re.compile(r"(chek|check|чек)\s*raqam\w*", re.I),
+    # register / shift / order lines at the top of a receipt (never the shop name)
+    "service": re.compile(r"\b(smena|kassa\s*raqami|navbatdagi|buyurtma|kassir)\b", re.I),
 }
+# "CHEK-INVOYS, KFC Файз": document type printed before the shop name
+DOC_TYPE_RE = re.compile(r"^\s*(chek[\s\-]*invo\w*|savdo\s*cheki?|xarid\s*cheki?)\s*[,.:]?\s*", re.I)
 ANY_LABEL = re.compile("|".join(
-    p.pattern for k, p in L.items() if k not in ("total", "address", "org", "address_label")), re.I)
+    p.pattern for k, p in L.items() if k not in ("total", "address", "org", "address_label", "receipt_number_fiscal")),
+    re.I)
 
 TIN_RE = re.compile(r"(?<!\d)(\d{14}|\d{9})(?!\d)")
 RECEIPT_NO_RE = re.compile(r"(?<![\d.:\-/])\d{1,10}(?![\d.:\-/])")
 FISCAL_SIGN_RE = re.compile(r"(?<!\d)\d{10,14}(?!\d)")
 FM_RE = re.compile(r"\b[A-Z]{2}[\dOIL]{12}\b")  # OCR may read 0 as O inside the code
-_PRICE = r"\d{1,3}(?:[  ']\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?"
+_PRICE = r"\d{1,3}(?:[  'ʼ’]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?"
 _CURRENCY = r"(?:so[ʻʼ'`’‘]?m|сўм|сум|uzs)"
 # "1,000 Kg X 24 000,00" (ERA) | "(10/30) x 16 000 = 5 333,33" (pharmacy: packs of a box)
 # "19,520 kub. metr X 5 700,00" (gas) | "10 L X 12 200 SO'M = 122 000" (petrol)
@@ -109,6 +116,17 @@ class _Match:
 AMOUNT_LAST = _AmountRe()
 
 
+class _RateAmountRe:
+    """VAT value: the amount after "12.0%=" when printed so (other amounts may follow on the line), else the last."""
+
+    def search(self, text):
+        m = re.search(r"%\s*=\s*(" + AMOUNT_RE.pattern + ")", text)
+        return _Match(m.group(1)) if m else AMOUNT_LAST.search(text)
+
+
+AMOUNT_AFTER_RATE = _RateAmountRe()
+
+
 def _qty(raw, num):
     """'1,000' -> 1.0; '(10/30)' -> 0.333 (10 packs of a box of 30)."""
     m = FRACTION_RE.fullmatch(raw.strip())
@@ -143,12 +161,48 @@ def _clean_name(t):
     return " ".join(words) or None
 
 
+# "BC:4780044573864 Narx: 3ʼ400.00*1Wt.=3ʼ400.00soʼm" | "Narx1: 18ʼ500.00*0.435Kr.=8ʼ048.00soʼm":
+# price first, then quantity and unit, then the line total; the name is on the line above
+NARX_ITEM_RE = re.compile(
+    rf"\b(?:narx|нарх)\w*\s*:?\s*(?P<price>{_PRICE})\s*[*xхX×]\s*(?P<qty>\d{{1,5}}(?:[.,]\d{{1,3}})?)\s*"
+    rf"(?:[^\W\d_]{{1,4}}\.?)?\s*=\s*(?P<total>{_PRICE})", re.I)
+MASKED_CARD_RE = re.compile(r"\d{4}\s*\*{3,}")  # "4337******8482": not qty × price
+BARCODE_RE = re.compile(r"\b(bc|шк)\s*:\s*\d*", re.I)
+# "kombo Nomi   summa" header, then "ЧИЗБУРГЕР ЛАНЧ БОКС  44000.00": one combo = one item, quantity 1;
+# the "+8800.00" lines under it are the combo's parts, not items
+COMBO_HEAD_RE = re.compile(r"\bkombo\s*nomi\b", re.I)
+
+
+def _combo_item(texts, i, num):
+    for t in texts[i + 1:i + 3]:
+        a = _last_amount(t)
+        name = t[:t.rfind(a)].strip() if a else ""
+        if a and len(re.sub(r"[^\w]", "", name)) >= 3 and not t.strip().startswith("+"):
+            v = num(a, 2)
+            return {"name": _clean_name(name), "quantity": 1.0, "price": v, "total": v, "_line": i,
+                    "_raw_qty": "1", "_raw_price": a, "_raw_total": a}
+    return None
+
+
 def extract_items(lines, num):
     texts = [_text(l) for l in lines]
     items = []
     for i, t in enumerate(texts):
+        if COMBO_HEAD_RE.search(t):
+            it = _combo_item(texts, i, num)
+            if it:
+                items.append(it)
+            continue
+        n = NARX_ITEM_RE.search(t)
+        if n:
+            before = BARCODE_RE.sub("", t[:n.start()])
+            items.append({"name": _item_name(texts, i, before), "quantity": _qty(n.group("qty"), num),
+                          "price": num(n.group("price"), 2), "total": num(n.group("total"), 2), "_line": i,
+                          "_raw_qty": n.group("qty"), "_raw_price": n.group("price"),
+                          "_raw_total": n.group("total")})
+            continue
         m = QTY_RE.search(t)
-        if not m or parse_datetime(t):
+        if not m or parse_datetime(t) or MASKED_CARD_RE.search(t):
             continue
         total = m.group("total")  # "= 5 333,33" on the same line
         if total is None:
@@ -298,6 +352,8 @@ def extract(lines, postprocess=True):
 
     v, i = _search_near(lines, L["rs"], RECEIPT_NO_RE, order=(0,))
     if v is None:
+        v, i = _search_near(lines, L["receipt_number_fiscal"], RECEIPT_NO_RE, order=(0, 1))
+    if v is None:
         v, i = _search_near(lines, L["receipt_number"], RECEIPT_NO_RE)
     put("receipt_number", v, i)
 
@@ -316,7 +372,7 @@ def extract(lines, postprocess=True):
         v = v[:2] + v[2:].translate(str.maketrans("OIL", "011"))
     put("fiscal_module", v, i)
 
-    v, i = _search_near(lines, L["vat_total"], AMOUNT_LAST, order=(0, 1, -1))
+    v, i = _search_near(lines, L["vat_total"], AMOUNT_AFTER_RATE if postprocess else AMOUNT_LAST, order=(0, 1, -1))
     if v is None:
         # last VAT line: items print their own VAT first, the receipt's VAT comes after them
         for j in range(len(texts) - 1, -1, -1):
@@ -351,6 +407,11 @@ def extract(lines, postprocess=True):
         others = [o for o in others if o and o != v]
         # 1) the total line, confirmed by another copy  2) two other copies that agree  3) the line as read
         total = (agree(v, others) if v else None) or consensus(others) or total
+        if total is None and items and all(it["total"] is not None for it in items):
+            # no total line read: the sum of the items, if a payment line ("BANK CARD =6ʼ900.00") confirms it
+            s = round(sum(it["total"] for it in items), 2)
+            if any(parse_amount(o) == s for o in others):
+                total = s
         for it in items:
             repair_item(it, total, single=len(items) == 1)
     for it in items:
@@ -406,9 +467,12 @@ def extract(lines, postprocess=True):
             break
     if seller is None:
         for j, t in enumerate(texts[:5]):
-            letters = sum(c.isalpha() for c in t)
-            if letters >= 4 and not ANY_LABEL.search(t) and not L["address"].search(t):
-                seller, si = t.strip(), j
+            if postprocess and (QTY_RE.search(t) or NARX_ITEM_RE.search(t) or ITEM_INDEX_RE.match(t)):
+                break  # the items have started: the top of the receipt has no shop name
+            name = DOC_TYPE_RE.sub("", t).strip() if postprocess else t.strip()
+            letters = sum(c.isalpha() for c in name)
+            if letters >= 4 and not ANY_LABEL.search(name) and not L["address"].search(name):
+                seller, si = name, j
                 break
     put("seller_name", seller, si)
 
