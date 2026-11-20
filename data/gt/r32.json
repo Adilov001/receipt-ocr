@@ -1,0 +1,32 @@
+{
+  "_status": "verified",
+  "_text_source": "r32_a.jpg",
+  "_note": "checked on paper (20 Nov): no shop name or address printed, only register/shift lines and the cashier's name (masked); FM, fiscal sign, number, seconds from the decoded QR",
+  "seller_name": null,
+  "seller_tin": "305645847",
+  "address": null,
+  "datetime": "2026-11-20T13:56:17",
+  "receipt_number": "289471",
+  "fiscal_module": "LG420230605218",
+  "fiscal_sign": "045133448457",
+  "vat": 739.29,
+  "total": 6900.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "SUV GAZLANMAGAN 1,5L ZAMIN",
+      "quantity": 1.0,
+      "price": 3400.0,
+      "total": 3400.0
+    },
+    {
+      "name": "MUZ. VANIL STAKANCHIK 100GR IMKON PLYUS",
+      "quantity": 1.0,
+      "price": 3500.0,
+      "total": 3500.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420230605218&r=289471&c=20261120135617&s=045133448457"
+  }
+}

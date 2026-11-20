@@ -1,0 +1,52 @@
+ERA
+Manzil
+Fargʻona viloyati.
+Farg'ona shahri,
+Barkamol MFY, Yangi asr
+ko'chasi, 118 b uy
+Yur.Manzil Fargʻona viloyati,
+Farg'ona shahri,
+Barkamol MFY, Yangi asr
+ko'chasi, 118 b uy
+STIR/JSHSHR 31802964140017
+Sana va vaqt 14-11-2026 13:04:30
+Chek 12314
+Savdo raqami 51470611142313
+Savdo
+1 Aralashmalar
+1.000 Kg X 12 000.00
+Narx 12 000.00
+QQS siz 8
+MXIK 02103002006000000
+Naqd 0.00
+Naqdsiz 12 000.00
+Karta turi Shaxsiy
+Operatsiya raqami 6280
+Terminal 48056499
+Savdogar 000000904819025
+POS versiyasi Era POS v1.9.1
+RRN 032591861161
+Sana 14-11-2026 13:04:24
+Karta 860055******2262
+Turi UZCARD
+Jami 12 000.00
+Operatsiya PIN-kod bilan
+tasdiqlanadi
+Javob kodi: 000
+Toʻlov uchun jami
+12 000.00 UZS
+Jami QQs 0.00
+Terminal S/R 2841051470
+Dasturiy taʼminot 3.5.6
+versiyasi:
+FM ID LG420211609580
+Fiskal imzo 092022093585
+Siz
+xaridning
+1%
+miqdorida
+"Keshbek"
+olish
+huquqiga
+ega
+bo'ldingiz

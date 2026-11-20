@@ -129,3 +129,10 @@ r18_a_x1.jpg,r18,era_barkamol,uz_latn,synthetic;crumpled;shadow;tilted,1
 r18_a_x2.jpg,r18,era_barkamol,uz_latn,synthetic;crumpled;faded;perspective,1
 r19_a_x1.jpg,r19,era_hamkorlik,uz_latn,synthetic;crumpled;shadow;tilted,1
 r19_a_x2.jpg,r19,era_hamkorlik,uz_latn,synthetic;crumpled;faded;perspective,1
+r30_a.jpg,r30,kfc_faiz,mixed,crumpled;long,1
+r30_b.jpg,r30,kfc_faiz,mixed,long;upside_down,1
+r30_q.jpg,r30,kfc_faiz,mixed,partial,1
+r31_a.jpg,r31,kfc_faiz,mixed,crumpled;long,1
+r31_q.jpg,r31,kfc_faiz,mixed,partial;crumpled,1
+r32_a.jpg,r32,supermarket_305645847,uz_latn,clean,1
+r32_q.jpg,r32,supermarket_305645847,uz_latn,partial,1

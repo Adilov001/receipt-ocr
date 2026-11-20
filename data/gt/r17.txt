@@ -1,0 +1,51 @@
+ERA
+ANVARJON MAXMUDOV DILMUROD OʻGʻLI
+Manzil Fargʻona viloyati,
+Fargʻona shahri,
+Barkamol MFY, Yangi asr
+koʻchasi, 118 b uy
+Yur.Manzil Farg'ona viloyati,
+Farg'ona shahri,
+Barkamol MFY, Yangi asr
+ko'chasi, 118 b uy
+STIR/JSHSHR 31802964140017
+Sana va vaqt 12-11-2026 16:00:46
+Chek 12264
+Savdo raqami 51470611122263
+Savdo
+1 Aralashmalar
+1.000 Kg x 24 000.00
+Narx 24 000.00
+QQS siz 0
+MXIK 02103002006000000
+Naqd 0.00
+Naqdsiz 24 000.00
+Karta turi Shaxsiy
+KONTAKSIZ OPERATSIYA
+Operatsiya raqami 6240
+Terminal 48056499
+Savdogar 000000904819025
+POS versiyasi Era POS v1.9.1
+RRN 032559855908
+Sana 12-11-2026 16:00:42
+Karta 561468******8721
+Turi UZCARD
+Jami 24 000.00
+Javob kodi: 000
+Toʻlov uchun jami
+24 000.00 UZS
+Jami QQS 0.00
+Terminal S/R 2841051470
+Dasturiy taʼminot 3.5.6
+versiyasi:
+FM ID LG420211609580
+Fiskal imzo 472779471534
+Siz
+xaridning
+1%
+miqdorida
+"Keshbek"
+olish
+huquqiga
+ega
+bo'ldingiz

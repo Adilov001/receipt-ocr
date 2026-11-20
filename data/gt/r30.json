@@ -1,0 +1,32 @@
+{
+  "_status": "verified",
+  "_text_source": "r30_a.jpg",
+  "_note": "checked on paper (20 Nov): no STIR/INN and no address printed (only Virtual kassa S/R 100060); shop name 'KFC Файз'; FM, fiscal sign, number, seconds from the decoded QR; 2 combos = 2 items",
+  "seller_name": "KFC Файз",
+  "seller_tin": null,
+  "address": null,
+  "datetime": "2026-11-18T20:52:20",
+  "receipt_number": "10461",
+  "fiscal_module": "LG420211610349",
+  "fiscal_sign": "213281054820",
+  "vat": 9428.57,
+  "total": 88000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "ЧИЗБУРГЕР ЛАНЧ БОКС",
+      "quantity": 1.0,
+      "price": 44000.0,
+      "total": 44000.0
+    },
+    {
+      "name": "ЧИЗБУРГЕР ЛАНЧ БОКС",
+      "quantity": 1.0,
+      "price": 44000.0,
+      "total": 44000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211610349&r=10461&c=20261118205220&s=213281054820"
+  }
+}

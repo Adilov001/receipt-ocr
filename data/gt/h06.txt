@@ -1,0 +1,51 @@
+ERA
+"ARO BREAD" XK
+Manzil Toshkent sh., M.Ulugʻbek
+tum., Yalangʻoch bozori
+hududida
+Yur.Manzil Toshkent sh., M.Ulugʻbek
+tum., Yalangʻoch bozori
+hududida
+STIR/JSHSHR 306263261
+Sana va vaqt 18-11-2026 13:29:12
+Chek 1738
+Savdo raqami 27878611186276
+Savdo
+1 Мучные продукты
+1,000 WT X 69 000.00
+69 000.00
+QQS (12%) 7 392.86
+MXIK 01905002001000000
+Naqd 0.00
+Naqdsiz 69 000.00
+Karta turi Shaxsiy
+Operatsiya raqami 21326
+Terminal 00027753
+Savdogar 000090490013742
+POS versiyasi Era POS v1.9.1
+RRN 032663674015
+Sana 18-11-2026 13:29:08
+Karta 860055******2262
+UZCARD
+Jami 69 000.00
+Operatsiya PIN-kod bilan
+tasdiqlanadi
+Javob kodi: 000
+Toʻlov uchun jami
+69 000.00 UZS
+Jami QQS 7 392.86
+Terminal S/R 1170427878
+Dasturiy taʼminot 3.5.6
+versiyasi:
+FM ID VG544170024923
+Fiskal imzo
+006628644216
+Siz
+xaridning
+1%
+miqdorida
+"Keshbek"
+olish
+huquqiga
+ega
+boʻldingiz!

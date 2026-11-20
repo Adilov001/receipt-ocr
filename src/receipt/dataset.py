@@ -13,7 +13,7 @@ import random
 from .config import ROOT
 
 CONDITIONS = ["clean", "crumpled", "shadow", "uneven_light", "tilted", "perspective", "faded", "long", "handheld",
-              "sideways", "synthetic",
+              "sideways", "upside_down", "synthetic",
               "blur", "partial"]  # partial = lower half of the receipt (QR close-up), QR metric only
 
 
@@ -77,3 +77,14 @@ def load_gt(cfg, receipt_id):
     fields = json.loads(j.read_text(encoding="utf-8")) if j.exists() else None
     text = t.read_text(encoding="utf-8") if t.exists() else None
     return fields, text
+
+
+def is_text_source(image, gt):
+    """True for the photo the full-text label was drafted from (OCR output, then corrected by hand)
+    and for its synthetic variants (<stem>_x1.jpg, ...). Scoring OCR against a label drafted from
+    the same OCR output rewards every mistake left in the label, so these photos get no CER / WER."""
+    src = (gt or {}).get("_text_source")
+    if not src:
+        return False
+    stem = src.rsplit(".", 1)[0]
+    return image == src or image.startswith(stem + "_x")

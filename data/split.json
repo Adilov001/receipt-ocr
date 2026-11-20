@@ -8,7 +8,9 @@
     "akmal_farm",
     "era_avtogaz",
     "era_hamkorlik",
-    "era_tinda"
+    "era_tinda",
+    "kfc_faiz",
+    "supermarket_305645847"
   ],
   "holdout": [
     "h01",

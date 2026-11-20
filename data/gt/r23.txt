@@ -1,0 +1,51 @@
+ERA
+"AVTOMOBILIST" XK
+Manzil Fargʻona viloyati,
+Margʻilon shahar
+Yangiobod MFY, Yangi
+Hayot koʻchasi, 6-uy
+Yur.Manzil FARG'ONA VILOYATI,
+Margʻilon shahar,
+Yangiobod MFY, Yangi
+Hayot koʻchasi, 6-uy
+STIR/JSHSHR 200152368
+Sana va vaqt 17-10-2026 07:39:10
+Chek 23668
+Savdo raqami 48736610179411
+Savdo
+1 Metan
+19.520 kub. mETr X 5 700,00
+Narx 111 264.00
+QQS (12%) 11 921.14
+MXIK 02711001005000000
+Naqd 0.00
+Naqdsiz 111 264.00
+Karta turi Shaxsiy
+KONTAKSIZ OPERATSIYA
+Operatsiya raqami 35678
+Terminal 30076073
+Savdogar 000000903043165
+POS versiyasi Era POS v1.9.1
+RRN 032096389088
+Sana 17-10-2026 07:39:06
+Karta 561468******4871
+Turi UZCARD
+Jami 111 264.00
+Javob kodi: 000
+Toʻlov uchun jami
+111 264.00 UZS
+Jami QQs 11 921.14
+Terminal S/R 2840648736
+Dasturiy taʼminot 3.5.5
+versiyasi:
+FM ID VG544170009803
+Fiskal imzo 060402094744
+Siz
+xaridning
+1%
+miqdorida
+"Keshbek"
+olish
+huquqiga
+ega
+bo'ldingiz

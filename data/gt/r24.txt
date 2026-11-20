@@ -1,0 +1,38 @@
+ERA
+"AVTOGAZ" MCHJ
+Manzil Farg'ona viloyati,
+Bagʻdod tumani, Konizar
+MFY, Konizar qishloʻgi
+Yur.Manzil FARG'ONA VILOYATI,
+Bagʻdodtumani,Konizar
+MFY, Konizar qishloʻgi
+STIR/JSHSHR 202647034
+Sana va vaqt 01-11-2026 14:39:42
+Chek 166009
+Savdo raqami 11548611014835
+Savdo
+1 Metan gaz
+16,873 kub metr X 5 500,00
+Narx 92 800.00
+QQS (12%) 9 942.86
+MXIK 02711001005000000
+Naqd 0.00
+Naqdsiz 92 800.00
+Karta turi Shaxsiy
+ToʻLov uchun jami
+92 800.00 UZS
+Jami QQs 9 942.86
+Terminal S/R 1170911548
+Dasturiy taʼminot 3.5.5
+versiyasi:
+FM ID YZ231006008925
+Fiskal imzo 424109502220
+Siz
+xaridning
+1%
+miqdorida
+"Keshbek"
+olish
+huquqiga
+ega
+boʻldingiz!

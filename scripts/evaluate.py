@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from receipt import FIELDS  # noqa: E402
 from receipt.config import ROOT, load_config, with_overrides  # noqa: E402
-from receipt.dataset import load_gt, rows_for  # noqa: E402
+from receipt.dataset import is_text_source, load_gt, rows_for  # noqa: E402
 from receipt.metrics import field_matches, item_counts, prf, text_counts  # noqa: E402
 from receipt.normalize import CYR2LAT, norm_field, unify_apostrophes  # noqa: E402
 from receipt.pipeline import load_image, process  # noqa: E402
@@ -82,7 +82,7 @@ def evaluate(cfg, rows, engine, pre, post, cache_dir, label):
         rec = {"config": label, "engine": engine, "image": r["image"], "receipt_id": r["receipt_id"],
                "seller": r["seller"], "lang": r.get("lang", ""), "conditions": ";".join(r["conditions"]),
                "seconds": out["timings"]["total"], "consistent": out["consistent"]}
-        if gt_text:
+        if gt_text and not is_text_source(r["image"], gt):
             ce, cn, we, wn = text_counts(gt_text, out["text"], cfg["eval"]["lowercase"])
             rec.update(char_err=ce, char_n=cn, word_err=we, word_n=wn)
         if gt:
