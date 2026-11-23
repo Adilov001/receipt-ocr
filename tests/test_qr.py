@@ -52,3 +52,16 @@ def test_decode_rotated_and_faded(angle):
     img = (img.astype(np.float32) * 0.35 + 150).astype(np.uint8)   # low contrast, like faded thermal print
     out = decode_qr(img)
     assert out["decoded"] and out["raw"] == URL
+
+
+def test_rebuilt_check_url():
+    from receipt.qr import rebuild_check_url
+    f = {"fiscal_module": "LG420230605218", "receipt_number": "289471", "datetime": "2026-11-20T13:56:17",
+         "fiscal_sign": "045133448457"}
+    url = "https://ofd.soliq.uz/check?t=LG420230605218&r=289471&c=20261120135617&s=045133448457"
+    assert rebuild_check_url(f, "Sana va vaqt 20-11-2026 13:56:17") == url
+    assert rebuild_check_url(f, "20-11-2026 13:56") is None  # no seconds printed: they would be a guess
+    assert rebuild_check_url({**f, "datetime": "2026-11-20T13:56:00"}, "Sana: 20.11.2026 13:56:00") is None  # order time
+    assert rebuild_check_url({**f, "fiscal_sign": "45133448457"}, "13:56:17") is None  # 11 digits
+    assert rebuild_check_url({**f, "fiscal_sign": "420230605218"}, "13:56:17") is None  # the FM digits
+    assert rebuild_check_url({**f, "receipt_number": None}, "13:56:17") is None

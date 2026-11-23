@@ -1,4 +1,5 @@
 """QR detection, decoding with retries, and parsing of the fiscal link."""
+import re
 import time
 from functools import lru_cache
 from pathlib import Path
@@ -260,3 +261,26 @@ def parse_qr(raw, param_map=None):
             value = parse_amount(value)
         res["fields"][field] = value
     return res
+
+
+CHECK_URL = "https://ofd.soliq.uz/check"
+_HAS_SECONDS_RE = re.compile(r"(?<!\d)\d{1,2}[:.]\d{2}[:.]\d{2}(?!\d)")
+
+
+def rebuild_check_url(fields, datetime_line=""):
+    """The tax authority's check link, built from the printed requisites when the QR code cannot be read.
+
+    The fiscal QR code holds exactly this link: ?t=<fiscal module>&r=<receipt no>&c=<YYYYMMDDhhmmss>&s=<fiscal sign>.
+    Built only when all four values are present and well-formed, and only when the printed time has seconds
+    (`datetime_line`, the OCR line the date was read from): a guessed ":00" would give a link to no receipt.
+    Returns the link or None. It is a reconstruction for checking the receipt online, not a decoded QR code."""
+    fm, num, dt, sign = (str(fields.get(k) or "") for k in ("fiscal_module", "receipt_number", "datetime", "fiscal_sign"))
+    # fiscal sign: 12 digits on every labelled receipt; equal to the FM digits = OCR took the wrong line
+    if not (re.fullmatch(r"[A-Z]{2}\d{12}", fm) and re.fullmatch(r"\d{1,10}", num) and re.fullmatch(r"\d{12}", sign)) \
+            or sign == fm[2:]:
+        return None
+    m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})", dt)
+    # seconds must be printed; a printed ":00" is usually an order time, not the fiscal one (KFC)
+    if not m or not _HAS_SECONDS_RE.search(datetime_line or "") or m.group(6) == "00":
+        return None
+    return f"{CHECK_URL}?t={fm}&r={num}&c={''.join(m.groups())}&s={sign}"

@@ -11,7 +11,7 @@ from .extract import extract
 from .normalize import clean_line, norm_field
 from .ocr import run_ocr
 from .preprocess import preprocess as run_preprocess
-from .qr import decode_qr, parse_qr
+from .qr import decode_qr, parse_qr, rebuild_check_url
 from .reconcile import is_consistent, reconcile
 
 HYBRID = ("rapidocr", "tesseract")  # main engine, helper engine
@@ -123,6 +123,10 @@ def process(img, cfg, engine="tesseract", preprocess=True, postprocess=True, cac
     result["items"] = [{k: v for k, v in it.items() if not k.startswith("_")} for it in items]
     result["qr"] = {**qr_parsed, "decoded": qr["decoded"], "attempt": qr["attempt"],
                     "plain_success": qr["plain_success"]}
+    # QR code unreadable: the check link it would hold, rebuilt from the printed requisites (not counted as decoded)
+    dt_line = used_lines[sources["datetime"]].get("text", "") if "datetime" in sources and isinstance(
+        used_lines[sources["datetime"]], dict) else ""
+    result["qr"]["rebuilt"] = None if qr["raw"] or not postprocess else rebuild_check_url(result, dt_line)
 
     return {
         "result": result,

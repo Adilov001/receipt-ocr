@@ -66,6 +66,11 @@ Response (shortened):
 * Errors: `400` empty file, `413` too large, `415` not an image, `422` wrong parameter.
 * Optional query parameters: `engine=rapidocr|tesseract|hybrid` (default `rapidocr`), `preprocess`, `postprocess`.
 * Missing fields are `null`; amounts are numbers; `status` of each check is `match` / `mismatch` / `no_data`.
+* `result.qr.rebuilt`: when the QR code cannot be read, the check link it would hold
+  (`https://ofd.soliq.uz/check?t=<FM>&r=<number>&c=<YYYYMMDDhhmmss>&s=<fiscal sign>`), rebuilt from the printed
+  requisites so the receipt can still be checked online. Built only when all four are well-formed and the paper
+  prints the seconds; `null` otherwise. It is not counted as a decoded QR code. On the 53 whole photos of dev + test,
+  16 links were rebuilt for 29 unread codes, 15 of them equal to the real QR text (the wrong one inherits a misread time).
 * Requests run one at a time (OCR uses all CPU cores); for more throughput run several containers.
 
 ## Layout
