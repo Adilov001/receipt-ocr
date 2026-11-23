@@ -92,6 +92,8 @@ def recognize(file: UploadFile = File(..., description="photo of a receipt"),
         "checks": out["checks"],            # arithmetic and OCR <-> QR, status match / mismatch / no_data
         "consistent": out["consistent"],
         "field_source": out["field_source"],  # where each value came from: ocr or qr
+        "source_lines": out["source_lines"],  # OCR line (text, confidence) each OCR field was read from
+        "text": out["text"],                  # full recognised text, line by line
         "engine": engine,
         "timings": {**out["timings"], "request": time.perf_counter() - t},
         "image_size": {"width": img.shape[1], "height": img.shape[0]},

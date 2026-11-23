@@ -132,6 +132,9 @@ def process(img, cfg, engine="tesseract", preprocess=True, postprocess=True, cac
         "sources": {f: used_lines[i]["box"] for f, i in sources.items()
                     if isinstance(used_lines[i], dict) and "box" in used_lines[i]},
         "item_sources": [used_lines[it["_line"]].get("box") for it in items],
+        # the OCR line each field was read from (text + confidence), for a "where did this come from" hint
+        "source_lines": {f: {"text": used_lines[i].get("text", ""), "conf": used_lines[i].get("conf")}
+                         for f, i in sources.items() if isinstance(used_lines[i], dict)},
         "lines": lines,
         "text": "\n".join(l["text"] for l in lines),
         "qr_polygon": qr["polygon"],

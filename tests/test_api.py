@@ -28,6 +28,7 @@ def test_recognize_real_receipt(client):
     body = r.json()
     res = body["result"]
     assert res["total"] == gt["total"] and res["fiscal_sign"] == gt["fiscal_sign"]
+    assert "Jami" in body["text"] and body["source_lines"]["total"]["text"]
     assert res["qr"]["decoded"] and res["qr"]["raw"] == gt["qr"]["raw"]
     assert {c["status"] for c in body["checks"]} <= {"match", "mismatch", "no_data"}
     assert body["timings"]["request"] > 0
