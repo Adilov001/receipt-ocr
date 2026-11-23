@@ -3,7 +3,8 @@
     uvicorn api:app --host 0.0.0.0 --port 8000        (or: make api)
     docs: http://localhost:8000/docs
 
-POST /api/v1/recognize   multipart form, field "file" = receipt photo (JPEG / PNG / WebP / BMP / TIFF)
+POST /api/v1/recognize   multipart form, field "file" = receipt photo (JPEG / PNG / WebP / BMP / TIFF /
+                         HEIC from an iPhone) or a PDF (first page; at most 5 pages)
                          optional query: engine=rapidocr|tesseract|hybrid, preprocess, postprocess
 GET  /api/v1/health      ready check (models are loaded at start-up)
 
@@ -24,7 +25,7 @@ from fastapi import FastAPI, File, HTTPException, Query, UploadFile
 sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 
 from receipt.config import load_config  # noqa: E402
-from receipt.pipeline import process  # noqa: E402
+from receipt.pipeline import MAX_PDF_PAGES, decode_image, process  # noqa: E402
 
 CFG = load_config()
 # A website must answer quickly: QR retries stop after 3 s. Measured on 90 real photos: 50 of 52 codes
@@ -77,11 +78,11 @@ def recognize(file: UploadFile = File(..., description="photo of a receipt"),
         raise HTTPException(400, "Empty file.")
     if len(data) > MAX_BYTES:
         raise HTTPException(413, f"File larger than {MAX_BYTES // 2**20} MB.")
-    img = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
+    img, pages = decode_image(data)
     if img is None:
-        name = (file.filename or "").lower()
-        hint = " HEIC (iPhone) is not supported: convert to JPEG first." if name.endswith((".heic", ".heif")) else ""
-        raise HTTPException(415, "Not a readable image (expected JPEG, PNG, WebP, BMP or TIFF)." + hint)
+        if pages > MAX_PDF_PAGES:
+            raise HTTPException(415, f"PDF has {pages} pages; at most {MAX_PDF_PAGES} are accepted.")
+        raise HTTPException(415, "Not a readable file (expected JPEG, PNG, WebP, BMP, TIFF, HEIC or PDF).")
 
     t = time.perf_counter()
     with _lock:
@@ -94,4 +95,5 @@ def recognize(file: UploadFile = File(..., description="photo of a receipt"),
         "engine": engine,
         "timings": {**out["timings"], "request": time.perf_counter() - t},
         "image_size": {"width": img.shape[1], "height": img.shape[0]},
+        "pages": pages,  # PDF: only the first page is recognised
     })

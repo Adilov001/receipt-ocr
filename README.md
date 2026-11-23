@@ -61,7 +61,8 @@ Response (shortened):
 }
 ```
 
-* Formats: JPEG, PNG, WebP, BMP, TIFF, up to 15 MB. HEIC (iPhone) → `415`, convert to JPEG first.
+* Formats: JPEG, PNG, WebP, BMP, TIFF, HEIC (iPhone), PDF (first page only, at most 5 pages), up to 15 MB.
+  The response field `pages` gives the page count of a PDF.
 * Errors: `400` empty file, `413` too large, `415` not an image, `422` wrong parameter.
 * Optional query parameters: `engine=rapidocr|tesseract|hybrid` (default `rapidocr`), `preprocess`, `postprocess`.
 * Missing fields are `null`; amounts are numbers; `status` of each check is `match` / `mismatch` / `no_data`.
@@ -381,5 +382,7 @@ wrong span* 35, *digits misread* 6, *digits/amounts misread* 5, *digits missing/
 | PyTorch 2.2.2 | BSD-3 |
 | RapidOCR 1.4.4 + PaddleOCR PP-OCRv4 models | Apache 2.0 |
 | ONNX Runtime 1.20 | MIT |
+| pillow-heif 1.8 (HEIC decoding; bundles libheif, LGPL) | BSD-3 |
+| pypdfium2 5.15 (PDF rendering; PDFium) | Apache 2.0 / BSD-3 |
 | WeChat QR models (opencv_3rdparty) | Apache 2.0 |
 | Dataset | own photos, personal data masked |

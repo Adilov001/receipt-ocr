@@ -149,3 +149,43 @@ def load_image(path):
     if img is None:
         raise FileNotFoundError(path)
     return img
+
+
+PDF_SCALE = 300 / 72  # render PDF pages at 300 dpi: thermal print needs about as much as a phone photo
+MAX_PDF_PAGES = 5
+
+
+def decode_image(data):
+    """Bytes of an uploaded file -> (BGR image, number of pages), or (None, 0) if it is not readable.
+
+    JPEG / PNG / WebP / BMP / TIFF through OpenCV (EXIF rotation applied); HEIC / HEIF (iPhone)
+    through pillow-heif; PDF: the first page only, so the fields of two receipts are never mixed
+    (the caller tells the user when a PDF has more pages)."""
+    import numpy as np
+
+    img = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
+    if img is not None:
+        return img, 1
+    if data[:5] == b"%PDF-":
+        try:
+            import pypdfium2 as pdfium
+            pdf = pdfium.PdfDocument(data)
+            pages = len(pdf)
+            if not 0 < pages <= MAX_PDF_PAGES:
+                return None, pages
+            pil = pdf[0].render(scale=PDF_SCALE).to_pil().convert("RGB")
+            return cv2.cvtColor(np.asarray(pil), cv2.COLOR_RGB2BGR), pages
+        except Exception:
+            return None, 0
+    if data[4:8] == b"ftyp":  # ISO media file: HEIC / HEIF / AVIF
+        try:
+            import io
+
+            import pillow_heif
+            from PIL import Image, ImageOps
+            pillow_heif.register_heif_opener()
+            pil = ImageOps.exif_transpose(Image.open(io.BytesIO(data))).convert("RGB")
+            return cv2.cvtColor(np.asarray(pil), cv2.COLOR_RGB2BGR), 1
+        except Exception:
+            return None, 0
+    return None, 0
