@@ -1,4 +1,4 @@
-"""Rules for the KFC and supermarket layouts (dev receipts r30-r32, chosen on dev only)."""
+"""Rules for the KFC and supermarket layouts (dev receipts r30-r33, chosen on dev only)."""
 from receipt.config import load_config
 from receipt.extract import extract
 from receipt.normalize import parse_amount
@@ -93,3 +93,14 @@ def test_printed_minute_matches_qr_seconds():
     f, items = _run(KFC)
     checks = reconcile(f, items, {"datetime": "2026-11-19T20:17:51"}, cfg)
     assert [c["status"] for c in checks if c["check"] == "OCR ↔ QR: datetime"] == [MATCH]
+
+
+def test_kfc_name_read_as_cyrillic_lookalikes():
+    f, _ = _run("CHEK-INVOYS, КЕС.ЧИМГАН\n" + KFC.split("\n", 1)[1])
+    assert f["seller_name"] == "KFC ЧИМГАН"
+
+
+def test_combo_header_is_not_a_shop_name():
+    # close-up photo without the top of the receipt: "Kombo tarkibi" must not become the seller
+    f, _ = _run(KFC[KFC.index("Sana:"):])
+    assert f["seller_name"] is None

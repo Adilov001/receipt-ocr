@@ -1,0 +1,26 @@
+{
+  "_status": "verified",
+  "_text_source": "r33_a.jpg",
+  "_note": "another KFC branch (same seller as old holdout h04; dev uses seller, holdout uses receipt id). No STIR/INN/address printed; paper Sana 13:22:00, seconds from QR; combo = one item, +11200 upgrade included in 56000; vat = Sh. J. QQS 12% line",
+  "seller_name": "KFC Чимган",
+  "seller_tin": null,
+  "address": null,
+  "datetime": "2026-11-23T13:22:09",
+  "receipt_number": "235927",
+  "fiscal_module": "YZ231006006324",
+  "fiscal_sign": "370474458239",
+  "vat": 6000.0,
+  "total": 56000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "БОКСМАСТЕР ЛАНЧ БОКС",
+      "quantity": 1.0,
+      "price": 56000.0,
+      "total": 56000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=YZ231006006324&r=235927&c=20261123132209&s=370474458239"
+  }
+}

@@ -171,6 +171,9 @@ BARCODE_RE = re.compile(r"\b(bc|шк)\s*:\s*\d*", re.I)
 # "kombo Nomi   summa" header, then "ЧИЗБУРГЕР ЛАНЧ БОКС  44000.00": one combo = one item, quantity 1;
 # the "+8800.00" lines under it are the combo's parts, not items
 COMBO_HEAD_RE = re.compile(r"\bkombo\s*nomi\b", re.I)
+COMBO_ANY_RE = re.compile(r"\bkombo\b", re.I)  # "Kombo tarkibi" / "kombo Nomi": the items have started
+# OCR reads the Latin "KFC" of a shop name as the Cyrillic look-alikes "КЕС" (dev r33)
+KFC_RE = re.compile(r"^[KК][FЕE][CС](?=[\s.,]|$)\.?\s*")
 
 
 def _combo_item(texts, i, num):
@@ -467,13 +470,16 @@ def extract(lines, postprocess=True):
             break
     if seller is None:
         for j, t in enumerate(texts[:5]):
-            if postprocess and (QTY_RE.search(t) or NARX_ITEM_RE.search(t) or ITEM_INDEX_RE.match(t)):
+            if postprocess and (QTY_RE.search(t) or NARX_ITEM_RE.search(t) or ITEM_INDEX_RE.match(t)
+                                or COMBO_ANY_RE.search(t)):
                 break  # the items have started: the top of the receipt has no shop name
             name = DOC_TYPE_RE.sub("", t).strip() if postprocess else t.strip()
             letters = sum(c.isalpha() for c in name)
             if letters >= 4 and not ANY_LABEL.search(name) and not L["address"].search(name):
                 seller, si = name, j
                 break
+    if postprocess and seller:
+        seller = KFC_RE.sub("KFC ", seller).strip()
     put("seller_name", seller, si)
 
     return f, items, src, lines
