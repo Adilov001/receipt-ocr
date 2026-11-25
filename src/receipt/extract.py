@@ -14,7 +14,7 @@ from .repair import agree, consensus, could_be_zero, repair_datetime, repair_ite
 A = "[ʻʼ'`’‘]?"  # optional apostrophe of any kind
 
 L = {
-    "tin": re.compile(r"\b(stir|inn|инн|стир|jshshr|жшшир|pinfl)\b", re.I),
+    "tin": re.compile(r"\b(stir|stia|inn|инн|стир|jshshr|жшшир|pinfl)\b", re.I),  # "STIA": OCR misread (dev r35)
     "datetime": re.compile(r"\b(sana|vaqt|дата|время|сана|вақт)\b", re.I),
     "receipt_number": re.compile(r"(^|\s)(chek|чек)(\s*(raqami|№|no\.?|#))?(?!\s*(turi|kodi|-?\s*invo))\b", re.I),
     "fiscal_sign": re.compile(r"(fiskal\s*(imzo|belgi|alomat)|фискал\w*\s*(признак|имзо|белги)|\bфп\b|\bfp\b|\bfb\s*:)", re.I),
@@ -162,9 +162,10 @@ def _clean_name(t):
 
 
 # "BC:4780044573864 Narx: 3ʼ400.00*1Wt.=3ʼ400.00soʼm" | "Narx1: 18ʼ500.00*0.435Kr.=8ʼ048.00soʼm":
-# price first, then quantity and unit, then the line total; the name is on the line above
+# price first, then quantity and unit, then the line total; the name is on the line above.
+# OCR misreads of the label ("Narn:", "Nar :", "Narl:", dev r35) count only with the colon
 NARX_ITEM_RE = re.compile(
-    rf"\b(?:narx|нарх)\w*\s*:?\s*(?P<price>{_PRICE})\s*[*xхX×]\s*(?P<qty>\d{{1,5}}(?:[.,]\d{{1,3}})?)\s*"
+    rf"\b(?:(?:narx|нарх)\w*\s*:?|nar\w{{0,2}}\s*:)\s*(?P<price>{_PRICE})\s*[*xхX×]\s*(?P<qty>\d{{1,5}}(?:[.,]\d{{1,3}})?)\s*"
     rf"(?:[^\W\d_]{{1,4}}\.?)?\s*=\s*(?P<total>{_PRICE})", re.I)
 MASKED_CARD_RE = re.compile(r"\d{4}\s*\*{3,}")  # "4337******8482": not qty × price
 BARCODE_RE = re.compile(r"\b(bc|шк)\s*:\s*\d*", re.I)
@@ -172,6 +173,7 @@ BARCODE_RE = re.compile(r"\b(bc|шк)\s*:\s*\d*", re.I)
 # the "+8800.00" lines under it are the combo's parts, not items
 COMBO_HEAD_RE = re.compile(r"\bkombo\s*nomi\b", re.I)
 COMBO_ANY_RE = re.compile(r"\bkombo\b", re.I)  # "Kombo tarkibi" / "kombo Nomi": the items have started
+MXIK_RE = re.compile(r"\b(mxik|ikpu|икпу)\b", re.I)  # product class code line: an item, not a shop name
 # OCR reads the Latin "KFC" of a shop name as the Cyrillic look-alikes "КЕС" (dev r33)
 KFC_RE = re.compile(r"^[KК][FЕE][CС](?=[\s.,]|$)\.?\s*")
 
@@ -401,13 +403,14 @@ def extract(lines, postprocess=True):
     if postprocess:
         # other copies of the same amount: payment lines, the card slip "Jami", Narx, the "... UZS" line,
         # item prices/totals (every amount on those lines: OCR noise may follow the real one)
-        others = [a for t in texts
-                  if L["card"].search(t) or L["narx"].search(t) or re.search(r"\buzs\b", t, re.I)
-                  or re.match(r"^\s*(jami|жами|итого)\s", t, re.I)
+        others = [a for k, t in enumerate(texts)
+                  if k != i  # the total line itself is not a second copy; an equal payment line is
+                  and (L["card"].search(t) or L["narx"].search(t) or re.search(r"\buzs\b", t, re.I)
+                  or re.match(r"^\s*(jami|жами|итого)\s", t, re.I))
                   for a in AMOUNT_RE.findall(t) if len(re.sub(r"\D", "", a)) >= 3]
         if len(items) == 1:  # one item: its price and line total are copies of the receipt total
             others += [items[0][k] for k in ("_raw_price", "_raw_total")]
-        others = [o for o in others if o and o != v]
+        others = [o for o in others if o]
         # 1) the total line, confirmed by another copy  2) two other copies that agree  3) the line as read
         total = (agree(v, others) if v else None) or consensus(others) or total
         if total is None and items and all(it["total"] is not None for it in items):
@@ -471,7 +474,7 @@ def extract(lines, postprocess=True):
     if seller is None:
         for j, t in enumerate(texts[:5]):
             if postprocess and (QTY_RE.search(t) or NARX_ITEM_RE.search(t) or ITEM_INDEX_RE.match(t)
-                                or COMBO_ANY_RE.search(t)):
+                                or COMBO_ANY_RE.search(t) or MXIK_RE.search(t) or BARCODE_RE.search(t)):
                 break  # the items have started: the top of the receipt has no shop name
             name = DOC_TYPE_RE.sub("", t).strip() if postprocess else t.strip()
             letters = sum(c.isalpha() for c in name)

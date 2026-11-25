@@ -1,4 +1,4 @@
-"""Rules for the KFC and supermarket layouts (dev receipts r30-r33, chosen on dev only)."""
+"""Rules for the KFC and supermarket layouts (dev receipts r30-r35, chosen on dev only)."""
 from receipt.config import load_config
 from receipt.extract import extract
 from receipt.normalize import parse_amount
@@ -104,3 +104,39 @@ def test_combo_header_is_not_a_shop_name():
     # close-up photo without the top of the receipt: "Kombo tarkibi" must not become the seller
     f, _ = _run(KFC[KFC.index("Sana:"):])
     assert f["seller_name"] is None
+
+
+# Havas (same POS as SUPERMARKET, dev r35): OCR misreads of the "Narx" and "STIR" labels
+HAVAS = """\
+smena raqami: 1824
+Savdo Chek : 152 STIA: 305645847
+23-11-2026 21:12
+1.SUV GAZLANMAGAN 1,5L FAMILY.
+BC:4780044571563 Narx : 4ʼ500.00*1Wr.=4ʼ500.00soʼm
+2.PECHENYE ASRT. 228GR OREO.
+BC:7622202204135 Narn: 29ʼ900.00*1Wr.=29ʼ900.00soʼm
+3.PAKET HAVAS 1 DONA
+BC :2000000000015 Nar : 500.00*1Wt.=500.00soʻm
+BANK CARD =34ʼ900.00
+QQS JAMI 12.0%=3ʼ739.28 JAMI =34ʼ900.00
+"""
+
+
+def test_havas_label_misreads():
+    f, items = _run(HAVAS)
+    assert f["seller_tin"] == "305645847"
+    assert f["seller_name"] is None
+    assert [(i["quantity"], i["price"], i["total"]) for i in items] == [
+        (1.0, 4500.0, 4500.0), (1.0, 29900.0, 29900.0), (1.0, 500.0, 500.0)]
+    assert f["total"] == 34900.0
+
+
+def test_product_code_line_is_not_a_shop_name():
+    f, _ = _run("MXIK: 01806001003001001 sh.j. QQS 12.00%=1ʼ971.43\nBANK CARD =20ʼ350.00\nJAMI =20ʼ350.00\n")
+    assert f["seller_name"] is None
+
+
+def test_total_confirmed_by_equal_payment_line():
+    # close-up with one item: the payment line repeats the total exactly; the item's 500 must not win
+    f, _ = _run("MXIK: 03923001002000000 Narx: 500.00*1Wt.=500.00soʻm\nBANK CARD =53ʼ300.00\nJAMI =53ʼ300.00\n")
+    assert f["total"] == 53300.0

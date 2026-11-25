@@ -1,0 +1,44 @@
+{
+  "_status": "verified",
+  "_text_source": "r35_a.jpg",
+  "_note": "checked from the photo (24 Nov): Havas supermarket (same STIR as r32, 'PAKET HAVAS' item); no shop name or address printed, cashier's name masked; FM, fiscal sign, number, seconds from the decoded QR",
+  "seller_name": null,
+  "seller_tin": "305645847",
+  "address": null,
+  "datetime": "2026-11-23T21:12:01",
+  "receipt_number": "66550",
+  "fiscal_module": "LG420211631962",
+  "fiscal_sign": "394707519265",
+  "vat": 5710.71,
+  "total": 53300.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "SUV GAZLANMAGAN 1,5L FAMILY",
+      "quantity": 1.0,
+      "price": 4500.0,
+      "total": 4500.0
+    },
+    {
+      "name": "PECHENYE ASRT. 228GR OREO",
+      "quantity": 1.0,
+      "price": 29900.0,
+      "total": 29900.0
+    },
+    {
+      "name": "BISKVIT SHOKOLADLI 30GR KINDER PINGUI",
+      "quantity": 2.0,
+      "price": 9200.0,
+      "total": 18400.0
+    },
+    {
+      "name": "PAKET HAVAS 1 DONA",
+      "quantity": 1.0,
+      "price": 500.0,
+      "total": 500.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211631962&r=66550&c=20261123211201&s=394707519265"
+  }
+}

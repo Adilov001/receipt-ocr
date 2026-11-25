@@ -1,0 +1,32 @@
+{
+  "_status": "verified",
+  "_text_source": "r34_a.jpg",
+  "_note": "checked from the photo (24 Nov): Havas supermarket (same STIR as r32, 'PAKET HAVAS' item); no shop name or address printed, cashier's name masked; FM, fiscal sign, number, seconds from the decoded QR",
+  "seller_name": null,
+  "seller_tin": "305645847",
+  "address": null,
+  "datetime": "2026-11-24T07:57:52",
+  "receipt_number": "67637",
+  "fiscal_module": "LG420211631961",
+  "fiscal_sign": "075335865404",
+  "vat": 2180.36,
+  "total": 20350.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "SUV GAZLANMAGAN 500ML ZAMIN",
+      "quantity": 1.0,
+      "price": 1950.0,
+      "total": 1950.0
+    },
+    {
+      "name": "BISKVIT SHOKOLADLI 30GR KINDER PINGUI",
+      "quantity": 2.0,
+      "price": 9200.0,
+      "total": 18400.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211631961&r=67637&c=20261124075752&s=075335865404"
+  }
+}
