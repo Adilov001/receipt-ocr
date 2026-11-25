@@ -1,16 +1,25 @@
 """REST API for the receipt recognizer: the web backend sends a photo, gets JSON back.
 
-    uvicorn api:app --host 0.0.0.0 --port 8000        (or: make api)
-    docs: http://localhost:8000/docs
+    uvicorn api:app --host 0.0.0.0 --port 8001        (or: make api)
+    docs: http://localhost:8001/docs
+    (port 8001: the MedAdvance Django backend runs on 8000)
 
 POST /api/v1/recognize   multipart form, field "file" = receipt photo (JPEG / PNG / WebP / BMP / TIFF /
                          HEIC from an iPhone) or a PDF (first page; at most 5 pages)
                          optional query: engine=rapidocr|tesseract|hybrid, preprocess, postprocess
 GET  /api/v1/health      ready check (models are loaded at start-up)
 
+The answer has a "medadvance" block: the fields in the format of the MedAdvance backend, ready to
+be saved there (see INTEGRATION.md).
+Access: if the environment variable RECEIPT_OCR_API_KEY is set, /api/v1/recognize needs the header
+"X-API-Key: <key>" (or "Authorization: Bearer <key>"); without the variable the API is open
+(local development). /api/v1/health is always open.
+
 Requests are processed one at a time: OCR is CPU-bound and already uses all cores, so parallel
 requests would only slow each other down. Run several containers for more throughput.
 """
+import hmac
+import os
 import sys
 import threading
 import time
@@ -20,11 +29,12 @@ from typing import Literal
 
 import cv2
 import numpy as np
-from fastapi import FastAPI, File, HTTPException, Query, UploadFile
+from fastapi import Depends, FastAPI, File, Header, HTTPException, Query, UploadFile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 
 from receipt.config import load_config  # noqa: E402
+from receipt.medadvance import to_medadvance  # noqa: E402
 from receipt.pipeline import MAX_PDF_PAGES, decode_image, process  # noqa: E402
 
 CFG = load_config()
@@ -64,12 +74,22 @@ app = FastAPI(title="Receipt recognition API", version="1.0",
               description="Uzbek fiscal receipts: OCR + QR → JSON with fields, items, checks.", lifespan=lifespan)
 
 
+def require_key(x_api_key: str | None = Header(None), authorization: str | None = Header(None)):
+    """The key from RECEIPT_OCR_API_KEY, if one is set (read per request, so tests can set it)."""
+    key = os.environ.get("RECEIPT_OCR_API_KEY", "")
+    if not key:
+        return
+    given = x_api_key or (authorization[7:] if authorization and authorization.lower().startswith("bearer ") else "")
+    if not hmac.compare_digest(given.encode(), key.encode()):
+        raise HTTPException(401, "Missing or wrong API key (header X-API-Key).")
+
+
 @app.get("/api/v1/health")
 def health():
     return {"status": "ok" if _state["ready"] else "starting", "engines": list(ENGINES)}
 
 
-@app.post("/api/v1/recognize")
+@app.post("/api/v1/recognize", dependencies=[Depends(require_key)])
 def recognize(file: UploadFile = File(..., description="photo of a receipt"),
               engine: Literal["rapidocr", "tesseract", "hybrid"] = Query("rapidocr"),
               preprocess: bool = True, postprocess: bool = True):
@@ -98,4 +118,5 @@ def recognize(file: UploadFile = File(..., description="photo of a receipt"),
         "timings": {**out["timings"], "request": time.perf_counter() - t},
         "image_size": {"width": img.shape[1], "height": img.shape[0]},
         "pages": pages,  # PDF: only the first page is recognised
+        "medadvance": to_medadvance(out, pages),  # fields + sources + warnings for MedAdvance (INTEGRATION.md)
     })

@@ -30,11 +30,15 @@ together with its measured time, so a second run is fast and the timings stay ho
 ## REST API (for integration)
 
 ```bash
-make api                                   # or: uvicorn api:app --host 0.0.0.0 --port 8000
-docker build -t receipt-ocr . && docker run -p 8000:8000 receipt-ocr   # same, in Docker
+make api                                   # or: uvicorn api:app --host 0.0.0.0 --port 8001
+docker build -t receipt-ocr . && docker run -p 8001:8001 receipt-ocr   # same, in Docker
 ```
 
-Interactive docs (Swagger): `http://localhost:8000/docs`.
+Interactive docs (Swagger): `http://localhost:8001/docs`. Port 8001, because the MedAdvance backend uses 8000.
+
+**MedAdvance:** every answer has a `medadvance` block with the fiscal fields in the format of the
+MedAdvance backend (they pass its own validation), sources and Russian warnings. Contract, errors and a
+Django example: [INTEGRATION.md](INTEGRATION.md).
 
 | method | path | what |
 |---|---|---|
@@ -42,7 +46,7 @@ Interactive docs (Swagger): `http://localhost:8000/docs`.
 | `POST` | `/api/v1/recognize` | multipart field `file` = receipt photo → JSON |
 
 ```bash
-curl -X POST "http://localhost:8000/api/v1/recognize" -F "file=@receipt.jpg"
+curl -X POST "http://localhost:8001/api/v1/recognize" -F "file=@receipt.jpg"   # + -H "X-API-Key: <key>" if set
 ```
 
 Response (shortened):
@@ -63,7 +67,9 @@ Response (shortened):
 
 * Formats: JPEG, PNG, WebP, BMP, TIFF, HEIC (iPhone), PDF (first page only, at most 5 pages), up to 15 MB.
   The response field `pages` gives the page count of a PDF.
-* Errors: `400` empty file, `413` too large, `415` not an image, `422` wrong parameter.
+* Errors: `400` empty file, `401` missing or wrong API key, `413` too large, `415` not an image, `422` wrong parameter.
+* Access: set `RECEIPT_OCR_API_KEY` on the service to require the header `X-API-Key` (or `Authorization: Bearer`)
+  on `/api/v1/recognize`; without it the API is open (local development). `/api/v1/health` is always open.
 * Optional query parameters: `engine=rapidocr|tesseract|hybrid` (default `rapidocr`), `preprocess`, `postprocess`.
 * Missing fields are `null`; amounts are numbers; `status` of each check is `match` / `mismatch` / `no_data`.
 * `result.qr.rebuilt`: when the QR code cannot be read, the check link it would hold

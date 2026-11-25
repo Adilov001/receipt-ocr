@@ -1,5 +1,5 @@
 # Receipt recognition API (CPU).  Build:  docker build -t receipt-ocr .
-#                                 Run:    docker run -p 8000:8000 receipt-ocr   -> http://localhost:8000/docs
+#                                 Run:    docker run -p 8001:8001 receipt-ocr   -> http://localhost:8001/docs
 FROM python:3.12-slim
 
 # Tesseract 5 with Uzbek (Latin + Cyrillic) and Russian models; libgl/libglib for OpenCV
@@ -22,7 +22,7 @@ COPY models ./models
 COPY src ./src
 COPY api.py ./
 
-EXPOSE 8000
+EXPOSE 8001
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s CMD python -c \
-    "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+    "import urllib.request; urllib.request.urlopen('http://localhost:8001/api/v1/health')"
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8001"]

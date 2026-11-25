@@ -29,8 +29,8 @@ eval:             ## all metrics + ablation -> reports/results.md
 app:              ## web UI on http://127.0.0.1:7860
 	$(PY) app.py
 
-api:              ## REST API on http://localhost:8000 (docs: /docs)
-	$(PY) -m uvicorn api:app --host 0.0.0.0 --port 8000
+api:              ## REST API on http://localhost:8001 (docs: /docs)
+	$(PY) -m uvicorn api:app --host 0.0.0.0 --port 8001
 
-docker:           ## build the API image (run: docker run -p 8000:8000 receipt-ocr)
+docker:           ## build the API image (run: docker run -p 8001:8001 receipt-ocr)
 	docker build -t receipt-ocr .

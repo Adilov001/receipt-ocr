@@ -74,3 +74,27 @@ def test_unknown_engine(client):
     with open(ROOT / "data/images/r17_a.jpg", "rb") as f:
         r = client.post("/api/v1/recognize?engine=foo", files={"file": ("r.jpg", f, "image/jpeg")})
     assert r.status_code == 422
+
+
+def test_medadvance_block(client):
+    with open(ROOT / "data/images/r17_a.jpg", "rb") as f:
+        body = client.post("/api/v1/recognize", files={"file": ("r17_a.jpg", f, "image/jpeg")}).json()
+    gt = json.loads((ROOT / "data/gt/r17.json").read_text())
+    m = body["medadvance"]
+    assert m["fields"]["amount"] == f"{gt['total']:.2f}" and m["fields"]["fiscalSign"] == gt["fiscal_sign"]
+    assert m["fields"]["date"] == gt["datetime"][:10] and m["missing"] == []
+    assert m["summary"]["qr"] == gt["qr"]["raw"]
+
+
+def test_api_key(client, monkeypatch):
+    monkeypatch.setenv("RECEIPT_OCR_API_KEY", "test-key-123")
+    data = (ROOT / "data/images/r17_a.jpg").read_bytes()
+    assert client.post("/api/v1/recognize", files={"file": ("a.jpg", data, "image/jpeg")}).status_code == 401
+    r = client.post("/api/v1/recognize", files={"file": ("a.jpg", b"", "image/jpeg")}, headers={"X-API-Key": "wrong"})
+    assert r.status_code == 401
+    r = client.post("/api/v1/recognize", files={"file": ("a.jpg", b"", "image/jpeg")}, headers={"X-API-Key": "test-key-123"})
+    assert r.status_code == 400  # key accepted, then the empty file is refused
+    r = client.post("/api/v1/recognize", files={"file": ("a.jpg", b"", "image/jpeg")},
+                    headers={"Authorization": "Bearer test-key-123"})
+    assert r.status_code == 400
+    assert client.get("/api/v1/health").status_code == 200  # health stays open
