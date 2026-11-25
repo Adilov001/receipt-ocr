@@ -140,3 +140,10 @@ def test_total_confirmed_by_equal_payment_line():
     # close-up with one item: the payment line repeats the total exactly; the item's 500 must not win
     f, _ = _run("MXIK: 03923001002000000 Narx: 500.00*1Wt.=500.00soʻm\nBANK CARD =53ʼ300.00\nJAMI =53ʼ300.00\n")
     assert f["total"] == 53300.0
+
+
+def test_cashless_is_card_payment():
+    # Havas (dev r37): "CASHLESS =20'400.00" instead of "BANK CARD"
+    f, _ = _run("1.SUV GAZLANMAGAN 500ML FAMILY\nBC:4780044571525 Narx: 2ʼ800.00*1Wt.=2ʼ800.00soʼm\n"
+                "CASHLESS =2ʼ800.00\nQAYTIM =0.00\nJAMI =2ʼ800.00\n")
+    assert f["payment"] == "card"

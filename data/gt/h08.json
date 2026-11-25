@@ -1,0 +1,44 @@
+{
+  "_status": "verified",
+  "_text_source": "h08_a.jpg",
+  "_note": "new shop (holdout2), labelled from the photo without running the model. Burger King is a logo picture; the printed name is 'FAST FOOD SYSTEM MCHJ' (branch uzbkr6-chimgan). A card slip of the bank terminal is printed above the receipt. The paper time is 13:28:06, the QR has 13:28:04: the label uses the QR (fiscal record). The 0,00 combo header is a printed line and kept as an item.",
+  "seller_name": "FAST FOOD SYSTEM MCHJ",
+  "seller_tin": "310839380",
+  "address": "Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",
+  "datetime": "2026-11-24T13:28:04",
+  "receipt_number": "2402",
+  "fiscal_module": "VG544170029014",
+  "fiscal_sign": "522785144893",
+  "vat": 7928.57,
+  "total": 74000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Двойной Криспи Чикен Комбо Standart",
+      "quantity": 1.0,
+      "price": 0.0,
+      "total": 0.0
+    },
+    {
+      "name": "Двойной Криспи Чикен",
+      "quantity": 1.0,
+      "price": 44578.31,
+      "total": 44578.31
+    },
+    {
+      "name": "Картофель фри средний",
+      "quantity": 1.0,
+      "price": 17831.32,
+      "total": 17831.32
+    },
+    {
+      "name": "Pepsi Zero 0,5 л",
+      "quantity": 1.0,
+      "price": 11590.37,
+      "total": 11590.37
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=VG544170029014&r=2402&c=20261124132804&s=522785144893"
+  }
+}

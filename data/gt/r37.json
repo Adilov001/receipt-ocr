@@ -1,0 +1,38 @@
+{
+  "_status": "verified",
+  "_text_source": "r37_a.jpg",
+  "_note": "checked from the photo (25 Nov): Havas supermarket (STIR 305645847, same POS as r32-r35); no shop name or address printed; cashier's name masked; 'CASHLESS' = card; FM, fiscal sign, number, seconds from the decoded QR",
+  "seller_name": null,
+  "seller_tin": "305645847",
+  "address": null,
+  "datetime": "2026-11-24T21:32:12",
+  "receipt_number": "234252",
+  "fiscal_module": "LG420211631939",
+  "fiscal_sign": "708619150117",
+  "vat": 2185.72,
+  "total": 20400.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "KEKS 28GR KINDER MOLOCHNIY LOMTIK",
+      "quantity": 2.0,
+      "price": 6950.0,
+      "total": 13900.0
+    },
+    {
+      "name": "SAQICH SWEET MINT 13,6GR ORBIT",
+      "quantity": 1.0,
+      "price": 3700.0,
+      "total": 3700.0
+    },
+    {
+      "name": "SUV GAZLANMAGAN 500ML FAMILY",
+      "quantity": 1.0,
+      "price": 2800.0,
+      "total": 2800.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211631939&r=234252&c=20261124213212&s=708619150117"
+  }
+}

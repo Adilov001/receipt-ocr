@@ -1,0 +1,32 @@
+{
+  "_status": "verified",
+  "_text_source": "r36_a.jpg",
+  "_note": "checked from the photo (25 Nov): Havas supermarket (STIR 305645847, same POS as r32-r35); no shop name or address printed; cashier's name masked; 'CASHLESS' = card; FM, fiscal sign, number, seconds from the decoded QR",
+  "seller_name": null,
+  "seller_tin": "305645847",
+  "address": null,
+  "datetime": "2026-11-24T21:31:27",
+  "receipt_number": "234251",
+  "fiscal_module": "LG420211631939",
+  "fiscal_sign": "805970239159",
+  "vat": 2400.0,
+  "total": 22400.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "YAXNA CHOY QORA SHAFTOLI 1,25L AYSTEA",
+      "quantity": 1.0,
+      "price": 9900.0,
+      "total": 9900.0
+    },
+    {
+      "name": "SHOK. BATON. KARAMEL 72GR TWIX XTRA",
+      "quantity": 1.0,
+      "price": 12500.0,
+      "total": 12500.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211631939&r=234251&c=20261124213127&s=805970239159"
+  }
+}

@@ -142,3 +142,13 @@ r34_a.jpg,r34,supermarket_305645847,uz_latn,clean,1
 r34_q.jpg,r34,supermarket_305645847,uz_latn,partial,1
 r35_a.jpg,r35,supermarket_305645847,uz_latn,crumpled,1
 r35_q.jpg,r35,supermarket_305645847,uz_latn,partial,1
+r36_a.jpg,r36,supermarket_305645847,uz_latn,upside_down,1
+r36_q.jpg,r36,supermarket_305645847,uz_latn,partial;upside_down,1
+r37_a.jpg,r37,supermarket_305645847,uz_latn,crumpled;upside_down,1
+r37_q.jpg,r37,supermarket_305645847,uz_latn,partial;upside_down,1
+h07_a.jpg,h07,burger_king_chimgan,mixed,long;upside_down,1
+h07_q.jpg,h07,burger_king_chimgan,mixed,partial;upside_down,1
+h08_a.jpg,h08,burger_king_chimgan,mixed,long;crumpled;upside_down,1
+h08_q.jpg,h08,burger_king_chimgan,mixed,partial;crumpled;upside_down,1
+h09_a.jpg,h09,era_omad_dengiz,mixed,long;crumpled;upside_down,1
+h09_q.jpg,h09,era_omad_dengiz,mixed,partial;upside_down,1

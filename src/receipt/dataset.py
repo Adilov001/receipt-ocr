@@ -64,9 +64,11 @@ def rows_for(cfg, split):
     sp = load_split(cfg)
     if sp is None:
         raise SystemExit("No split yet: run `make split` first.")
-    holdout = set(sp.get("holdout", []))  # receipt ids collected after all tuning, measured once
-    if split == "holdout":
-        return [r for r in rows if r["receipt_id"] in holdout]
+    # receipt ids collected after all tuning, measured once: "holdout" (18 Nov, since seen) and
+    # "holdout2" (new shops from 25 Nov); none of them is in dev or test
+    holdout = {rid for k, ids in sp.items() if k.startswith("holdout") for rid in ids}
+    if split.startswith("holdout"):
+        return [r for r in rows if r["receipt_id"] in set(sp.get(split, []))]
     return [r for r in rows if r["seller"] in sp[split] and r["receipt_id"] not in holdout]
 
 

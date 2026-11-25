@@ -1,0 +1,26 @@
+{
+  "_status": "verified",
+  "_text_source": "h09_a.jpg",
+  "_note": "new shop (holdout2), labelled from the photo without running the model. ERA POS cafe, legal name '\"OMAD DENGIZ\" MCHJ' under the 'ERA' brand line (seller = 'ERA' as on other ERA receipts); cardholder's name masked; 'Chek 22028' = QR r",
+  "seller_name": "ERA",
+  "seller_tin": "312649427",
+  "address": "Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy",
+  "datetime": "2026-11-24T20:24:10",
+  "receipt_number": "22028",
+  "fiscal_module": "LG420211633037",
+  "fiscal_sign": "026433429105",
+  "vat": 6428.57,
+  "total": 60000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "пирожки с картофелем",
+      "quantity": 1.0,
+      "price": 60000.0,
+      "total": 60000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211633037&r=22028&c=20261124202410&s=026433429105"
+  }
+}

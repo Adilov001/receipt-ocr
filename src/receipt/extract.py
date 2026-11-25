@@ -30,7 +30,7 @@ L = {
         re.compile(r"\b(итого|итог|всего|жами)\b(?!\s*(ндс|ққс))", re.I),
         re.compile(r"(?<!qqs )(?<!qqs)\bjami\b(?!\s*qqs)", re.I),  # not "QQS JAMI 12%=739.29" (VAT)
     ],
-    "card": re.compile(r"(naqdsiz|plastik|bank\s*karta|bank\s*card|безнал|карт[аой]|uzcard|humo|нақдсиз)", re.I),
+    "card": re.compile(r"(naqdsiz|cashless|plastik|bank\s*karta|bank\s*card|безнал|карт[аой]|uzcard|humo|нақдсиз)", re.I),
     "cash": re.compile(r"(\bnaqd\b(?!\s*siz)|наличн|\bнақд\b)", re.I),
     "address": re.compile(
         rf"(ko{A}ch|kuchasi|tuman|shahar|shahri|viloyat|mahalla|\bmfy\b|massiv|\buy\b|\bул\.|улиц|район|"
