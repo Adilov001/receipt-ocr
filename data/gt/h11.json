@@ -1,0 +1,24 @@
+{
+  "_status": "verified",
+  "_text_source": "h11_a.jpg",
+  "_note": "new shop (holdout2), labelled from the photo without running the model. OKA market: the name is only a logo picture and the ИНН line is printed empty, so seller_name and seller_tin are null. Seller's name masked. Paper shows no seconds (21:26), so seconds = 00; the QR code is not read by a plain decoder, so qr = null (as r16). Receipt number = 'Чек №: 2562' (not 'T-№: 93346'). НДС 0 %.",
+  "seller_name": null,
+  "seller_tin": null,
+  "address": null,
+  "datetime": "2026-11-25T21:26:00",
+  "receipt_number": "2562",
+  "fiscal_module": "UZ210317265020",
+  "fiscal_sign": "140092504709",
+  "vat": 0.0,
+  "total": 6000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Hydrolife suv 1,5 л",
+      "quantity": 1.0,
+      "price": 6000.0,
+      "total": 6000.0
+    }
+  ],
+  "qr": null
+}

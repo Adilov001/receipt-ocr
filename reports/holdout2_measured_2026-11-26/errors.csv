@@ -1,0 +1,492 @@
+config,engine,image,conditions,field,gt,pred,cause
+baseline,tesseract,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,| УРНЫ | |,text misread / wrong span
+baseline,tesseract,h07_a.jpg,long;upside_down,seller_tin,310839380,,not found
+baseline,tesseract,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+baseline,tesseract,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,,not found
+baseline,tesseract,h07_a.jpg,long;upside_down,receipt_number,2000,,not found
+baseline,tesseract,h07_a.jpg,long;upside_down,fiscal_module,VG544170029013,,not found
+baseline,tesseract,h07_a.jpg,long;upside_down,fiscal_sign,285421523353,,not found
+baseline,tesseract,h07_a.jpg,long;upside_down,vat,7607.14,,not found
+baseline,tesseract,h07_a.jpg,long;upside_down,total,71000.0,,not found
+baseline,tesseract,h07_a.jpg,long;upside_down,payment,card,,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,А ПИВА,text misread / wrong span
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,seller_tin,310839380,,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,receipt_number,2402,,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,fiscal_module,VG544170029014,,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,fiscal_sign,522785144893,,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,vat,7928.57,,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,total,74000.0,,not found
+baseline,tesseract,h08_a.jpg,long;crumpled;upside_down,payment,card,,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,«SAYS,text misread / wrong span
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,seller_tin,312649427,,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy",,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T20:24:10,,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,receipt_number,22028,,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,fiscal_module,LG420211633037,,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,fiscal_sign,026433429105,,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,vat,6428.57,,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,total,60000.0,,not found
+baseline,tesseract,h09_a.jpg,long;crumpled;upside_down,payment,card,,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""",,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,seller_tin,310107872,,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,datetime,2026-11-25T13:25:52,,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,receipt_number,15214,,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,fiscal_module,LG420211614890,,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,fiscal_sign,176570502130,,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,vat,6964.28,,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,total,65000.0,,not found
+baseline,tesseract,h10_a.jpg,long;sideways;shadow,payment,card,,not found
+baseline,tesseract,h11_a.jpg,sideways;crumpled;shadow,seller_name,,ng an qi ИА И,spurious value
+baseline,tesseract,h11_a.jpg,sideways;crumpled;shadow,datetime,2026-11-25T21:26:00,,not found
+baseline,tesseract,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,,not found
+baseline,tesseract,h11_a.jpg,sideways;crumpled;shadow,fiscal_module,UZ210317265020,,not found
+baseline,tesseract,h11_a.jpg,sideways;crumpled;shadow,fiscal_sign,140092504709,,not found
+baseline,tesseract,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,,not found
+baseline,tesseract,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+baseline,tesseract,h11_a.jpg,sideways;crumpled;shadow,payment,card,,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,1рох Yd bijos,text misread / wrong span
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,seller_tin,202099756,,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,datetime,2026-11-25T20:38:51,,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,receipt_number,113691,,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,fiscal_module,LG420230638226,,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,fiscal_sign,423511047502,,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,,not found
+baseline,tesseract,h12_a.jpg,upside_down;crumpled;shadow,payment,card,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,seller_tin,202099756,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,datetime,2026-11-25T20:39:20,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,receipt_number,113692,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_module,LG420230638226,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_sign,341627400731,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,vat,3212.14,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,total,29980.0,,not found
+baseline,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,payment,card,,not found
+pre,tesseract,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,oe 000 ЕАЗТ FOOD SYSTEMS,text misread / wrong span
+pre,tesseract,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+pre,tesseract,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,2026-11-24T13:29:19,date/time misread
+pre,tesseract,h07_a.jpg,long;upside_down,receipt_number,2000,362,digits missing/extra
+pre,tesseract,h07_a.jpg,long;upside_down,vat,7607.14,,not found
+pre,tesseract,h07_a.jpg,long;upside_down,total,71000.0,,not found
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,"Savdogar 000000901349249 "",",text misread / wrong span
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,seller_tin,310839380,,not found
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",MIRZO ULUGBEK TUMANI T MALIK ЗА,text misread / wrong span
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,,not found
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,receipt_number,2402,,not found
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,fiscal_module,VG544170029014,,not found
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,fiscal_sign,522785144893,,not found
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,vat,7928.57,,not found
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,total,74000.0,,not found
+pre,tesseract,h08_a.jpg,long;crumpled;upside_down,payment,card,,not found
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,"“OMAD DENGIZ"" MCHJ",text misread / wrong span
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,seller_tin,312649427,,not found
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy","\ Toshkent shahri, Yunusobod tumani, Mirzo, Ulugʻbek MFY, Amir Temur, - Xidirali Ergashev, koʻchasi, 1-uy",text misread / wrong span
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T20:24:10,2026-11-24T20:24:05,date/time misread
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,receipt_number,22028,,not found
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,fiscal_module,LG420211633037,,not found
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,fiscal_sign,026433429105,026433429185,digits misread
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,vat,6428.57,69207570.0,digits/amounts misread
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,total,60000.0,89.0,digits/amounts misread
+pre,tesseract,h09_a.jpg,long;crumpled;upside_down,payment,card,other,text misread / wrong span
+pre,tesseract,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""",000 “ALEXANDER BRANDS” |,text misread / wrong span
+pre,tesseract,h10_a.jpg,long;sideways;shadow,seller_tin,310107872,,not found
+pre,tesseract,h10_a.jpg,long;sideways;shadow,datetime,2026-11-25T13:25:52,,not found
+pre,tesseract,h10_a.jpg,long;sideways;shadow,fiscal_sign,176570502130,178570502130,digits misread
+pre,tesseract,h10_a.jpg,long;sideways;shadow,vat,6964.28,12.0,digits/amounts misread
+pre,tesseract,h10_a.jpg,long;sideways;shadow,payment,card,cash,text misread / wrong span
+pre,tesseract,h11_a.jpg,sideways;crumpled;shadow,seller_name,,"у ""u",spurious value
+pre,tesseract,h11_a.jpg,sideways;crumpled;shadow,datetime,2026-11-25T21:26:00,,not found
+pre,tesseract,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,,not found
+pre,tesseract,h11_a.jpg,sideways;crumpled;shadow,fiscal_module,UZ210317265020,,not found
+pre,tesseract,h11_a.jpg,sideways;crumpled;shadow,fiscal_sign,140092504709,,not found
+pre,tesseract,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,,not found
+pre,tesseract,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+pre,tesseract,h11_a.jpg,sideways;crumpled;shadow,payment,card,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,seller_tin,202099756,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,datetime,2026-11-25T20:38:51,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,receipt_number,113691,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,fiscal_module,LG420230638226,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,fiscal_sign,423511047502,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,,not found
+pre,tesseract,h12_a.jpg,upside_down;crumpled;shadow,payment,card,,not found
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,vane Food» MChJ XK,text misread / wrong span
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,seller_tin,202099756,,not found
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Toshkent, Markaz-6, Osiyo koʻchasi ot",text misread / wrong span
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,datetime,2026-11-25T20:39:20,,not found
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,receipt_number,113692,104,digits missing/extra
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_module,LG420230638226,,not found
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_sign,341627400731,,not found
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,vat,3212.14,,not found
+pre,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,total,29980.0,,not found
+pre_post,tesseract,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,oe 000 ЕАЗТ FOOD SYSTEMS,text misread / wrong span
+pre_post,tesseract,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+pre_post,tesseract,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,2026-11-24T13:29:19,date/time misread
+pre_post,tesseract,h07_a.jpg,long;upside_down,receipt_number,2000,362,digits missing/extra
+pre_post,tesseract,h07_a.jpg,long;upside_down,vat,7607.14,,not found
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,"Savdogar 000000901349249 "",",text misread / wrong span
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,seller_tin,310839380,,not found
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",MIRZO ULUGBEK TUMANI T MALIK ЗА,text misread / wrong span
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,,not found
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,receipt_number,2402,,not found
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,fiscal_module,VG544170029014,,not found
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,fiscal_sign,522785144893,,not found
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,vat,7928.57,,not found
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,total,74000.0,,not found
+pre_post,tesseract,h08_a.jpg,long;crumpled;upside_down,payment,card,,not found
+pre_post,tesseract,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,ERAS,text misread / wrong span
+pre_post,tesseract,h09_a.jpg,long;crumpled;upside_down,seller_tin,312649427,,not found
+pre_post,tesseract,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy","\ Toshkent shahri, Yunusobod tumani, Mirzo, Ulugʻbek MFY, Amir Temur, - Xidirali Ergashev, koʻchasi, 1-uy",text misread / wrong span
+pre_post,tesseract,h09_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T20:24:10,2026-11-24T20:24:05,date/time misread
+pre_post,tesseract,h09_a.jpg,long;crumpled;upside_down,receipt_number,22028,,not found
+pre_post,tesseract,h09_a.jpg,long;crumpled;upside_down,fiscal_module,LG420211633037,,not found
+pre_post,tesseract,h09_a.jpg,long;crumpled;upside_down,fiscal_sign,026433429105,026433429185,digits misread
+pre_post,tesseract,h09_a.jpg,long;crumpled;upside_down,vat,6428.57,69207570.0,digits/amounts misread
+pre_post,tesseract,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""",000 “ALEXANDER BRANDS” |,text misread / wrong span
+pre_post,tesseract,h10_a.jpg,long;sideways;shadow,seller_tin,310107872,,not found
+pre_post,tesseract,h10_a.jpg,long;sideways;shadow,vat,6964.28,12.0,digits/amounts misread
+pre_post,tesseract,h10_a.jpg,long;sideways;shadow,payment,card,cash,text misread / wrong span
+pre_post,tesseract,h11_a.jpg,sideways;crumpled;shadow,seller_name,,"у ""u",spurious value
+pre_post,tesseract,h11_a.jpg,sideways;crumpled;shadow,datetime,2026-11-25T21:26:00,,not found
+pre_post,tesseract,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,,not found
+pre_post,tesseract,h11_a.jpg,sideways;crumpled;shadow,fiscal_module,UZ210317265020,,not found
+pre_post,tesseract,h11_a.jpg,sideways;crumpled;shadow,fiscal_sign,140092504709,,not found
+pre_post,tesseract,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,,not found
+pre_post,tesseract,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+pre_post,tesseract,h11_a.jpg,sideways;crumpled;shadow,payment,card,,not found
+pre_post,tesseract,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,,not found
+pre_post,tesseract,h12_a.jpg,upside_down;crumpled;shadow,seller_tin,202099756,,not found
+pre_post,tesseract,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+pre_post,tesseract,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+pre_post,tesseract,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,,not found
+pre_post,tesseract,h12_a.jpg,upside_down;crumpled;shadow,payment,card,,not found
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,K107 Korzinka - Markaz-6 Thy,text misread / wrong span
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,seller_tin,202099756,,not found
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Toshkent, Markaz-6, Osiyo koʻchasi ot",text misread / wrong span
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,datetime,2026-11-25T20:39:20,,not found
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,receipt_number,113692,104,digits missing/extra
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_module,LG420230638226,,not found
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_sign,341627400731,,not found
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,vat,3212.14,,not found
+pre_post,tesseract,h13_a.jpg,long;sideways;crumpled;shadow,total,29980.0,,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,"ButT1Ptoh 7u22pot""%8ʼ rupox",text misread / wrong span
+baseline,easyocr,h07_a.jpg,long;upside_down,seller_tin,310839380,,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,receipt_number,2000,,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,fiscal_module,VG544170029013,,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,fiscal_sign,285421523353,,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,vat,7607.14,,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,total,71000.0,,not found
+baseline,easyocr,h07_a.jpg,long;upside_down,payment,card,,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,Zgbee {UI ubjo7bBu,text misread / wrong span
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,seller_tin,310839380,,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,receipt_number,2402,,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,fiscal_module,VG544170029014,,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,fiscal_sign,522785144893,,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,vat,7928.57,,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,total,74000.0,,not found
+baseline,easyocr,h08_a.jpg,long;crumpled;upside_down,payment,card,,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,"ʻ>equsax""",text misread / wrong span
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,seller_tin,312649427,,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy",,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T20:24:10,,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,receipt_number,22028,,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,fiscal_module,LG420211633037,,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,fiscal_sign,026433429105,,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,vat,6428.57,,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,total,60000.0,,not found
+baseline,easyocr,h09_a.jpg,long;crumpled;upside_down,payment,card,,not found
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""","1 3 : ; 4 5; 1 0 # = # 4 1 =8 9 ""g 8 ;",text misread / wrong span
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,seller_tin,310107872,,not found
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,datetime,2026-11-25T13:25:52,,not found
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,receipt_number,15214,,not found
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,fiscal_module,LG420211614890,,not found
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,fiscal_sign,176570502130,,not found
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,vat,6964.28,,not found
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,total,65000.0,,not found
+baseline,easyocr,h10_a.jpg,long;sideways;shadow,payment,card,,not found
+baseline,easyocr,h11_a.jpg,sideways;crumpled;shadow,datetime,2026-11-25T21:26:00,,not found
+baseline,easyocr,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,,not found
+baseline,easyocr,h11_a.jpg,sideways;crumpled;shadow,fiscal_module,UZ210317265020,,not found
+baseline,easyocr,h11_a.jpg,sideways;crumpled;shadow,fiscal_sign,140092504709,,not found
+baseline,easyocr,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,,not found
+baseline,easyocr,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+baseline,easyocr,h11_a.jpg,sideways;crumpled;shadow,payment,card,,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,@SA XZSOd :Iseksex WR IPox u0 biloS,text misread / wrong span
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,seller_tin,202099756,,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,datetime,2026-11-25T20:38:51,,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,receipt_number,113691,,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,fiscal_module,LG420230638226,,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,fiscal_sign,423511047502,,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,,not found
+baseline,easyocr,h12_a.jpg,upside_down;crumpled;shadow,payment,card,,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,"* : K : ;; { g 1 4 1 8 84 8 M "" 1 Hx 29;",text misread / wrong span
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,seller_tin,202099756,,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,datetime,2026-11-25T20:39:20,,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,receipt_number,113692,,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_module,LG420230638226,,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_sign,341627400731,,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,vat,3212.14,,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,total,29980.0,,not found
+baseline,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,payment,card,,not found
+pre,easyocr,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,IP Ooo FAST,text misread / wrong span
+pre,easyocr,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+pre,easyocr,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,,not found
+pre,easyocr,h07_a.jpg,long;upside_down,vat,7607.14,44.0,digits/amounts misread
+pre,easyocr,h07_a.jpg,long;upside_down,total,71000.0,0.0,digits/amounts misread
+pre,easyocr,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,"0118""",text misread / wrong span
+pre,easyocr,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",MIRZO ULUGBEK TUMANI T MALIK 3A,text misread / wrong span
+pre,easyocr,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,2026-11-24T13:27:52,date/time misread
+pre,easyocr,h08_a.jpg,long;crumpled;upside_down,vat,7928.57,82.0,digits/amounts misread
+pre,easyocr,h08_a.jpg,long;crumpled;upside_down,total,74000.0,0.0,digits/amounts misread
+pre,easyocr,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,"""OMAD DENGIZ"" MCHJ",text misread / wrong span
+pre,easyocr,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy","Toshkent shahri, Yunusobod turani Mirzo, Ulugbek MFY Amnir Temur, Xidirali Ergashıev",text misread / wrong span
+pre,easyocr,h09_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T20:24:10,2026-11-24T20:24:05,date/time misread
+pre,easyocr,h09_a.jpg,long;crumpled;upside_down,total,60000.0,0.0,digits/amounts misread
+pre,easyocr,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""","000 ʼALEXANDER BRANDS""",text misread / wrong span
+pre,easyocr,h10_a.jpg,long;sideways;shadow,datetime,2026-11-25T13:25:52,,not found
+pre,easyocr,h10_a.jpg,long;sideways;shadow,fiscal_sign,176570502130,,not found
+pre,easyocr,h10_a.jpg,long;sideways;shadow,vat,6964.28,0.0,digits/amounts misread
+pre,easyocr,h10_a.jpg,long;sideways;shadow,total,65000.0,0.0,digits/amounts misread
+pre,easyocr,h10_a.jpg,long;sideways;shadow,payment,card,cash,text misread / wrong span
+pre,easyocr,h11_a.jpg,sideways;crumpled;shadow,datetime,2026-11-25T21:26:00,,not found
+pre,easyocr,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,,not found
+pre,easyocr,h11_a.jpg,sideways;crumpled;shadow,fiscal_module,UZ210317265020,,not found
+pre,easyocr,h11_a.jpg,sideways;crumpled;shadow,fiscal_sign,140092504709,,not found
+pre,easyocr,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,,not found
+pre,easyocr,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+pre,easyocr,h11_a.jpg,sideways;crumpled;shadow,payment,card,,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,8 *9  1 | N 7hi 1 B,text misread / wrong span
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,seller_tin,202099756,,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,datetime,2026-11-25T20:38:51,,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,receipt_number,113691,,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,fiscal_module,LG420230638226,,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,fiscal_sign,423511047502,,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,,not found
+pre,easyocr,h12_a.jpg,upside_down;crumpled;shadow,payment,card,,not found
+pre,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,#Aaglesxi Korzinka Foodw MChJ XK Markaz-6,text misread / wrong span
+pre,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,seller_tin,202099756,888218598,digits misread
+pre,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+pre,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,datetime,2026-11-25T20:39:20,,not found
+pre,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_module,LG420230638226,,not found
+pre,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,vat,3212.14,3.0,digits/amounts misread
+pre,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,total,29980.0,,not found
+pre_post,easyocr,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,IP Ooo FAST,text misread / wrong span
+pre_post,easyocr,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+pre_post,easyocr,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,,not found
+pre_post,easyocr,h07_a.jpg,long;upside_down,receipt_number,2000,3,digits missing/extra
+pre_post,easyocr,h07_a.jpg,long;upside_down,vat,7607.14,44.0,digits/amounts misread
+pre_post,easyocr,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,IP Ooo FAST FOOD SYSTEMS,text misread / wrong span
+pre_post,easyocr,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",MIRZO ULUGBEK TUMANI T MALIK 3A,text misread / wrong span
+pre_post,easyocr,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,2026-11-24T13:27:52,date/time misread
+pre_post,easyocr,h08_a.jpg,long;crumpled;upside_down,receipt_number,2402,3,digits missing/extra
+pre_post,easyocr,h08_a.jpg,long;crumpled;upside_down,vat,7928.57,82.0,digits/amounts misread
+pre_post,easyocr,h08_a.jpg,long;crumpled;upside_down,total,74000.0,0.0,digits/amounts misread
+pre_post,easyocr,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy","Toshkent shahri, Yunusobod tumani Mirzo, Ulugbek MFY Amnir Temur, Xidirali Ergashıev",text misread / wrong span
+pre_post,easyocr,h09_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T20:24:10,2026-11-24T20:24:05,date/time misread
+pre_post,easyocr,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""","000 ʼALEXANDER BRANDS""",text misread / wrong span
+pre_post,easyocr,h10_a.jpg,long;sideways;shadow,vat,6964.28,150.39,digits/amounts misread
+pre_post,easyocr,h10_a.jpg,long;sideways;shadow,payment,card,cash,text misread / wrong span
+pre_post,easyocr,h11_a.jpg,sideways;crumpled;shadow,datetime,2026-11-25T21:26:00,,not found
+pre_post,easyocr,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,,not found
+pre_post,easyocr,h11_a.jpg,sideways;crumpled;shadow,fiscal_module,UZ210317265020,,not found
+pre_post,easyocr,h11_a.jpg,sideways;crumpled;shadow,fiscal_sign,140092504709,,not found
+pre_post,easyocr,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,,not found
+pre_post,easyocr,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+pre_post,easyocr,h11_a.jpg,sideways;crumpled;shadow,payment,card,,not found
+pre_post,easyocr,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,,not found
+pre_post,easyocr,h12_a.jpg,upside_down;crumpled;shadow,seller_tin,202099756,,not found
+pre_post,easyocr,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+pre_post,easyocr,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+pre_post,easyocr,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,,not found
+pre_post,easyocr,h12_a.jpg,upside_down;crumpled;shadow,payment,card,,not found
+pre_post,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,#Aaglesxi Korzinka Foodw MChJ XK Markaz-6,text misread / wrong span
+pre_post,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,seller_tin,202099756,888218598,digits misread
+pre_post,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+pre_post,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,datetime,2026-11-25T20:39:20,,not found
+pre_post,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,fiscal_module,LG420230638226,,not found
+pre_post,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,vat,3212.14,3.0,digits/amounts misread
+pre_post,easyocr,h13_a.jpg,long;sideways;crumpled;shadow,total,29980.0,18.0,digits/amounts misread
+baseline,rapidocr,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,qirollik farmoni! Sizning fikringis,text misread / wrong span
+baseline,rapidocr,h07_a.jpg,long;upside_down,seller_tin,310839380,,not found
+baseline,rapidocr,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+baseline,rapidocr,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,2026-11-24T13:29:19,date/time misread
+baseline,rapidocr,h07_a.jpg,long;upside_down,fiscal_sign,285421523353,544170029013,digits misread
+baseline,rapidocr,h07_a.jpg,long;upside_down,vat,7607.14,12.0,digits/amounts misread
+baseline,rapidocr,h07_a.jpg,long;upside_down,total,71000.0,1.020200101e+16,digits/amounts misread
+baseline,rapidocr,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,Restoran ID: 33892,text misread / wrong span
+baseline,rapidocr,h08_a.jpg,long;crumpled;upside_down,seller_tin,310839380,,not found
+baseline,rapidocr,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+baseline,rapidocr,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,2026-11-24T13:28:06,date/time misread
+baseline,rapidocr,h08_a.jpg,long;crumpled;upside_down,vat,7928.57,,not found
+baseline,rapidocr,h08_a.jpg,long;crumpled;upside_down,total,74000.0,1.020200101e+16,digits/amounts misread
+baseline,rapidocr,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,"""Keshbek""",text misread / wrong span
+baseline,rapidocr,h09_a.jpg,long;crumpled;upside_down,seller_tin,312649427,,not found
+baseline,rapidocr,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy",,not found
+baseline,rapidocr,h09_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T20:24:10,2026-11-24T20:24:05,date/time misread
+baseline,rapidocr,h09_a.jpg,long;crumpled;upside_down,receipt_number,22028,,not found
+baseline,rapidocr,h09_a.jpg,long;crumpled;upside_down,fiscal_sign,026433429105,420211633037,digits misread
+baseline,rapidocr,h09_a.jpg,long;crumpled;upside_down,vat,6428.57,12.0,digits/amounts misread
+baseline,rapidocr,h09_a.jpg,long;crumpled;upside_down,total,60000.0,0.0,digits/amounts misread
+baseline,rapidocr,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""","□ ваш следующий заказ в Зале от 90 000 сум 2.Получите Пепперони роллы в подарок на 1.Отсканируйте QR код пройдите опрос Уважаемый гость. 3AКA3 № 11 ""ALEXANDER BRANDS"" Better Ingredients, Better Pizza. PAPAJOHNS",text misread / wrong span
+baseline,rapidocr,h10_a.jpg,long;sideways;shadow,seller_tin,310107872,,not found
+baseline,rapidocr,h10_a.jpg,long;sideways;shadow,datetime,2026-11-25T13:25:52,,not found
+baseline,rapidocr,h10_a.jpg,long;sideways;shadow,receipt_number,15214,0,digits missing/extra
+baseline,rapidocr,h10_a.jpg,long;sideways;shadow,fiscal_sign,176570502130,,not found
+baseline,rapidocr,h10_a.jpg,long;sideways;shadow,vat,6964.28,0.0,digits/amounts misread
+baseline,rapidocr,h10_a.jpg,long;sideways;shadow,total,65000.0,0.0,digits/amounts misread
+baseline,rapidocr,h11_a.jpg,sideways;crumpled;shadow,seller_name,,:HHИ S/R: q-2,spurious value
+baseline,rapidocr,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,1,digits missing/extra
+baseline,rapidocr,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,210317265020.0,digits/amounts misread
+baseline,rapidocr,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+baseline,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,Soliq QR kodi,text misread / wrong span
+baseline,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Toshkent, Marka-6,siyo kochasi85-uy",text misread / wrong span
+baseline,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,receipt_number,113691,,not found
+baseline,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,384.64,wrong line picked (value of vat)
+baseline,rapidocr,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,,not found
+baseline,rapidocr,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+baseline,rapidocr,h13_a.jpg,long;sideways;crumpled;shadow,vat,3212.14,,not found
+baseline,rapidocr,h13_a.jpg,long;sideways;crumpled;shadow,total,29980.0,,not found
+pre,rapidocr,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,IP OOO FAST FOOD SYSTEMS,text misread / wrong span
+pre,rapidocr,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+pre,rapidocr,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,2026-11-24T13:29:19,date/time misread
+pre,rapidocr,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,"""ga huquqiga",text misread / wrong span
+pre,rapidocr,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",MIRZO ULUGBEK TUMANI T MALIK 3A,text misread / wrong span
+pre,rapidocr,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,2026-11-24T13:27:52,date/time misread
+pre,rapidocr,h08_a.jpg,long;crumpled;upside_down,fiscal_module,VG544170029014,,not found
+pre,rapidocr,h08_a.jpg,long;crumpled;upside_down,fiscal_sign,522785144893,,not found
+pre,rapidocr,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,"""OMAD DENGIZ"" MCHD",text misread / wrong span
+pre,rapidocr,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy","Toshkent shahri, Yunusobod tumani, Mirzo, Ulugbek MFY, Amir Temur, Xidirali Ergashev, koʻ chasi, 1-uy",text misread / wrong span
+pre,rapidocr,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""","000 ""ALEXANDER BRANDS""",text misread / wrong span
+pre,rapidocr,h10_a.jpg,long;sideways;shadow,datetime,2026-11-25T13:25:52,,not found
+pre,rapidocr,h10_a.jpg,long;sideways;shadow,vat,6964.28,351.75,digits/amounts misread
+pre,rapidocr,h11_a.jpg,sideways;crumpled;shadow,seller_name,,ИHH: S/R: q-2,spurious value
+pre,rapidocr,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,1,digits missing/extra
+pre,rapidocr,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,210317265020.0,digits/amounts misread
+pre,rapidocr,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+pre,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,korzinka 7 ta avtomobil oʻynayapmiz! 67 1. Suv gazsiz Bonaqua Still PET 500ml jumladan OS,text misread / wrong span
+pre,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Anglesey Food MChJ XK Markaz-6, Osiyo koʻchasi, ,64 XARIDINGIZ UCHUN RAHMAT Soliq QR kodl",text misread / wrong span
+pre,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,receipt_number,113691,7,digits missing/extra
+pre,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+pre,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,113691.0,digits/amounts misread
+pre,rapidocr,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Toshent, Mara6iyo ochasi -uy K107 Korzinka - Markaz-6",text misread / wrong span
+pre_post,rapidocr,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,IP OOO FAST FOOD SYSTEMS,text misread / wrong span
+pre_post,rapidocr,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+pre_post,rapidocr,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,2026-11-24T13:29:19,date/time misread
+pre_post,rapidocr,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,bo ldingiz,text misread / wrong span
+pre_post,rapidocr,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",MIRZO ULUGBEK TUMANI T MALIK 3A,text misread / wrong span
+pre_post,rapidocr,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,2026-11-24T13:27:52,date/time misread
+pre_post,rapidocr,h08_a.jpg,long;crumpled;upside_down,receipt_number,2402,3,digits missing/extra
+pre_post,rapidocr,h08_a.jpg,long;crumpled;upside_down,fiscal_module,VG544170029014,,not found
+pre_post,rapidocr,h08_a.jpg,long;crumpled;upside_down,fiscal_sign,522785144893,,not found
+pre_post,rapidocr,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy","Toshkent shahri, Yunusobod tumani, Mirzo, Ulugbek MFY, Amir Temur, Xidirali Ergashev, koʻʻchasi, 1-uy",text misread / wrong span
+pre_post,rapidocr,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""","000 ""ALEXANDER BRANDS""",text misread / wrong span
+pre_post,rapidocr,h10_a.jpg,long;sideways;shadow,vat,6964.28,351.75,digits/amounts misread
+pre_post,rapidocr,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,1,digits missing/extra
+pre_post,rapidocr,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,210317265020.0,digits/amounts misread
+pre_post,rapidocr,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+pre_post,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,korzinka 7 ta avtomobil oʻynayapmiz! 67 1. Suv gazsiz Bonaqua Still PET 500m1 jumladan OS,text misread / wrong span
+pre_post,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Anglesey Food MChJ XK Markaz-6, Osiyo koʻchasi, ,64 XARIDINGIZ UCHUN RAHMAT Soliq QR kodl",text misread / wrong span
+pre_post,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+pre_post,rapidocr,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,113691.0,digits/amounts misread
+pre_post,rapidocr,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Toshkent, Mara6iyo koʻchasi -uy K107 Korzinka - Markaz-6",text misread / wrong span
+baseline,hybrid,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,| УРНЫ | |,text misread / wrong span
+baseline,hybrid,h07_a.jpg,long;upside_down,seller_tin,310839380,,not found
+baseline,hybrid,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+baseline,hybrid,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,2026-11-24T13:29:19,date/time misread
+baseline,hybrid,h07_a.jpg,long;upside_down,fiscal_sign,285421523353,544170029013,digits misread
+baseline,hybrid,h07_a.jpg,long;upside_down,vat,7607.14,12.0,digits/amounts misread
+baseline,hybrid,h07_a.jpg,long;upside_down,total,71000.0,1.020200101e+16,digits/amounts misread
+baseline,hybrid,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,А ПИВА,text misread / wrong span
+baseline,hybrid,h08_a.jpg,long;crumpled;upside_down,seller_tin,310839380,,not found
+baseline,hybrid,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+baseline,hybrid,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,2026-11-24T13:28:06,date/time misread
+baseline,hybrid,h08_a.jpg,long;crumpled;upside_down,vat,7928.57,,not found
+baseline,hybrid,h08_a.jpg,long;crumpled;upside_down,total,74000.0,1.020200101e+16,digits/amounts misread
+baseline,hybrid,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,"""Keshbek""",text misread / wrong span
+baseline,hybrid,h09_a.jpg,long;crumpled;upside_down,seller_tin,312649427,,not found
+baseline,hybrid,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy",,not found
+baseline,hybrid,h09_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T20:24:10,2026-11-24T20:24:05,date/time misread
+baseline,hybrid,h09_a.jpg,long;crumpled;upside_down,receipt_number,22028,,not found
+baseline,hybrid,h09_a.jpg,long;crumpled;upside_down,fiscal_sign,026433429105,420211633037,digits misread
+baseline,hybrid,h09_a.jpg,long;crumpled;upside_down,vat,6428.57,12.0,digits/amounts misread
+baseline,hybrid,h09_a.jpg,long;crumpled;upside_down,total,60000.0,0.0,digits/amounts misread
+baseline,hybrid,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""","□ ваш следующий заказ в Зале от 90 000 сум 2.Получите Пепперони роллы в подарок на 1.Отсканируйте QR код пройдите опрос Уважаемый гость. 3AКA3 № 11 ""ALEXANDER BRANDS"" Better Ingredients, Better Pizza. PAPAJOHNS",text misread / wrong span
+baseline,hybrid,h10_a.jpg,long;sideways;shadow,seller_tin,310107872,,not found
+baseline,hybrid,h10_a.jpg,long;sideways;shadow,datetime,2026-11-25T13:25:52,,not found
+baseline,hybrid,h10_a.jpg,long;sideways;shadow,receipt_number,15214,0,digits missing/extra
+baseline,hybrid,h10_a.jpg,long;sideways;shadow,fiscal_sign,176570502130,,not found
+baseline,hybrid,h10_a.jpg,long;sideways;shadow,vat,6964.28,0.0,digits/amounts misread
+baseline,hybrid,h10_a.jpg,long;sideways;shadow,total,65000.0,0.0,digits/amounts misread
+baseline,hybrid,h11_a.jpg,sideways;crumpled;shadow,seller_name,,ng an qi ИА И,spurious value
+baseline,hybrid,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,1,digits missing/extra
+baseline,hybrid,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,210317265020.0,digits/amounts misread
+baseline,hybrid,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+baseline,hybrid,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,Soliq QR kodi,text misread / wrong span
+baseline,hybrid,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Toshkent, Marka-6,siyo kochasi85-uy",text misread / wrong span
+baseline,hybrid,h12_a.jpg,upside_down;crumpled;shadow,receipt_number,113691,,not found
+baseline,hybrid,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,384.64,wrong line picked (value of vat)
+baseline,hybrid,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,,not found
+baseline,hybrid,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",,not found
+baseline,hybrid,h13_a.jpg,long;sideways;crumpled;shadow,vat,3212.14,,not found
+baseline,hybrid,h13_a.jpg,long;sideways;crumpled;shadow,total,29980.0,,not found
+pre,hybrid,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,oe 000 ЕАЗТ FOOD SYSTEMS,text misread / wrong span
+pre,hybrid,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+pre,hybrid,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,2026-11-24T13:29:19,date/time misread
+pre,hybrid,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,"""ga huquqiga",text misread / wrong span
+pre,hybrid,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",MIRZO ULUGBEK TUMANI T MALIK 3A,text misread / wrong span
+pre,hybrid,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,2026-11-24T13:27:52,date/time misread
+pre,hybrid,h08_a.jpg,long;crumpled;upside_down,fiscal_module,VG544170029014,,not found
+pre,hybrid,h08_a.jpg,long;crumpled;upside_down,fiscal_sign,522785144893,,not found
+pre,hybrid,h09_a.jpg,long;crumpled;upside_down,seller_name,ERA,"""OMAD DENGIZ"" MCHD",text misread / wrong span
+pre,hybrid,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy","Toshkent shahri, Yunusobod tumani, Mirzo, Ulugbek MFY, Amir Temur, Xidirali Ergashev, koʻ chasi, 1-uy",text misread / wrong span
+pre,hybrid,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""",000 “ALEXANDER BRANDS” |,text misread / wrong span
+pre,hybrid,h10_a.jpg,long;sideways;shadow,datetime,2026-11-25T13:25:52,,not found
+pre,hybrid,h10_a.jpg,long;sideways;shadow,vat,6964.28,351.75,digits/amounts misread
+pre,hybrid,h11_a.jpg,sideways;crumpled;shadow,seller_name,,"у ""u",spurious value
+pre,hybrid,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,1,digits missing/extra
+pre,hybrid,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,210317265020.0,digits/amounts misread
+pre,hybrid,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+pre,hybrid,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,korzinka 7 ta avtomobil oʻynayapmiz! 67 1. Suv gazsiz Bonaqua Still PET 500ml jumladan OS,text misread / wrong span
+pre,hybrid,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Anglesey Food MChJ XK Markaz-6, Osiyo koʻchasi, ,64 XARIDINGIZ UCHUN RAHMAT Soliq QR kodl",text misread / wrong span
+pre,hybrid,h12_a.jpg,upside_down;crumpled;shadow,receipt_number,113691,7,digits missing/extra
+pre,hybrid,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+pre,hybrid,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,113691.0,digits/amounts misread
+pre,hybrid,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,vane Food» MChJ XK,text misread / wrong span
+pre,hybrid,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Toshkent, Markaz-6, Osiyo koʻchasi ot",text misread / wrong span
+pre_post,hybrid,h07_a.jpg,long;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,oe 000 ЕАЗТ FOOD SYSTEMS,text misread / wrong span
+pre_post,hybrid,h07_a.jpg,long;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",,not found
+pre_post,hybrid,h07_a.jpg,long;upside_down,datetime,2026-11-24T13:29:18,2026-11-24T13:29:19,date/time misread
+pre_post,hybrid,h08_a.jpg,long;crumpled;upside_down,seller_name,FAST FOOD SYSTEM MCHJ,bo ldingiz,text misread / wrong span
+pre_post,hybrid,h08_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Mirzo ulug'bek tumani, Katta Yalang'och-ota MFY, Temur Malik ko'chasi, 3a-uy",MIRZO ULUGBEK TUMANI T MALIK 3A,text misread / wrong span
+pre_post,hybrid,h08_a.jpg,long;crumpled;upside_down,datetime,2026-11-24T13:28:04,2026-11-24T13:27:52,date/time misread
+pre_post,hybrid,h08_a.jpg,long;crumpled;upside_down,receipt_number,2402,3,digits missing/extra
+pre_post,hybrid,h08_a.jpg,long;crumpled;upside_down,fiscal_module,VG544170029014,,not found
+pre_post,hybrid,h08_a.jpg,long;crumpled;upside_down,fiscal_sign,522785144893,,not found
+pre_post,hybrid,h09_a.jpg,long;crumpled;upside_down,address,"Toshkent shahri, Yunusobod tumani, Mirzo Ulug'bek MFY, Amir Temur - Xidirali Ergashev ko'chasi, 1-uy","Toshkent shahri, Yunusobod tumani, Mirzo, Ulugbek MFY, Amir Temur, Xidirali Ergashev, koʻʻchasi, 1-uy",text misread / wrong span
+pre_post,hybrid,h10_a.jpg,long;sideways;shadow,seller_name,"OOO ""ALEXANDER BRANDS""",000 “ALEXANDER BRANDS” |,text misread / wrong span
+pre_post,hybrid,h10_a.jpg,long;sideways;shadow,vat,6964.28,351.75,digits/amounts misread
+pre_post,hybrid,h11_a.jpg,sideways;crumpled;shadow,seller_name,,"у ""u",spurious value
+pre_post,hybrid,h11_a.jpg,sideways;crumpled;shadow,receipt_number,2562,1,digits missing/extra
+pre_post,hybrid,h11_a.jpg,sideways;crumpled;shadow,vat,0.0,210317265020.0,digits/amounts misread
+pre_post,hybrid,h11_a.jpg,sideways;crumpled;shadow,total,6000.0,,not found
+pre_post,hybrid,h12_a.jpg,upside_down;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,korzinka 7 ta avtomobil oʻynayapmiz! 67 1. Suv gazsiz Bonaqua Still PET 500m1 jumladan OS,text misread / wrong span
+pre_post,hybrid,h12_a.jpg,upside_down;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Anglesey Food MChJ XK Markaz-6, Osiyo koʻchasi, ,64 XARIDINGIZ UCHUN RAHMAT Soliq QR kodl",text misread / wrong span
+pre_post,hybrid,h12_a.jpg,upside_down;crumpled;shadow,vat,384.64,,not found
+pre_post,hybrid,h12_a.jpg,upside_down;crumpled;shadow,total,3590.0,113691.0,digits/amounts misread
+pre_post,hybrid,h13_a.jpg,long;sideways;crumpled;shadow,seller_name,«Anglesey Food» MChJ XK,K107 Korzinka - Markaz-6 Thy,text misread / wrong span
+pre_post,hybrid,h13_a.jpg,long;sideways;crumpled;shadow,address,"Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy","Toshkent, Markaz-6, Osiyo koʻchasi ot",text misread / wrong span

@@ -126,6 +126,7 @@ lives in `configs/default.yaml` (`qr.param_map`).
 | Conditions | clean, crumpled, shadow, held in hand, tilted, sideways, blurred; synthetic: shadow, faded, perspective |
 | Split | seller-disjoint (`data/split.json`): **dev** = `era_tinda`, `akmal_farm`, `era_hamkorlik`, `era_avtogaz` (13 receipts); **test** = `era_barkamol`, `diyor_neft`, `era_avtomobilist` (16 receipts) |
 | Holdout | 6 receipts from 6 new shops (`h01`–`h06`: clothing store, café, supermarket, KFC, pharmacy, another ERA shop), 12 photos, collected after development, measured once (`--split holdout`) |
+| Holdout 2 | 7 receipts from 5 new shops (`h07`–`h13`: Burger King, ERA café, Papa John's, OKA, Korzinka), 14 photos, labelled from the photos without running the model, measured once on 26 Nov; then moved to dev (`spent_holdout2` in `split.json`) to fix the rules on these layouts |
 | Personal data | cardholder, cashier and pharmacy staff names blacked out (`scripts/mask_pii.py`, two OCR passes, every image checked); card numbers are already masked by the terminal |
 
 **Lower-half photos** (`*_q.jpg`, condition `partial`) show only the totals and the QR code; they count for the
@@ -239,6 +240,40 @@ supermarket, pharmacy, a different POS) 40–80 %. Most holdout errors are *not 
 these layouts use and the rules don't know (`Umumiy to'lov`, `Kassa raqami`, `Savdo Cheki`, `JAMI =`).
 Fiscal fields read from the QR (FM, fiscal sign, receipt number) stay at 83–100 %.
 
+### Holdout 2: 5 new shops, measured once (26 Nov, 7 whole-receipt photos)
+
+Report: `reports/holdout2_measured_2026-11-26/`. RapidOCR, pre + post-processing, real whole-receipt photos:
+
+| receipts | fields % | item F1 % | consistent % | QR decoded per receipt % |
+|---:|---:|---:|---:|---:|
+| 7 | **71.4** [58.6–81.4] | 14.8 [0.0–53.3] | 28.6 [0.0–57.1] | 57.1 |
+
+|                        | seller_name | seller_tin | address | datetime | receipt_number | fiscal_module | fiscal_sign | vat | total | payment |
+|:-----------------------|------------:|-----------:|--------:|---------:|---------------:|--------------:|------------:|----:|------:|--------:|
+| RapidOCR, holdout 2, % |        42.9 |        100 |    28.6 |     71.4 |           71.4 |          85.7 |        85.7 | 57.1 |  71.4 |     100 |
+
+Again the drop comes from new layouts, not from photo quality:
+
+* **Orientation:** with the receipt crop off, "sideways" was decided by the photo's shape, which fails when the
+  receipt does not fill the photo (a vertical receipt on a landscape photo, a sideways one on a portrait
+  photo). OCR then merged the whole receipt into a few long lines (OKA, Korzinka).
+* **Labels and formats the rules did not know:** `ОБЩИЙ` and `TOʻLOV UCHUN` totals, `6,000` with a comma as
+  thousands separator, date and time on two lines, `1-dona 5 252 soʻm` items, an item whose price
+  is alone on the next line, `jami QQS` misread as `jami qas`, `000` read for `OOO`.
+* **Bank card slip printed above the receipt** (Burger King): its merchant name and time are taken.
+
+**After the measurement** the 7 receipts were moved to dev and the rules were fixed on them, then checked on
+test (no photo got worse):
+
+| real whole-receipt photos, RapidOCR pre + post | fields % | item F1 % | consistent % |
+|---|---:|---:|---:|
+| test, before → after | 94.8 → 94.8 | 87.0 → 87.0 | 87.0 → 87.0 |
+| dev (with the former holdout 2), before → after | 86.0 → **87.9** | 62.2 → **64.8** | 71.4 → **78.6** |
+
+Changes: the sideways check uses the text detector (tall vs wide text boxes; the photo's shape only when
+the vote is weak), and the label and format rules above. These dev numbers are **not** a fair score for new
+shops: a new holdout of unseen shops is needed for that.
+
 ### QR decoding
 
 | photos | test | holdout |
@@ -298,7 +333,8 @@ our line crops, or FP16. Two fixes were needed to quantize this export at all: i
 
 ### Limits (read before trusting the numbers)
 
-* Small data: 16 test and 6 holdout receipts; see the confidence intervals.
+* Small data: 16 test, 6 holdout and 7 holdout 2 receipts; see the confidence intervals.
+* On shops with a layout never seen before, fields drop to about 70 % (holdout 63.3 %, holdout 2 71.4 %).
 * Test is dominated by one layout (ERA, 12 of 16 receipts); the holdout shows the drop on new layouts.
 * The test set was looked at after each development step (only to confirm, never to choose between
   variants); the holdout was measured once.

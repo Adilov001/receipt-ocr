@@ -26,7 +26,8 @@ SEPARATOR_RE = re.compile(r"^[\s\-=*_~.#+]{3,}$")
 _CURRENCY_RE = re.compile(r"(so[ʻʼ'`’‘]?m|сўм|сум|sum|uzs)\.?", re.I)
 
 # Amount as printed on receipts: 32 000.00 / 12 500,00 / 32000 / 1'500.00 / 6ʼ900.00 (apostrophe as unified)
-AMOUNT_RE = re.compile(r"\d{1,3}(?:[  'ʼ’]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?")
+# / 6,000 (OKA: a comma followed by 3 digits is a thousands separator; sums have 2 decimals)
+AMOUNT_RE = re.compile(r"\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?(?![\d,])|\d{1,3}(?:[  'ʼ’]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?")
 
 
 def unify_apostrophes(text):
@@ -132,7 +133,7 @@ def is_separator(text):
 
 
 def parse_number(s, ndigits=2):
-    """'12 500,00 soʻm' -> 12500.0, '1,000' -> 1.0, '1.234.567,89' -> 1234567.89."""
+    """'12 500,00 soʻm' -> 12500.0, '1.234.567,89' -> 1234567.89; '1,000': 1.0 as a quantity, 1000.0 as a sum."""
     if s is None:
         return None
     if isinstance(s, (int, float)):
@@ -146,6 +147,8 @@ def parse_number(s, ndigits=2):
     if "," in num and "." in num:
         dec = "," if num.rfind(",") > num.rfind(".") else "."
         num = num.replace("." if dec == "," else ",", "").replace(dec, ".")
+    elif ndigits == 2 and re.fullmatch(r"-?\d{1,3}(,\d{3})+", num):
+        num = num.replace(",", "")  # "6,000" soʻm: thousands (a quantity "1,000" kg stays 1.0)
     elif num.count(",") > 1 or num.count(".") > 1:
         num = num.replace("," if num.count(",") > 1 else ".", "")
     else:

@@ -11,7 +11,12 @@
     "era_tinda",
     "kfc_chimgan",
     "kfc_faiz",
-    "supermarket_305645847"
+    "supermarket_305645847",
+    "burger_king_chimgan",
+    "era_omad_dengiz",
+    "papa_johns_alexander_brands",
+    "oka_market",
+    "korzinka_markaz6"
   ],
   "holdout": [
     "h01",
@@ -21,9 +26,13 @@
     "h05",
     "h06"
   ],
-  "holdout2": [
+  "spent_holdout2": [
     "h07",
     "h08",
-    "h09"
+    "h09",
+    "h10",
+    "h11",
+    "h12",
+    "h13"
   ]
 }

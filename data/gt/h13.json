@@ -1,0 +1,24 @@
+{
+  "_status": "verified",
+  "_text_source": "h13_a.jpg",
+  "_note": "new shop (holdout2), labelled from the photo without running the model. Korzinka, same shop as h12. Cashier's name and the card number / auth code / RRN of the bank slip masked. The fiscal QR code is not read by a plain decoder (only the krzn.uz promo QR), so qr = null; time from paper 20:39:20 (the bank slip has 20:39:01). Receipt number = 'Chek raqami: 113692' (not 'SAVDO CHEKI N 293' or the slip 'Чек 104'). Bank slip 'СУММА 29980.00 UZS' repeats the total.",
+  "seller_name": "«Anglesey Food» MChJ XK",
+  "seller_tin": "202099756",
+  "address": "Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",
+  "datetime": "2026-11-25T20:39:20",
+  "receipt_number": "113692",
+  "fiscal_module": "LG420230638226",
+  "fiscal_sign": "341627400731",
+  "vat": 3212.14,
+  "total": 29980.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Sirok KK vanilli qora shok. 23% 50g",
+      "quantity": 2.0,
+      "price": 14990.0,
+      "total": 29980.0
+    }
+  ],
+  "qr": null
+}

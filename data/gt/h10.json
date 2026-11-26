@@ -1,0 +1,25 @@
+{
+  "_status": "verified",
+  "_text_source": "h10_a.jpg",
+  "_note": "new shop (holdout2), labelled from the photo without running the model. Papa John's is a logo picture; the printed name is 'OOO \"ALEXANDER BRANDS\"'. Cashier's name masked. Paper time 13.25.52 = QR. Traps: 'Chegirma 34 000' (discount) and 'Terminal 65 000' in the payment block; a second QR code (feedback link) below the fiscal one; the pizza name runs over 3 lines. Items add up to JAMI 65 000.",
+  "seller_name": "OOO \"ALEXANDER BRANDS\"",
+  "seller_tin": "310107872",
+  "address": null,
+  "datetime": "2026-11-25T13:25:52",
+  "receipt_number": "15214",
+  "fiscal_module": "LG420211614890",
+  "fiscal_sign": "176570502130",
+  "vat": 6964.28,
+  "total": 65000.0,
+  "payment": "card",
+  "items": [
+    {"name": "Картофель фри 60", "quantity": 1.0, "price": 5252.0, "total": 5252.0},
+    {"name": "Pepsi Cola 0,26 л", "quantity": 1.0, "price": 4596.0, "total": 4596.0},
+    {"name": "Крылья 2 шт ланч бокс", "quantity": 1.0, "price": 13132.0, "total": 13132.0},
+    {"name": "BBQ соус", "quantity": 1.0, "price": 3283.0, "total": 3283.0},
+    {"name": "Пицца \"Индейка с грибами\" XS (20см) ЛАНЧ-БОКС в зале", "quantity": 1.0, "price": 38737.0, "total": 38737.0}
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420211614890&r=15214&c=20261125132552&s=176570502130"
+  }
+}

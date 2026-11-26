@@ -109,6 +109,33 @@ def _paper_aspect(img, mask):
     return img.shape[1] / img.shape[0]
 
 
+def text_sideways(img, cfg):
+    """True / False: the text lines run vertically / horizontally; None: too little text to tell.
+
+    The photo's shape says little without a crop (a vertical receipt on a landscape photo, a
+    sideways one on a portrait photo), and a light table passes for paper. The text detector does
+    not care: on a downscaled copy, the total length of tall text boxes vs wide ones decides."""
+    try:
+        from .ocr import rapidocr_engine
+        s = 1000 / max(img.shape[:2])
+        small = cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA)
+        boxes, _ = rapidocr_engine(cfg["ocr"].get("rapidocr", {}))(small, use_det=True, use_cls=False, use_rec=False)
+    except Exception:
+        return None
+    wide = tall = 0.0
+    for b in boxes or []:
+        b = np.asarray(b, dtype=float).reshape(-1, 2)
+        w, h = np.linalg.norm(b[1] - b[0]), np.linalg.norm(b[3] - b[0])
+        if w > 1.5 * h:
+            wide += w
+        elif h > 1.5 * w:
+            tall += h
+    # a weak vote (faded print: a couple of boxes, 101 px wide vs 80 px tall on test r15_a_x2) is no vote
+    if wide + tall < 300 or max(wide, tall) < 2 * min(wide, tall):
+        return None
+    return tall > wide
+
+
 def osd_rotation(gray):
     """Rotation (0/90/180/270, clockwise) Tesseract OSD suggests, or 0 if it is unsure or unavailable."""
     try:
@@ -180,8 +207,10 @@ def preprocess(img, cfg):
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    if p.get("orient") and _paper_aspect(gray, mask) > 1.2:
-        # receipts are long and narrow: one lying sideways is turned upright (180° is fixed by OSD below)
+    sideways = text_sideways(img, cfg) if p.get("orient") else None
+    if p.get("orient") and (sideways if sideways is not None else _paper_aspect(gray, mask) > 1.2):
+        # a receipt lying sideways is turned upright (180° is fixed by the QR position below);
+        # too little text to tell: receipts are long and narrow, so the paper's shape decides
         gray, mask = _rot90(gray, 1), _rot90(mask, 1)
         info["rotated"] = 90
         stages["orient"] = gray

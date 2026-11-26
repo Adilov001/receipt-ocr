@@ -1,0 +1,26 @@
+{
+  "_status": "verified",
+  "_text_source": "h12_a.jpg",
+  "_note": "new shop (holdout2), labelled from the photo without running the model. Korzinka (legal name «Anglesey Food» MChJ XK). Cashier's name masked. Paper time 20:38:51 = QR. Receipt number = 'Chek raqami: 113691' = QR r (not 'SAVDO CHEKI N 292'). Paid in two Click parts (999 + 2 591), To'lov shakli 'Plastik karta'. A second QR code (krzn.uz promo) is at the top. Item name has a Russian copy on the next line; the label keeps the first line.",
+  "seller_name": "«Anglesey Food» MChJ XK",
+  "seller_tin": "202099756",
+  "address": "Toshkent, Markaz-6, Osiyo ko'chasi, 85-uy",
+  "datetime": "2026-11-25T20:38:51",
+  "receipt_number": "113691",
+  "fiscal_module": "LG420230638226",
+  "fiscal_sign": "423511047502",
+  "vat": 384.64,
+  "total": 3590.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "Suv gazsiz Bonaqua Still PET 500ml",
+      "quantity": 1.0,
+      "price": 3590.0,
+      "total": 3590.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=LG420230638226&r=113691&c=20261125203851&s=423511047502"
+  }
+}

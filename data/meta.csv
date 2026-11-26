@@ -152,3 +152,11 @@ h08_a.jpg,h08,burger_king_chimgan,mixed,long;crumpled;upside_down,1
 h08_q.jpg,h08,burger_king_chimgan,mixed,partial;crumpled;upside_down,1
 h09_a.jpg,h09,era_omad_dengiz,mixed,long;crumpled;upside_down,1
 h09_q.jpg,h09,era_omad_dengiz,mixed,partial;upside_down,1
+h10_a.jpg,h10,papa_johns_alexander_brands,mixed,long;sideways;shadow,1
+h10_q.jpg,h10,papa_johns_alexander_brands,mixed,partial;shadow,1
+h11_a.jpg,h11,oka_market,mixed,sideways;crumpled;shadow,1
+h11_q.jpg,h11,oka_market,mixed,partial;sideways;shadow,1
+h12_a.jpg,h12,korzinka_markaz6,mixed,upside_down;crumpled;shadow,1
+h12_q.jpg,h12,korzinka_markaz6,mixed,partial;upside_down;shadow,1
+h13_a.jpg,h13,korzinka_markaz6,mixed,long;sideways;crumpled;shadow,1
+h13_q.jpg,h13,korzinka_markaz6,mixed,partial;sideways;crumpled,1

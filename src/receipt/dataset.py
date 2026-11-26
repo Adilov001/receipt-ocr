@@ -64,8 +64,9 @@ def rows_for(cfg, split):
     sp = load_split(cfg)
     if sp is None:
         raise SystemExit("No split yet: run `make split` first.")
-    # receipt ids collected after all tuning, measured once: "holdout" (18 Nov, since seen) and
-    # "holdout2" (new shops from 25 Nov); none of them is in dev or test
+    # receipt ids collected after all tuning, measured once: "holdout" (18 Nov, since seen); none of
+    # them is in dev or test. "spent_holdout2" (new shops, measured once on 26 Nov, report in
+    # reports/holdout2_measured_2026-11-26) was moved to dev afterwards to fix the rules on it
     holdout = {rid for k, ids in sp.items() if k.startswith("holdout") for rid in ids}
     if split.startswith("holdout"):
         return [r for r in rows if r["receipt_id"] in set(sp.get(split, []))]

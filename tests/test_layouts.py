@@ -147,3 +147,102 @@ def test_cashless_is_card_payment():
     f, _ = _run("1.SUV GAZLANMAGAN 500ML FAMILY\nBC:4780044571525 Narx: 2ʼ800.00*1Wt.=2ʼ800.00soʼm\n"
                 "CASHLESS =2ʼ800.00\nQAYTIM =0.00\nJAMI =2ʼ800.00\n")
     assert f["payment"] == "card"
+
+
+# ---- layouts of the new shops (former holdout2, moved to dev after its one measurement) ----
+
+# OKA (dev h11): comma as thousands separator, date and time on separate lines, "ОБЩИЙ" total
+OKA = """\
+OKA
+ИHH: T-N: 93346
+Чек №: 2562 25.11.2026
+KACCA: Kassa-1 21:26
+Hydrolife suv 1,5 л 1*6,000=6,000
+В том числе НДС 0% 0
+ОБЩИЙ 6,000
+В ТОМ ЧИСЛЕ НДС
+UzCard 6,000
+ОПЛАЧЕННЫЙ: 6,000
+FB: 140092504709
+FM:UZ210317265020 Versiya: 0.2.
+"""
+
+# Korzinka (dev h12): an item without quantity has its price on the next line; "TO'LOV UCHUN" total,
+# paid in two Click parts
+KORZINKA = """\
+korzinka Colgate
+Anglesey Food MChJ XK
+K107 Korzinka - Markaz-6
+Toshkent, Markaz-6, Osiyo koʻchasi, 85-uy
+STIR: 202099756 S/N:STS-20221117-001018
+SAVDO CHEK N 292 25/11/2026 20:38:51
+1. Suv gazsiz Bonaqua Still PET 500m1
+3 590,00
+Shu jumladan QOS 12%: 384,64
+TOʻLOV UCHUN: 3590,00
+Shu jumladan QQS 384,64
+Toʻlandi (Click): 999,00
+Toʻlandi (Click): 2591,00
+Toʻlov shakli: Plastik karta
+FB: 423511047502 FM: LG420230638226
+Chek raqami: 113691 VK versiyasi: POS2K V5.0
+"""
+
+# Papa John's (dev h10): "1-dona 5 252 soʻm" items, "000" read for "OOO", "jami QQS" read as "jami qas"
+PAPA = """\
+PAPAJOHNS
+000 "ALEXANDER BRANDS"
+STIR: 310107872
+Chek raqami N15214
+Картофель фри 80 1-dONa 5 252 soʼm
+SH.J. QQS 12% 562,71 soʻm
+Крылья 2 шт ланч бокс 1-dOn 13 132 soʼm
+a
+SH.J. QQS 12% 1 407 soʻm
+BBQ соуС 1-dOna 3 283 soʼm
+SH.J, QQS 12% 351,75 soʻm
+JAMI: 22 667 soʻm
+Sh.J. jami qas: 2 321,46 soʻm
+Terminal 22 667 soʻm
+"""
+
+
+def test_comma_thousands_separator():
+    assert parse_amount("6,000") == 6000.0
+    assert parse_amount("1,234,500") == 1234500.0
+    assert parse_amount("6 000,00") == 6000.0
+    assert parse_amount("384,64") == 384.64
+
+
+def test_oka_layout():
+    f, items = _run(OKA)
+    assert f["total"] == 6000.0
+    assert f["datetime"] == "2026-11-25T21:26:00"
+    assert f["receipt_number"] == "2562"
+    assert f["vat"] == 0.0
+    assert [(i["name"], i["quantity"], i["price"], i["total"]) for i in items] == [
+        ("Hydrolife suv 1,5 л", 1.0, 6000.0, 6000.0)]
+
+
+def test_korzinka_layout():
+    f, items = _run(KORZINKA)
+    assert f["total"] == 3590.0
+    assert f["vat"] == 384.64
+    assert f["receipt_number"] == "113691"
+    assert [(i["name"], i["quantity"], i["price"], i["total"]) for i in items] == [
+        ("Suv gazsiz Bonaqua Still PET 500m1", 1.0, 3590.0, 3590.0)]
+
+
+def test_papa_johns_layout():
+    f, items = _run(PAPA)
+    assert f["seller_name"] == 'OOO "ALEXANDER BRANDS"'
+    assert f["vat"] == 2321.46
+    assert f["total"] == 22667.0
+    assert [(i["name"], i["quantity"], i["total"]) for i in items] == [
+        ("Картофель фри 80", 1.0, 5252.0), ("Крылья 2 шт ланч бокс", 1.0, 13132.0), ("BBQ соуС", 1.0, 3283.0)]
+
+
+def test_receipt_number_on_the_label_line_beats_a_neighbour():
+    # Burger King (dev h08): "SOTUV CHEK" with no number, the address line above ends in "3a-uy"
+    f, _ = _run("Malikkoʻchasi, 3a-uy\nSOTUV CHEK\nCHEK 2402 24.11.2026, 13:28:06\nSTIR: 310839380\n")
+    assert f["receipt_number"] == "2402"

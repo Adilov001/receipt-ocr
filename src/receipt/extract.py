@@ -21,13 +21,14 @@ L = {
     # fiscal receipt number printed as "RS:" (pharmacy); preferred over the shop's own "Chek:" counter
     "rs": re.compile(r"\brs\s*:", re.I),
     "fiscal_module": re.compile(r"(\bfm\b|\bфм\b|fiskal\s*modul|фискал\w*\s*модул|\bzfm\b)", re.I),
-    "vat_total": re.compile(rf"(jami\s*qqs|qqs\s*jami|итого\s*ндс|жами\s*ққс|ққс\s*жами|ндс\s*итого)", re.I),
+    "vat_total": re.compile(rf"(jami\s*q[qo0a][sz]\b|q[qo0]s\s*jami|итого\s*ндс|жами\s*ққс|ққс\s*жами|ндс\s*итого)", re.I),
     "vat": re.compile(r"\b(qqs|ндс|ққс)\b(?!\s*siz)", re.I),
     "total": [
-        re.compile(rf"to{A}lov\s*uchun\s*jami|тўлов\s*учун\s*жами", re.I),
+        # "TOʻLOV UCHUN: 3590,00" (Korzinka) without "jami"
+        re.compile(rf"to{A}lov\s*uchun(\s*jami)?|тўлов\s*учун(\s*жами)?", re.I),
         re.compile(rf"jami\s*to{A}lov|umumiy\s*to{A}lov|итого\s*к\s*оплате|к\s*оплате|всего\s*к\s*оплате", re.I),
         re.compile(rf"to{A}landi|тўланди|оплачено", re.I),
-        re.compile(r"\b(итого|итог|всего|жами)\b(?!\s*(ндс|ққс))", re.I),
+        re.compile(r"\b(итого|итог|всего|жами|общий|общая\s*сумма)\b(?!\s*(ндс|ққс))", re.I),  # "ОБЩИЙ" (OKA)
         re.compile(r"(?<!qqs )(?<!qqs)\bjami\b(?!\s*qqs)", re.I),  # not "QQS JAMI 12%=739.29" (VAT)
     ],
     "card": re.compile(r"(naqdsiz|cashless|plastik|bank\s*karta|bank\s*card|безнал|карт[аой]|uzcard|humo|нақдсиз)", re.I),
@@ -50,11 +51,13 @@ ANY_LABEL = re.compile("|".join(
     p.pattern for k, p in L.items() if k not in ("total", "address", "org", "address_label", "receipt_number_fiscal")),
     re.I)
 
+DATE_ONLY_RE = re.compile(r"(?<![\d.])\d{2}[.\-/]\d{2}[.\-/]\d{4}(?![\d.])")
+TIME_ONLY_RE = re.compile(r"(?<![\d.:])\d{1,2}:\d{2}(?::\d{2})?(?![\d:])")
 TIN_RE = re.compile(r"(?<!\d)(\d{14}|\d{9})(?!\d)")
 RECEIPT_NO_RE = re.compile(r"(?<![\d.:\-/])\d{1,10}(?![\d.:\-/])")
 FISCAL_SIGN_RE = re.compile(r"(?<!\d)\d{10,14}(?!\d)")
 FM_RE = re.compile(r"\b[A-Z]{2}[\dOIL]{12}\b")  # OCR may read 0 as O inside the code
-_PRICE = r"\d{1,3}(?:[  'ʼ’]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?"
+_PRICE = r"\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?(?![\d,])|\d{1,3}(?:[  'ʼ’]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?"
 _CURRENCY = r"(?:so[ʻʼ'`’‘]?m|сўм|сум|uzs)"
 # "1,000 Kg X 24 000,00" (ERA) | "(10/30) x 16 000 = 5 333,33" (pharmacy: packs of a box)
 # "19,520 kub. metr X 5 700,00" (gas) | "10 L X 12 200 SO'M = 122 000" (petrol)
@@ -157,6 +160,8 @@ def _clean_name(t):
     while words and len(words[0]) == 1 and not words[0].isdigit():
         words.pop(0)
     while words and len(words[-1]) == 1 and not words[-1].isdigit():
+        if len(words) > 1 and re.search(r"\d", words[-2]):
+            break  # a unit after a number: "Hydrolife suv 1,5 л", "Pepsi Cola 0,26 л"
         words.pop()
     return " ".join(words) or None
 
@@ -167,6 +172,10 @@ def _clean_name(t):
 NARX_ITEM_RE = re.compile(
     rf"\b(?:(?:narx|нарх)\w*\s*:?|nar\w{{0,2}}\s*:)\s*(?P<price>{_PRICE})\s*[*xхX×]\s*(?P<qty>\d{{1,5}}(?:[.,]\d{{1,3}})?)\s*"
     rf"(?:[^\W\d_]{{1,4}}\.?)?\s*=\s*(?P<total>{_PRICE})", re.I)
+# "Картофель фри 80 1-dona 5 252 soʻm" (Papa Johnʼs): quantity, then the line total; OCR may cut "dona"
+DONA_ITEM_RE = re.compile(rf"(?<![\d,.])(?P<qty>\d{{1,4}})\s*-\s*do\w*\s+(?P<total>{_PRICE})\s*{_CURRENCY}", re.I)
+# "1. Suv gazsiz Bonaqua Still PET 500ml" with the price alone on the next line (Korzinka, quantity 1)
+INDEXED_NAME_RE = re.compile(r"^\s*\d{1,3}\.\s*[^\W\d_]")
 MASKED_CARD_RE = re.compile(r"\d{4}\s*\*{3,}")  # "4337******8482": not qty × price
 BARCODE_RE = re.compile(r"\b(bc|шк)\s*:\s*\d*", re.I)
 # "kombo Nomi   summa" header, then "ЧИЗБУРГЕР ЛАНЧ БОКС  44000.00": one combo = one item, quantity 1;
@@ -175,6 +184,7 @@ COMBO_HEAD_RE = re.compile(r"\bkombo\s*nomi\b", re.I)
 COMBO_ANY_RE = re.compile(r"\bkombo\b", re.I)  # "Kombo tarkibi" / "kombo Nomi": the items have started
 MXIK_RE = re.compile(r"\b(mxik|ikpu|икпу)\b", re.I)  # product class code line: an item, not a shop name
 # OCR reads the Latin "KFC" of a shop name as the Cyrillic look-alikes "КЕС" (dev r33)
+OOO_RE = re.compile(r"^0{3}(?=\s*[\"«“]|\s+[A-ZА-Я])")
 KFC_RE = re.compile(r"^[KК][FЕE][CС](?=[\s.,]|$)\.?\s*")
 
 
@@ -205,6 +215,21 @@ def extract_items(lines, num):
                           "price": num(n.group("price"), 2), "total": num(n.group("total"), 2), "_line": i,
                           "_raw_qty": n.group("qty"), "_raw_price": n.group("price"),
                           "_raw_total": n.group("total")})
+            continue
+        dn = DONA_ITEM_RE.search(t)
+        if dn:
+            qty, total = _qty(dn.group("qty"), num), num(dn.group("total"), 2)
+            price = round(total / qty, 2) if qty and total is not None else None
+            items.append({"name": _item_name(texts, i, t[:dn.start()]), "quantity": qty, "price": price,
+                          "total": total, "_line": i, "_raw_qty": dn.group("qty"), "_raw_price": None,
+                          "_raw_total": dn.group("total")})
+            continue
+        nxt = texts[i + 1].strip() if i + 1 < len(texts) else ""
+        if (INDEXED_NAME_RE.match(t) and not QTY_RE.search(t) and AMOUNT_RE.fullmatch(nxt)
+                and len(re.sub(r"\D", "", nxt)) >= 3):
+            v = num(nxt, 2)
+            items.append({"name": _clean_name(t), "quantity": 1.0, "price": v, "total": v, "_line": i,
+                          "_raw_qty": "1", "_raw_price": nxt, "_raw_total": nxt})
             continue
         m = QTY_RE.search(t)
         if not m or parse_datetime(t) or MASKED_CARD_RE.search(t):
@@ -348,6 +373,17 @@ def extract(lines, postprocess=True):
             if parse_datetime(t):
                 v, i = t, j
                 break
+    if v is None:
+        # "Чек №: 2562 25.11.2026" / "KACCA: Kassa-1 21:26" (OKA): the date and the time on two lines
+        for j, t in enumerate(texts):
+            d = DATE_ONLY_RE.search(t)
+            if not d:
+                continue
+            tm = next((TIME_ONLY_RE.search(texts[k]) for k in (j + 1, j - 1)
+                       if 0 <= k < len(texts) and TIME_ONLY_RE.search(texts[k])), None)
+            if tm:
+                v, i = f"{d.group()} {tm.group()}", j
+                break
     dt = parse_datetime(v) if v else None
     if dt and postprocess and not 2020 <= int(dt[:4]) <= 2035:
         dt = None  # "2826": a misread zero gave a valid but impossible year
@@ -358,6 +394,8 @@ def extract(lines, postprocess=True):
     v, i = _search_near(lines, L["rs"], RECEIPT_NO_RE, order=(0,))
     if v is None:
         v, i = _search_near(lines, L["receipt_number_fiscal"], RECEIPT_NO_RE, order=(0, 1))
+    if v is None:  # a number on any "Chek" line first, then next to one ("SOTUV CHEK" / "CHEK 2402 ...")
+        v, i = _search_near(lines, L["receipt_number"], RECEIPT_NO_RE, order=(0,))
     if v is None:
         v, i = _search_near(lines, L["receipt_number"], RECEIPT_NO_RE)
     put("receipt_number", v, i)
@@ -483,6 +521,7 @@ def extract(lines, postprocess=True):
                 break
     if postprocess and seller:
         seller = KFC_RE.sub("KFC ", seller).strip()
+        seller = OOO_RE.sub("OOO", seller)  # "000 \"ALEXANDER BRANDS\"": OCR reads the letters O as zeros
     put("seller_name", seller, si)
 
     return f, items, src, lines
