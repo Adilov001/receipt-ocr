@@ -367,7 +367,7 @@ def extract(lines, postprocess=True):
     v, i = _search_near(lines, L["tin"], TIN_RE)
     put("seller_tin", v, i)
 
-    v, i = _search_near(lines, L["datetime"], re.compile(r"\d{2}[.\-/]\d{2}[.\-/]\d{4}[ T,]*\d{1,2}[:.]\d{2}(?:[:.]\d{2})?"))
+    v, i = _search_near(lines, L["datetime"], re.compile(r"\d{2}[.\-/]\d{2}[.\-/]\d{4}[ T,]*\d{1,2}(?:[:.]| (?=\d{2}[:.]\d{2}))\d{2}(?:[:.]\d{2})?"))
     if v is None:
         for j, t in enumerate(texts):
             if parse_datetime(t):

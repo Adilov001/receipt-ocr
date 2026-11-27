@@ -135,7 +135,7 @@ Farg'ona viloyati.
 Hamkorlik MFY, Nizomiy
 STIR/JSHSHR 312599814"""
     f, *_ = _run(text)
-    assert f["address"] == "Fargʻona viloyati., Hamkorlik MFY, Nizomiy"
+    assert f["address"] == "Fargʻona viloyati, Hamkorlik MFY, Nizomiy"  # "viloyati." comma read as a stop
     assert f["seller_name"] == "ERA"
 
 

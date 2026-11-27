@@ -191,7 +191,7 @@ def md(df, floatfmt=".1f"):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=None)
-    ap.add_argument("--split", default="test", choices=["dev", "test", "holdout", "all"])
+    ap.add_argument("--split", default="test", choices=["dev", "test", "holdout", "holdout3", "all"])
     ap.add_argument("--engines", nargs="*", default=None)
     ap.add_argument("--ablation", action="store_true")
     ap.add_argument("--ablation-split", default="dev")

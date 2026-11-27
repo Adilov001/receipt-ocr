@@ -14,6 +14,7 @@ ocr:
     rec_keys_path: models/rec/cyrillic_PP-OCRv5_mobile_rec_onnx/keys.txt
     intra_op_num_threads: 4   # ONNX Runtime threads; more is slower in Docker VMs (5-12 s -> 2.5 s OCR)
     inter_op_num_threads: 1
+    det_box_thresh: 0.3      # text detector box score (RapidOCR default 0.5 dropped whole printed lines: a name line on ERA receipts); chosen on dev
 
 preprocess:
   crop: false            # detect receipt + perspective warp; off: hurts with RapidOCR (ablation, dev and test)

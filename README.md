@@ -127,6 +127,7 @@ lives in `configs/default.yaml` (`qr.param_map`).
 | Split | seller-disjoint (`data/split.json`): **dev** = `era_tinda`, `akmal_farm`, `era_hamkorlik`, `era_avtogaz` (13 receipts); **test** = `era_barkamol`, `diyor_neft`, `era_avtomobilist` (16 receipts) |
 | Holdout | 6 receipts from 6 new shops (`h01`–`h06`: clothing store, café, supermarket, KFC, pharmacy, another ERA shop), 12 photos, collected after development, measured once (`--split holdout`) |
 | Holdout 2 | 7 receipts from 5 new shops (`h07`–`h13`: Burger King, ERA café, Papa John's, OKA, Korzinka), 14 photos, labelled from the photos without running the model, measured once on 26 Nov; then moved to dev (`spent_holdout2` in `split.json`) to fix the rules on these layouts |
+| Holdout 3 | collecting: `h14` (Safia café, MADINA-QANDOLAT MCHJ), 2 photos, labelled from the photos without running the model; not measured yet (wait for 3–5 receipts, then measure once) |
 | Personal data | cardholder, cashier and pharmacy staff names blacked out (`scripts/mask_pii.py`, two OCR passes, every image checked); card numbers are already masked by the terminal |
 
 **Lower-half photos** (`*_q.jpg`, condition `partial`) show only the totals and the QR code; they count for the
@@ -290,10 +291,10 @@ labelled total matches it.
 
 | target | test | holdout (new layouts) | status |
 |---|---:|---:|---|
-| field accuracy ≥ 85 % | **94.8 %** [91.4–98.0] | 63.3 % | reached on test; not on new layouts |
+| field accuracy ≥ 85 % | **95.7 %** [92.7–98.5] | 63.3 % | reached on test; not on new layouts |
 | item F1 ≥ 75 % | **87.0 %** [75.0–100] | 53.3 % | reached on test |
-| CER ≤ 10 % | **9.8 %** [5.6–13.9] | — (no full-text labels) | reached on test (just) |
-| WER ≤ 20 % | 23.4 % [17.2–29.5] | — | not reached |
+| CER ≤ 10 % | **7.1 %** [3.1–10.6] | — (no full-text labels) | reached on test |
+| WER ≤ 20 % | **15.5 %** [9.1–21.2] | — | reached on test (dev: 24.3 %) |
 | QR decoded ≥ 95 % | 60.9 % per photo, 81.2 % per receipt | 50 % / 83.3 % | not reached |
 | arithmetic checks 100 % correct | **100 %** (`tests/test_reconcile.py`, all 29 labelled dev + test receipts) | | reached |
 | ≤ 10 s per receipt on CPU | **6.4 s** mean through the API in Docker (3 s QR limit); 21 of 23 photos ≤ 10 s, max 11.7 s on a busy Mac. Offline evaluation without the QR limit: 9.8 s | 8.2 s | reached on average |
@@ -307,9 +308,12 @@ labelled total matches it.
 | A2: address = block from `Manzil` to the next label | 87.4 | 82.6 | 14.4 | 30.3 |
 | A3: line grouping along the local text slope | 89.1 | 87.0 | 10.0 | 26.8 |
 | label vocabulary, spec number normalization, look-alike letters | 89.6 | 87.0 | 9.4 | 24.3 |
-| preprocessing: receipt crop switched off (ablation on dev) | **94.8** | **87.0** | 9.8 | **23.4** |
+| preprocessing: receipt crop switched off (ablation on dev) | 94.8 | 87.0 | 9.8 | 23.4 |
+| holdout2 fixes (orientation from text direction, new layouts; 26 Nov) | 94.8 | 87.0 | 8.6 | 21.6 |
+| text detector `det_box_thresh` 0.5 → 0.3 (a whole printed line was dropped), `ʻ` restored in split / bare Uzbek words (`bo ldingiz`, `Tolandi`), `,` read as `.` after address words, `18 31:36` time (27 Nov; dev WER 27.3 → 24.3, fields 87.9 → 88.1) | **95.7** | **87.0** | **7.1** | **15.5** |
 
-Tried on dev and **rejected** (made results worse): a white margin before OCR, 3 text-detector settings,
+Tried on dev and **rejected** (made results worse or no gain): a white margin before OCR, 3 other text-detector settings
+(`max_side_len` 3000, `unclip_ratio` 2.0, `thresh` 0.2: no gain, 2× slower), WeChat QR at 4 scales and on tiles (1 of 25 failing dev codes read),
 a larger rotation canvas, switching deskew off, the OpenCV Aruco QR decoder, rebuilding the QR grid.
 
 ### Quantization of the recognizer (spec bonus: speed-up and quality loss)

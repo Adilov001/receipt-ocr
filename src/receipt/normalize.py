@@ -120,12 +120,45 @@ def fix_label_words(line):
     return " ".join(words)
 
 
+# Uzbek words with an oʻ / gʻ / ʼ that OCR drops ('tolandi') or reads as a space ('bo ldingiz', 'farg ona'):
+# the receipt label words plus common address words. Only restored, never guessed from other words.
+APOS_WORDS = [w for w in LABEL_WORDS if re.search("[ʻʼ]", w)] + ["koʻchasi", "fargʻona", "oʻgʻli"]
+_APOS_KEYS = {re.sub("[ʻʼ]", "", w): w for w in APOS_WORDS}
+_TRAIL_RE = re.compile(r"[^\wʻʼ]*$")
+
+
+def fix_apostrophes(line):
+    words, out, i = line.split(" "), [], 0
+    while i < len(words):
+        w = words[i]
+        for n in (2, 1):  # two pieces split at the apostrophe first, then one word without it
+            piece = "".join(words[i:i + n])
+            if n == 2 and (i + 1 >= len(words) or not words[i].isalpha()):
+                continue
+            tail = _TRAIL_RE.search(piece).group()
+            core = piece[:len(piece) - len(tail)] if tail else piece
+            key = re.sub("[ʻʼ'`’‘]", "", core).casefold()
+            if key in _APOS_KEYS and (n == 2 or not re.search("[ʻʼ]", core)):
+                out.append(_like(core, _APOS_KEYS[key]) + tail)
+                i += n
+                break
+        else:
+            out.append(w)
+            i += 1
+    return " ".join(out)
+
+
+# a comma read as a full stop after address words: 'Fargʻona shahri.' -> 'Fargʻona shahri,'
+ADDRESS_COMMA_RE = re.compile(r"(?i)\b(viloyati|shahri|shahar|tumani|mfy|koʻchasi)\.(?=\s|$)")
+
+
 def clean_line(text):
     text = unicodedata.normalize("NFC", text)
     text = unify_apostrophes(text)
     text = re.sub(r"(?<=[\d\s])×(?=[\s\d])", "x", text)  # look-alike multiplication sign
     words = [fix_letters(fix_digits(fix_mixed_script(w))) for w in text.split()]
-    return fix_label_words(" ".join(words))
+    text = fix_apostrophes(fix_label_words(" ".join(words)))
+    return ADDRESS_COMMA_RE.sub(r"\1,", text)
 
 
 def is_separator(text):
@@ -176,7 +209,8 @@ def naive_number(s):
 
 
 _DT_PATTERNS = [
-    (re.compile(r"(\d{2})[.\-/ ](\d{2})[.\-/ ](\d{4})[ T,]*(\d{1,2})[:.](\d{2})(?:[:.](\d{2}))?"), "dmy"),
+    # "18 31:36": the hour-minute colon lost, read as a space (only when seconds follow)
+    (re.compile(r"(\d{2})[.\-/ ](\d{2})[.\-/ ](\d{4})[ T,]*(\d{1,2})(?:[:.]| (?=\d{2}[:.]\d{2}))(\d{2})(?:[:.](\d{2}))?"), "dmy"),
     (re.compile(r"(\d{4})[.\-/](\d{2})[.\-/](\d{2})[ T,]*(\d{1,2})[:.](\d{2})(?:[:.](\d{2}))?"), "ymd"),
     (re.compile(r"(?<!\d)(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(?!\d)"), "ymd"),
 ]

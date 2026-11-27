@@ -1,0 +1,26 @@
+{
+  "_status": "verified",
+  "_text_source": "h14_a.jpg",
+  "_note": "new shop (holdout3), labelled from the photo without running the model. Safia cafe & bakery is a logo; the printed name is 'MADINA-QANDOLAT MCHJ'. No cashier name or card number on it, nothing masked. Two times on paper: 'Sana 26.11.2026 20:15' (order) and 'Fiskal vaqt 26.11.2026 20:16:13' = QR c; the label uses the fiscal time. Receipt number 'Chek raqami 118638' = 'Fiskal chek raqami' = QR r (not 'Navbat raqami (Smena) 747'). Item line '1 / 31 000,00' (quantity / price) and the name runs over 2 lines. A second QR code (cashback promo) is at the top; 'TERMINAL UzCard 31 000,00' repeats the total.",
+  "seller_name": "MADINA-QANDOLAT MCHJ",
+  "seller_tin": "306080395",
+  "address": "Юнусабад tumani, Iftixor MFY, Iftixor ko'chasi, 1-a-uy",
+  "datetime": "2026-11-26T20:16:13",
+  "receipt_number": "118638",
+  "fiscal_module": "YZ231006034680",
+  "fiscal_sign": "614220814580",
+  "vat": 3321.43,
+  "total": 31000.0,
+  "payment": "card",
+  "items": [
+    {
+      "name": "МАЛЕНЬКИЙ ЭКЛЕР МИНИ СЕТ",
+      "quantity": 1.0,
+      "price": 31000.0,
+      "total": 31000.0
+    }
+  ],
+  "qr": {
+    "raw": "https://ofd.soliq.uz/check?t=YZ231006034680&r=118638&c=20261126201613&s=614220814580"
+  }
+}

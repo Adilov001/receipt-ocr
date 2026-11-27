@@ -103,3 +103,23 @@ def test_label_words_are_snapped():
     assert f("1 Margarin 5 000.00") == "1 Margarin 5 000.00"
     assert f("Tinda ADHAMJON MAMADALIYEV") == "Tinda ADHAMJON MAMADALIYEV"
     assert f("Guruch Gilos Xurmo Aralashmalar") == "Guruch Gilos Xurmo Aralashmalar"
+
+
+def test_apostrophe_restored_in_known_uzbek_words():
+    from receipt.normalize import clean_line
+    assert clean_line("Tolandi: 5000") == "Toʻlandi: 5000"
+    assert clean_line("bo ldingiz!") == "boʻldingiz!"
+    assert clean_line("Dasturiy ta ʼminot") == "Dasturiy taʼminot"
+    assert clean_line("FARG ONA VILOYATI,") == "FARGʻONA VILOYATI,"
+    assert clean_line("ANVARJON O G LI") == "ANVARJON O G LI"  # 3 pieces: not guessed
+
+
+def test_comma_read_as_stop_after_address_words():
+    from receipt.normalize import clean_line
+    assert clean_line("Fargʻona shahri. Barkamol MFY.") == "Fargʻona shahri, Barkamol MFY,"
+    assert clean_line("Jami. 5000") == "Jami. 5000"
+
+
+def test_datetime_with_hour_colon_read_as_space():
+    assert parse_datetime("Sana 04-11-2026 18 31:32") == "2026-11-04T18:31:32"
+    assert parse_datetime("04-11-2026 18 31") is None  # no seconds: a space is not trusted
